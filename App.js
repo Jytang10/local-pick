@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Routes from './components/Routes';
-import { View, Text, StyleSheet } from 'react-native';
+import { Provider } from 'react-redux'
 
 class App extends Component {
   render() {
     return (
-      <View>
         <Routes></Routes>
-      </View>
     );
   }
 }
