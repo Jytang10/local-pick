@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
+import Routes from './components/Routes';
 import { View, Text, StyleSheet } from 'react-native';
 
 class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>App</Text>
+      <View>
+        <Routes></Routes>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-});
 
 export default App;
