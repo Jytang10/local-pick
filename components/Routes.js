@@ -11,9 +11,39 @@ const App = createSwitchNavigator({
   }
 })
 
-
-const BottomTab = createBottomTabNavigator({
+const AuthStack = createStackNavigator({
   
+})
+
+const AppStack = createStackNavigator({
+
+})
+
+const MainTabs = createBottomTabNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+    }
+  },
+  Search: {
+    screen: Search,
+    navigationOptions: {
+      tabBarLabel:'Search'
+    }
+  },
+  Discover: {
+    screen: Discover,
+    navigationOptions: {
+      tabBarLabel:'Discover'
+    }
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      tabBarLabel:'Profile'
+    }
+  },
 })
 
 export default createAppContainer(App);
