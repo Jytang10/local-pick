@@ -1,8 +1,6 @@
 
 
-
-
-export default function (state = {},){
+export default function (state = {}, action){
   switch(action.type){
     case "CATEGORIES_FETCH":
       return {
