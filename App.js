@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import Routes from './components/Routes';
+import { Provider } from 'react-redux'
 
 class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>App</Text>
-      </View>
+        <Routes></Routes>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-});
 
 export default App;
