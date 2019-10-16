@@ -6,10 +6,10 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
-          <Text>Guest User</Text>
+          <Text>Guest User click here</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-          <Text>Continue Auth Stack Path</Text>
+          <Text>Click here to Login or Sign Up</Text>
         </TouchableOpacity>
       </View>
     );

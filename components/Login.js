@@ -5,7 +5,9 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Login</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
+          <Text>Click me to login and start App</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUp')}>
           <Text>New User Sign Up</Text>
         </TouchableOpacity>

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-class Discover extends Component {
+class Locations extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>I am the Discover screen with various categories</Text>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Locations')}>
-          <Text>Click me to view catagory and list of locations</Text>
+        <Text>I am the Locations screen</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('LocationDetails')}>
+          <Text>Click me to view location details and go to LocationDetails screen</Text>
         </TouchableOpacity>
       </View>
     );
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'purple',
+    backgroundColor: 'orange',
   },
 });
 
-export default Discover;
+export default Locations;

@@ -1,12 +1,15 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class Profile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Profile</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+          <Text>No current user. Please Login or Sign Up to view Profile.</Text>
+          <Text>Go to Login/SignUp page</Text>
+        </TouchableOpacity>      
       </View>
     );
   }
