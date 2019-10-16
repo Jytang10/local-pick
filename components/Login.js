@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-class Home extends Component {
+class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
-          <Text>Guest User</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-          <Text>Continue Auth Stack Path</Text>
+        <Text>Login</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUp')}>
+          <Text>New User Sign Up</Text>
         </TouchableOpacity>
       </View>
     );
@@ -21,8 +19,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'grey',
   },
 });
 
-export default Home;
+export default Login;

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-class Discover extends Component {
+// create a component
+class SignUp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Discover</Text>
+        <Text>Sign Up</Text>
       </View>
     );
   }
@@ -16,8 +17,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'purple',
+    backgroundColor: 'blue',
   },
 });
 
-export default Discover;
+export default SignUp;
