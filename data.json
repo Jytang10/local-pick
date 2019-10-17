@@ -1,0 +1,59 @@
+{
+  "data" : {
+    "picks" : {                       // PICKS TABLE
+      "ABCDID": {
+        "title" : "Best fast casual"
+      },
+      "EFGHID": {
+        "title" : "Best dessert"
+      },
+      "IJKLMID": {
+        "title" : "Best instagrammable cafes"
+      }
+    },
+    "recommendations" : {             // RECOMMENDATIONS TABLE
+      "SDFDSFID" : {
+        "title" : "Tacos Maria",
+        "address": "101 Harbor Blvd, Costa Mesa, CA",
+        "website": "www.tacosmaria.com",
+        "city" : "Costa Mesa",
+        "picksID" : "ABCDID"          // use to identify and join with appropriate pick lists
+      },
+      "DSFSDVID" : {
+        "title" : "OMOMO",
+        "address": "93 Culver Drive, Irvine, CA",
+        "website": "www.omomo.com",
+        "city" : "Irvine",
+        "picksID" : "EFGHID",
+      }
+    },
+    "notes" : {                     // NOTES TABLE
+      "NNDSFKID" : {
+        "content" : "I recommend the carne asada tacos",
+        "title" : "Good tacos",
+        "recommendationID" : "SDFDSFID",     // use to identify and join with approciate recommendation
+        "userID": "1"                         // use to identify with appropriate user
+      },
+      "MMDSJID" : {
+        "content" : "Affordable prices and nice staff",
+        "title" : "Great value",
+        "recommendationID" : "DSFSDVID",
+        "userID": "2"
+      }
+    },
+    "users" : {
+      "1" : {
+        "name" : "James Tang",
+        "displayName" : "jtang99",
+        "email" : "james@email.com",
+        "location" : "Costa Mesa"
+      },
+      "2" : {
+        "name" : "David East",
+        "displayName" : "sirdavid2245",
+        "email" : "david@email.com",
+        "location" : "Irvine"
+      }
+    }
+  }
+}
