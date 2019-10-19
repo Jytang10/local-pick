@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { getLists } from '../actions';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
 class Discover extends Component {
   render() {
@@ -27,4 +29,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Discover;
+function mapStateToProps(state){
+  const listOfLists = _.map(state.blogsList, (val, key) =>{
+    return {
+      ...val,
+      key: key
+    }
+  })
+  return {
+    listOfLists,
+    loadingReducer: state.loadingReducer.loadingReducer
+  }
+}
+
+export default connect(mapStateToProps, {getLists})(Discover);

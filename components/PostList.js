@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PostList;
+export default connect(null, {postList})(PostList);
