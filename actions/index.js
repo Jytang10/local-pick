@@ -45,3 +45,9 @@ export function deleteList(key){
     firebase.database().ref(`/data/lists/${key}`).remove();
   }
 }
+
+export function updateList(title, key){
+  return(dispatch) => {
+    firebase.database().ref('/data/lists').child(key).update({title});
+  }
+}

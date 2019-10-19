@@ -32,10 +32,15 @@ class Discover extends Component {
                     return (
                       <View style={{elevation:8, marginBottom:15, borderRadius:15, backgroundColor:'#575FCF', padding:20}}>
                         <Text style={{fontSize:30, fontWeight:'bold', color:'#fff', marginBottom:10}}>{item.title}</Text>
-                        <View>
+                        <View style={styles.iconsContainer}>
+                          <TouchableHighlight onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
+                            <View style={{marginRight:15}}>
+                              <Icon size={30} color="white" name="edit"></Icon>
+                            </View>
+                          </TouchableHighlight> 
                           <TouchableHighlight onPress={() => this.props.deleteList(item.key)}>
                             <View>
-                              <Icon size={30} color="white" name="close"></Icon>
+                              <Icon size={30} color="red" name="close"></Icon>
                             </View>
                           </TouchableHighlight> 
                         </View>
@@ -66,6 +71,11 @@ const styles = StyleSheet.create({
   listContainer: {
 
   },
+  iconsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 25
+  }
 });
 
 function mapStateToProps(state){

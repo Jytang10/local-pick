@@ -7,6 +7,7 @@ import SignUp from './SignUp';
 import Search from './Search';
 import Discover from './Discover';
 import PostList from './PostList';
+import UpdateList from './UpdateList';
 import Locations from './Locations';
 import LocationDetails from './LocationDetails';
 import Profile from './Profile.js';
@@ -53,6 +54,12 @@ const DiscoverStack = createStackNavigator({
     screen: PostList,
     navigationOptions: {
       headerTitle:'Add a List'
+    }
+  },
+  UpdateList: {
+    screen: UpdateList,
+    navigationOptions: {
+      headerTitle:'Update List'
     }
   },
   Locations: {
