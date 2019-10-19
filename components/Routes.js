@@ -91,7 +91,7 @@ const AppStack = createBottomTabNavigator({
     }
   },
 },{
-  initialRouteName: 'Search'
+  initialRouteName: 'Discover'
 })
 
 const App = createSwitchNavigator({
@@ -101,6 +101,8 @@ const App = createSwitchNavigator({
   App: {
     screen: AppStack
   }
+}, {
+  initialRouteName: 'App'
 })
 
 export default createAppContainer(App);
