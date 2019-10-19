@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import SearchReducer from './SearchReducer';
 import LoadingReducer from './LoadingReducer';
-import CategoriesReducer from './CategoriesReducer';
+import ListsReducer from './ListsReducer';
 import LocationReducer from './LoadingReducer';
 import NotesReducer from './NotesReducer';
 
 const rootReducer = combineReducers({
   searchList: SearchReducer,
   loadingReducer: LoadingReducer,
-  categoriesList: CategoriesReducer,
+  listsList: ListsReducer,
   locationsList: LocationReducer,
   notesList: NotesReducer
 })

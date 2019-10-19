@@ -2,10 +2,10 @@
 
 export default function (state = {}, action){
   switch(action.type){
-    case "CATEGORIES_FETCH":
+    case "LISTS_FETCH":
       return {
         ...state,
-        categoriesList: action.payload
+        listsList: action.payload
       }
     default:
       return state
