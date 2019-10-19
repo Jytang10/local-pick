@@ -8,7 +8,7 @@ import _ from 'lodash';
 class Discover extends Component {
 
   componentDidMount(){
-    this.props.getLists();
+    // this.props.getLists();
   }
 
   render() {
