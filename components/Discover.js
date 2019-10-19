@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { getLists } from '../actions';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { getLists, deleteList } from '../actions';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 
 class Discover extends Component {
@@ -31,6 +32,13 @@ class Discover extends Component {
                     return (
                       <View style={{elevation:8, marginBottom:15, borderRadius:15, backgroundColor:'#575FCF', padding:20}}>
                         <Text style={{fontSize:30, fontWeight:'bold', color:'#fff', marginBottom:10}}>{item.title}</Text>
+                        <View>
+                          <TouchableHighlight onPress={() => this.props.deleteList(item.key)}>
+                            <View>
+                              <Icon size={30} color="white" name="close"></Icon>
+                            </View>
+                          </TouchableHighlight> 
+                        </View>
                       </View>
                     )
                   }
@@ -73,4 +81,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {getLists})(Discover);
+export default connect(mapStateToProps, {getLists, deleteList})(Discover);

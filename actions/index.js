@@ -39,3 +39,9 @@ export function postList(title){
     firebase.database().ref('/data/lists').push({title})
   }
 }
+
+export function deleteList(key){
+  return(dispatch) => {
+    firebase.database().ref(`/data/lists/${key}`).remove();
+  }
+}
