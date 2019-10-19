@@ -33,7 +33,7 @@ class Discover extends Component {
                       <View style={{elevation:8, marginBottom:15, borderRadius:15, backgroundColor:'#575FCF', padding:20}}>
                         <Text style={{fontSize:30, fontWeight:'bold', color:'#fff', marginBottom:10}}>{item.title}</Text>
                         <View>
-                          <TouchableHighlight onPress={() => this.props.navigation.navigate('EditList', {...item})}>
+                          <TouchableHighlight onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
                             <View style={{marginRight:15}}>
                               <Icon size={30} color="white" name="edit"></Icon>
                             </View>
