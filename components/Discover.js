@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { getLists } from '../actions';
+import { getLists, deleteList } from '../actions';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
 class Discover extends Component {
 
   componentDidMount(){
-    this.props.getLists();
+    // this.props.getLists();
   }
 
   render() {
@@ -73,4 +73,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {getLists})(Discover);
+export default connect(mapStateToProps, {getLists, deleteList})(Discover);
