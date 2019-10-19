@@ -16,13 +16,21 @@ class UpdateList extends Component {
       title: "",
       key: ""
     })
-    this.props.navigation.navigation('Discover');
+    this.props.navigation.navigate('Discover');
   }
 
   render() {
+    const { title } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Update List</Text>
+        <Text>Update List Screen</Text>
+        <TextInput
+          style={styles.titleInput}
+          placeholder="title"
+          onChangeText={title => this.setState({ title })}
+          value={title}>
+        </TextInput>
+        <Button title="Submit" onPress={this.submitUpdate}></Button>
       </View>
     );
   }
@@ -32,9 +40,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    padding: 30,
+    backgroundColor: '#fff',
   },
+  titleInput: {
+    marginTop: 20,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1
+  }
 });
 
-export default UpdateList;
+export default connect(null, {updateList})(UpdateList);
