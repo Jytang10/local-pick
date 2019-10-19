@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { getLists } from '../actions';
 
 class Discover extends Component {
   render() {
@@ -8,6 +9,9 @@ class Discover extends Component {
         <Text>I am the Discover screen with various categories</Text>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Locations')}>
           <Text>Click me to view catagory and list of locations</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('PostList')}>
+          <Text>Click me to add a List</Text>
         </TouchableOpacity>
       </View>
     );
