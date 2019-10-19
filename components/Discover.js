@@ -1,14 +1,44 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { getLists } from '../actions';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
 class Discover extends Component {
+
+  componentDidMount(){
+    this.props.getLists();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>I am the Discover screen with various categories</Text>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Locations')}>
-          <Text>Click me to view catagory and list of locations</Text>
-        </TouchableOpacity>
+        <View style={styles.addList}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('PostList')}>
+            <Text>Click me to add a List</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.listsContainer}>
+          {
+            this.props.loadingReducer
+            ? <Text>Loading Lists, Please Wait</Text>
+            : <FlatList
+                style={{width:'100%'}}
+                data={this.props.listOfLists}
+                keyExtractor={(item) => item.key}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => {
+                    return (
+                      <View style={{elevation:8, marginBottom:15, borderRadius:15, backgroundColor:'#575FCF', padding:20}}>
+                        <Text style={{fontSize:30, fontWeight:'bold', color:'#fff', marginBottom:10}}>{item.title}</Text>
+                      </View>
+                    )
+                  }
+                }
+              >
+            </FlatList>
+          }        
+        </View>
       </View>
     );
   }
@@ -19,8 +49,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'purple',
+    backgroundColor: '#fff',
+    padding:10
+  },
+  addList: {
+
+  },
+  listContainer: {
+
   },
 });
 
-export default Discover;
+function mapStateToProps(state){
+  const listOfLists = _.map(state.listsList.listsList, (val, key) =>{
+    return {
+      ...val,
+      key: key
+    }
+  })
+  return {
+    listOfLists,
+    loadingReducer: state.loadingReducer.loadingReducer
+  }
+}
+
+export default connect(mapStateToProps, {getLists})(Discover);

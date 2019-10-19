@@ -6,6 +6,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Search from './Search';
 import Discover from './Discover';
+import PostList from './PostList';
 import Locations from './Locations';
 import LocationDetails from './LocationDetails';
 import Profile from './Profile.js';
@@ -46,6 +47,12 @@ const DiscoverStack = createStackNavigator({
     screen: Discover,
     navigationOptions: {
       headerTitle:'Discover'
+    }
+  },
+  PostList: {
+    screen: PostList,
+    navigationOptions: {
+      headerTitle:'Add a List'
     }
   },
   Locations: {
@@ -91,7 +98,7 @@ const AppStack = createBottomTabNavigator({
     }
   },
 },{
-  initialRouteName: 'Search'
+  initialRouteName: 'Discover'
 })
 
 const App = createSwitchNavigator({
@@ -101,6 +108,8 @@ const App = createSwitchNavigator({
   App: {
     screen: AppStack
   }
+}, {
+  initialRouteName: 'App'
 })
 
 export default createAppContainer(App);
