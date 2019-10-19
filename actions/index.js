@@ -33,3 +33,9 @@ export function getLists(){
     })
   }
 }
+
+export function postList(title){
+  return(dispatch) => {
+    firebase.database().ref('/data/lists').push({title})
+  }
+}
