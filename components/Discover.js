@@ -13,10 +13,6 @@ class Discover extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Text>I am the Discover screen with various categories</Text> */}
-        {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Locations')}>
-          <Text>Click me to view catagory and list of locations</Text>
-        </TouchableOpacity> */}
         <View style={styles.addList}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('PostList')}>
             <Text>Click me to add a List</Text>
@@ -65,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state){
-  const listOfLists = _.map(state.blogsList, (val, key) =>{
+  const listOfLists = _.map(state.listsList.listsList, (val, key) =>{
     return {
       ...val,
       key: key
