@@ -2,7 +2,7 @@
 
 export default function(state = {}, action){
   switch(action.type){
-    case "LIST_LOADING_STATUS":
+    case "LISTS_LOADING_STATUS":
       return {
         ...state,
         loadingReducer: action.payload

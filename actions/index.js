@@ -1,18 +1,5 @@
 import firebase from '../fb';
 
-export function getSearchCity(){
-  return(dispatch) => {
-    dispatch({
-      type:"SEARCH_FETCH",
-      payload:"success"
-    })
-  //  dispatch({
-  //    type:"SEARCH_LOADING_STATUS",
-  //    payload: true
-  //  })
-  }
-}
-
 export function getLists(){
   return(dispatch) => {
     dispatch({
@@ -49,5 +36,14 @@ export function deleteList(key){
 export function updateList(title, key){
   return(dispatch) => {
     firebase.database().ref('/data/lists').child(key).update({title});
+  }
+}
+
+export function setCity(city){
+  return(dispatch) => {
+    dispatch({
+      type:"SEARCH_SET_CITY",
+      payload: city
+    })
   }
 }
