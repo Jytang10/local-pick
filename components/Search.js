@@ -13,7 +13,7 @@ class Search extends Component {
     const { city } = this.state;
     this.props.setCity(city);
     this.setState({ city: "" });
-    this.props.navigation.navigation('Discover')
+    this.props.navigation.navigate('Discover');
   } 
   
   render() {
