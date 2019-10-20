@@ -1,12 +1,12 @@
-//import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
+
+import { connect } from 'react-redux';
 
 class Search extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>I am the Search screen</Text>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Discover')}>
           <Text>Click me to search and go to Discover screen</Text>
         </TouchableOpacity>
