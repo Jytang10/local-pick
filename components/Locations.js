@@ -14,9 +14,6 @@ class Locations extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('LocationDetails')}>
-          <Text>Click me to view location details and go to LocationDetails screen</Text>
-        </TouchableOpacity> */}
         <View style={styles.addLocation}>
           <Button title="Add a Recommendation!" onPress={() => this.props.navigation.navigate('PostLocation')} color="red"></Button>
         </View>
@@ -31,7 +28,7 @@ class Locations extends Component {
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) => {
                 return (
-                  <TouchableOpacity style={{shadowOpacity:0.5}}>
+                  <TouchableOpacity style={{shadowOpacity:0.5}} onPress={() => this.props.navigation.navigate('LocationDetails', {...item})}>
                     <View style={{overflow:'hidden', marginVertical:20, marginHorizontal:15, borderRadius:15, backgroundColor:'#ced6eo'}}>
                       <View style={{padding:15, backgroundColor:'#86dfe5', borderTopLeftRadius:15, borderTopRightRadius:15}}>
                         <Text style={{fontSize:20, fontWeight:'bold'}}>

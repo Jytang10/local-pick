@@ -89,7 +89,7 @@ const DiscoverStack = createStackNavigator({
     }
   },
 },{
-  initialRouteName: 'Discover'
+  initialRouteName: 'Locations'
 })
 
 const ProfileStack = createStackNavigator({
