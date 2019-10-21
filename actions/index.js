@@ -69,6 +69,12 @@ export function getLocations(){
   }
 }
 
+export function postLocation(locationTitle){
+  return(dispatch) => {
+    firebase.database().ref('/data/locations').push({locationTitle});
+  }
+}
+
 export function deleteLocation(key){
   return(dispatch) => {
     firebase.database().ref(`/data/locations/${key}`).remove();
