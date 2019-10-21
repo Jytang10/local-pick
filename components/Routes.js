@@ -65,7 +65,7 @@ const DiscoverStack = createStackNavigator({
   Locations: {
     screen: Locations,
     navigationOptions: {
-      headerTitle:'Locations'
+      headerTitle:'**Locations**'
     }
   },
   LocationDetails: {
@@ -74,6 +74,8 @@ const DiscoverStack = createStackNavigator({
       headerTitle:'Location Details'
     }
   },
+},{
+  initialRouteName: 'Locations'
 })
 
 const ProfileStack = createStackNavigator({
@@ -105,7 +107,7 @@ const AppStack = createBottomTabNavigator({
     }
   },
 },{
-  initialRouteName: 'Search'
+  initialRouteName: 'Discover'
 })
 
 const App = createSwitchNavigator({

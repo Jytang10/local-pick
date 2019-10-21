@@ -5,7 +5,6 @@ class Locations extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>I am the Locations screen</Text>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('LocationDetails')}>
           <Text>Click me to view location details and go to LocationDetails screen</Text>
         </TouchableOpacity>
