@@ -37,6 +37,18 @@ class Locations extends Component {
                         <Text style={{fontSize:20, fontWeight:'bold'}}>
                           {item.locationTitle}
                         </Text>
+                        <View style={styles.iconsContainer}>
+                          <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
+                            <View style={{marginRight:15}}>
+                              <Icon size={30} color="white" name="edit"></Icon>
+                            </View>
+                          </TouchableOpacity> 
+                          <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
+                            <View>
+                              <Icon size={30} color="red" name="close"></Icon>
+                            </View>
+                          </TouchableOpacity> 
+                        </View>
                       </View>
                       <View>
                         <Image source={{uri:item.image}}>
@@ -69,6 +81,11 @@ const styles = StyleSheet.create({
   locationsContainer: {
 
   },
+  iconsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 25
+  }
 });
 
 function mapStateToProps(state){
