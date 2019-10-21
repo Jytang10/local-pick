@@ -80,3 +80,9 @@ export function deleteLocation(key){
     firebase.database().ref(`/data/locations/${key}`).remove();
   }
 }
+
+export function updateLocation(locationTitle, key){
+  return(dispatch) => {
+    firebase.database().ref('/data/locations').child(key).update({locationTitle});
+  }
+}

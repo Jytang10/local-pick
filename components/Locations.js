@@ -8,7 +8,7 @@ import _ from 'lodash';
 class Locations extends Component {
 
   componentDidMount(){
-    // this.props.getLocations();
+    this.props.getLocations();
   }
 
   render() {

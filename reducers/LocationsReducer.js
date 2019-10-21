@@ -2,7 +2,7 @@
 
 export default function (state = {}, action){
   switch(action.type){
-    case "LOCATION_FETCH":
+    case "LOCATIONS_FETCH":
       return {
         ...state,
         locationsList: action.payload
