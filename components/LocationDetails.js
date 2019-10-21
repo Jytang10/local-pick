@@ -8,7 +8,6 @@ class LocationDetails extends Component {
     const map = <Icon style={{paddingRight:5}} name="map" color="black" size={20}></Icon>
     const phone = <Icon style={{paddingRight:5}} name="copy" color="black" size={20}></Icon>
     const params = this.props.navigation.state.params;
-    console.log(params)
     return (
       <View style={styles.container}>
         <View style={{height:250, width:'100%', alignSelf:'stretch'}}>
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 8,
-    backgroundColor: 'pink',
+    backgroundColor: 'grey',
   },
 });
 
