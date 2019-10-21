@@ -25,11 +25,11 @@ class Locations extends Component {
             this.props.loadingReducer
             ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
             : <FlatList
-              style={{width:'100%'}}
-              data={this.props.listOfLocations}
-              keyExtractor={(item) => item.key}
-              showsVerticalScrollIndicator={false}
-              renderItem={({item}) => {
+                style={{width:'100%'}}
+                data={this.props.listOfLocations}
+                keyExtractor={(item) => item.key}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => {
                 return (
                   <TouchableOpacity style={{shadowOpacity:0.5}}>
                     <View style={{overflow:'hidden', marginVertical:20, marginHorizontal:15, borderRadius:15, backgroundColor:'#ced6eo'}}>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state){
-  const listOfLocations = _.map(state.locationsList, (val, key) => {
+  const listOfLocations = _.map(state.locationsList.locationsList, (val, key) => {
     return {
       ...val,
       key: key
