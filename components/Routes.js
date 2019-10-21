@@ -9,6 +9,8 @@ import Discover from './Discover';
 import PostList from './PostList';
 import UpdateList from './UpdateList';
 import Locations from './Locations';
+import PostLocation from './PostLocation';
+import UpdateLocation from './UpdateLocation';
 import LocationDetails from './LocationDetails';
 import Profile from './Profile.js';
 
@@ -65,7 +67,19 @@ const DiscoverStack = createStackNavigator({
   Locations: {
     screen: Locations,
     navigationOptions: {
-      headerTitle:'Locations'
+      headerTitle:'**Locations**'
+    }
+  },
+  PostLocation: {
+    screen: PostLocation,
+    navigationOptions: {
+      headerTitle:'Add a Location'
+    }
+  },
+  UpdateLocation: {
+    screen: UpdateLocation,
+    navigationOptions: {
+      headerTitle:'Update Location'
     }
   },
   LocationDetails: {
@@ -74,6 +88,8 @@ const DiscoverStack = createStackNavigator({
       headerTitle:'Location Details'
     }
   },
+},{
+  initialRouteName: 'Discover'
 })
 
 const ProfileStack = createStackNavigator({
@@ -105,7 +121,7 @@ const AppStack = createBottomTabNavigator({
     }
   },
 },{
-  initialRouteName: 'Search'
+  initialRouteName: 'Discover'
 })
 
 const App = createSwitchNavigator({

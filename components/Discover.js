@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
 import { getLists, deleteList } from '../actions';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,14 +15,12 @@ class Discover extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.addList}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('PostList')}>
-            <Text>Click me to add a List</Text>
-          </TouchableOpacity>
+          <Button title="Add a List!!" onPress={() => this.props.navigation.navigate('PostList')} color="red"></Button>
         </View>
         <View style={styles.listsContainer}>
           {
             this.props.loadingReducer
-            ? <Text>Loading Lists, Please Wait</Text>
+            ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
             : <FlatList
                 style={{width:'100%'}}
                 data={this.props.listOfLists}
@@ -30,21 +28,23 @@ class Discover extends Component {
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) => {
                     return (
-                      <View style={{elevation:8, marginBottom:15, borderRadius:15, backgroundColor:'#575FCF', padding:20}}>
-                        <Text style={{fontSize:30, fontWeight:'bold', color:'#fff', marginBottom:10}}>{item.title}</Text>
-                        <View style={styles.iconsContainer}>
-                          <TouchableHighlight onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
-                            <View style={{marginRight:15}}>
-                              <Icon size={30} color="white" name="edit"></Icon>
-                            </View>
-                          </TouchableHighlight> 
-                          <TouchableHighlight onPress={() => this.props.deleteList(item.key)}>
-                            <View>
-                              <Icon size={30} color="red" name="close"></Icon>
-                            </View>
-                          </TouchableHighlight> 
+                      <TouchableOpacity style={{shadowOpacity:0.5, marginBottom:15, borderRadius:15, backgroundColor:'#575FCF', padding:20}} onPress={() => this.props.navigation.navigate('Locations', {...item})}>
+                        <View style={{overflow:'hidden'}} >
+                          <Text style={{fontSize:30, fontWeight:'bold', color:'#fff', marginBottom:10}}>{item.title}</Text>
+                          <View style={styles.iconsContainer}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
+                              <View style={{marginRight:15}}>
+                                <Icon size={30} color="white" name="edit"></Icon>
+                              </View>
+                            </TouchableOpacity> 
+                            <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
+                              <View>
+                                <Icon size={30} color="red" name="close"></Icon>
+                              </View>
+                            </TouchableOpacity> 
+                          </View>
                         </View>
-                      </View>
+                      </TouchableOpacity>
                     )
                   }
                 }
