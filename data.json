@@ -11,19 +11,21 @@
         "title" : "Best instagrammable cafes"
       }
     },
-    "recommendations" : {             // RECOMMENDATIONS TABLE
+    "locations" : {             // RECOMMENDATIONS TABLE
       "SDFDSFID" : {
-        "title" : "Tacos Maria",
+        "locationTitle" : "Tacos Maria",
         "address": "101 Harbor Blvd, Costa Mesa, CA",
         "website": "www.tacosmaria.com",
         "city" : "Costa Mesa",
+        "image": "www.image.com",
         "picksID" : "ABCDID"          // use to identify and join with appropriate pick lists
       },
       "DSFSDVID" : {
-        "title" : "OMOMO",
+        "locationTitle" : "OMOMO",
         "address": "93 Culver Drive, Irvine, CA",
         "website": "www.omomo.com",
         "city" : "Irvine",
+        "image": "www.image.com",
         "picksID" : "EFGHID",
       }
     },

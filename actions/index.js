@@ -1,5 +1,14 @@
 import firebase from '../fb';
 
+export function setCity(city){
+  return(dispatch) => {
+    dispatch({
+      type:"SEARCH_SET_CITY",
+      payload: city
+    })
+  }
+}
+
 export function getLists(){
   return(dispatch) => {
     dispatch({
@@ -39,11 +48,29 @@ export function updateList(title, key){
   }
 }
 
-export function setCity(city){
+export function getLocations(){
   return(dispatch) => {
     dispatch({
-      type:"SEARCH_SET_CITY",
-      payload: city
+      type: "LOCATIONS_LOADING_STATUS",
+      payload: true
     })
+
+    firebase.database().ref('/data/locations').on('value', snapshot => {
+      dispatch({
+        type: "LOCATIONS_FETCH",
+        payload: snapshot.val()
+      })
+
+      dispatch({
+        type: "LOCATIONS_LOADING_STATUS",
+        payload: false
+      })
+    })
+  }
+}
+
+export function deleteLocation(key){
+  return(dispatch) => {
+    firebase.database().ref(`/data/locations/${key}`).remove();
   }
 }
