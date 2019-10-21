@@ -7,6 +7,11 @@ export default function(state = {}, action){
         ...state,
         loadingReducer: action.payload
       }
+    case "LOCATIONS_LOADING_STATUS":
+      return {
+        ...state,
+        loadingReducer: action.payload
+      }
       default:
         return state
   }
