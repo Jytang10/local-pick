@@ -12,6 +12,7 @@ import Locations from './Locations';
 import PostLocation from './PostLocation';
 import UpdateLocation from './UpdateLocation';
 import LocationDetails from './LocationDetails';
+import Maps from './Maps';
 import Profile from './Profile.js';
 
 
@@ -88,6 +89,9 @@ const DiscoverStack = createStackNavigator({
       headerTitle:'Location Details'
     }
   },
+  Map: {
+    screen: Maps
+  }
 },{
   initialRouteName: 'Locations'
 })
