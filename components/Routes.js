@@ -37,16 +37,13 @@ const AuthStack = createStackNavigator({
   }
 })
 
-const SearchStack = createStackNavigator({
+const DiscoverStack = createStackNavigator({
   Search: {
     screen: Search,
     navigationOptions: {
       headerTitle:'Search'
     }
   },
-})
-
-const DiscoverStack = createStackNavigator({
   Discover: {
     screen: Discover,
     navigationOptions: {
@@ -93,8 +90,21 @@ const DiscoverStack = createStackNavigator({
     screen: Maps
   }
 },{
-  initialRouteName: 'Discover'
+  initialRouteName: 'Search'
 })
+
+// const SearchStack = createStackNavigator({
+//   Search: {
+//     screen: Search,
+//     navigationOptions: {
+//       headerTitle:'Search'
+//     }
+//   },
+//   DiscoverStack: {
+//     screen: DiscoverStack
+//   }
+// })
+
 
 const ProfileStack = createStackNavigator({
   Profile: {
@@ -105,35 +115,35 @@ const ProfileStack = createStackNavigator({
   },
 })
 
-const AppStack = createBottomTabNavigator({
-  Search: {
-    screen: SearchStack,
-    navigationOptions: {
-      tabBarLabel:'Search'
-    }
-  },
-  Discover: {
-    screen: DiscoverStack,
-    navigationOptions: {
-      tabBarLabel:'Discover'
-    }
-  },
-  Profile: {
-    screen: ProfileStack,
-    navigationOptions: {
-      tabBarLabel:'Profile',
-    }
-  },
-},{
-  initialRouteName: 'Search'
-})
+// const AppStack = createBottomTabNavigator({
+//   Search: {
+//     screen: SearchStack,
+//     navigationOptions: {
+//       tabBarLabel:'Search'
+//     }
+//   },
+//   Discover: {
+//     screen: DiscoverStack,
+//     navigationOptions: {
+//       tabBarLabel:'Discover'
+//     }
+//   },
+//   Profile: {
+//     screen: ProfileStack,
+//     navigationOptions: {
+//       tabBarLabel:'Profile',
+//     }
+//   },
+// },{
+//   initialRouteName: 'Search'
+// })
 
 const App = createSwitchNavigator({
   Auth: {
     screen: AuthStack,
   },
   App: {
-    screen: AppStack
+    screen: DiscoverStack
   }
 }, {
   initialRouteName: 'App'

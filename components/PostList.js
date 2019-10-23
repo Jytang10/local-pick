@@ -9,7 +9,8 @@ class PostList extends Component {
 
   submitList = () => {
     const { title } = this.state;
-    this.props.postList(title);
+    const city = this.props.cityLocation;
+    this.props.postList(title, city);
     this.setState({ title:"" });
     this.props.navigation.navigate('Discover')
   }
@@ -46,4 +47,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, {postList})(PostList);
+function mapStateToProps(state){
+  return {
+    cityLocation: state.searchList.city
+  }
+}
+
+export default connect(mapStateToProps, {postList})(PostList);

@@ -15,7 +15,6 @@ export function getLists(city){
       type:"LISTS_LOADING_STATUS",
       payload: true
     })
-
     firebase.database().ref('/data/lists').orderByChild('city').equalTo(city).on('value', snapshot => {
       dispatch({
         type: "LISTS_FETCH",
