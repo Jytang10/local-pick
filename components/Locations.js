@@ -9,8 +9,7 @@ class Locations extends Component {
 
   componentDidMount(){
     const params = this.props.navigation.state.params;
-    const cityLocation = this.props.cityLocation;
-    this.props.getLocations(cityLocation, params.key);
+    this.props.getLocations(params.key);
   }
 
   render() {
@@ -97,8 +96,7 @@ function mapStateToProps(state){
   })
   return {
     listOfLocations,
-    loadingReducer: state.loadingReducer.loadingReducer,
-    cityLocation: state.searchList.city
+    loadingReducer: state.loadingReducer.loadingReducer
   }
 }
 

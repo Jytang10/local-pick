@@ -37,7 +37,7 @@ const AuthStack = createStackNavigator({
   }
 })
 
-const DiscoverStack = createStackNavigator({
+const MainStack = createStackNavigator({
   Search: {
     screen: Search,
     navigationOptions: {
@@ -93,19 +93,6 @@ const DiscoverStack = createStackNavigator({
   initialRouteName: 'Search'
 })
 
-// const SearchStack = createStackNavigator({
-//   Search: {
-//     screen: Search,
-//     navigationOptions: {
-//       headerTitle:'Search'
-//     }
-//   },
-//   DiscoverStack: {
-//     screen: DiscoverStack
-//   }
-// })
-
-
 const ProfileStack = createStackNavigator({
   Profile: {
     screen: Profile,
@@ -143,7 +130,7 @@ const App = createSwitchNavigator({
     screen: AuthStack,
   },
   App: {
-    screen: DiscoverStack
+    screen: MainStack
   }
 }, {
   initialRouteName: 'App'

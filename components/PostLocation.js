@@ -5,20 +5,19 @@ import { connect } from 'react-redux';
 
 class PostLocation extends Component {
   state = {
-    locationTitle:"",
-    city:""
+    locationTitle:""
   }
 
   submitLocation = () => {
-    const { locationTitle, city } = this.state;
+    const { locationTitle } = this.state;
     const params = this.props.navigation.state.params;
-    this.props.postLocation(locationTitle, city, params.key);
-    this.setState({ locationTitle:"", city:"" });
+    this.props.postLocation(locationTitle, params.key);
+    this.setState({ locationTitle:"" });
     this.props.navigation.navigate('Locations')
   }
 
   render() {
-    const { locationTitle, city } = this.state;
+    const { locationTitle } = this.state;
     return (
       <View style={styles.container}>
         <Text>Add a Recommendation</Text>
@@ -27,12 +26,6 @@ class PostLocation extends Component {
           placeholder="title"
           onChangeText={locationTitle => this.setState({ locationTitle })}
           value={locationTitle}>
-        </TextInput>
-        <TextInput 
-          style={styles.locationTitle}
-          placeholder="city"
-          onChangeText={city => this.setState({ city })}
-          value={city}>
         </TextInput>
         <Button title="submit" onPress={this.submitLocation}></Button>
       </View>
