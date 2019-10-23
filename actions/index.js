@@ -9,14 +9,14 @@ export function setCity(city){
   }
 }
 
-export function getLists(){
+export function getLists(city){
   return(dispatch) => {
     dispatch({
       type:"LISTS_LOADING_STATUS",
       payload: true
     })
 
-    firebase.database().ref('/data/lists').on('value', snapshot => {
+    firebase.database().ref('/data/lists').orderByChild('city').equalTo(city).on('value', snapshot => {
       dispatch({
         type: "LISTS_FETCH",
         payload: snapshot.val()
@@ -30,9 +30,9 @@ export function getLists(){
   }
 }
 
-export function postList(title){
+export function postList(title, city){
   return(dispatch) => {
-    firebase.database().ref('/data/lists').push({title})
+    firebase.database().ref('/data/lists').push({title, city})
   }
 }
 
@@ -48,7 +48,7 @@ export function updateList(title, key){
   }
 }
 
-export function getLocations(city, pickID){
+export function getLocations(pickID){
   return(dispatch) => {
     dispatch({
       type: "LOCATIONS_LOADING_STATUS",

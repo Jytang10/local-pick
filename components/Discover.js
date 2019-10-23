@@ -8,7 +8,8 @@ import _ from 'lodash';
 class Discover extends Component {
 
   componentDidMount(){
-    this.props.getLists();
+    const city = this.props.cityLocation;
+    this.props.getLists(city);
   }
 
   render() {
@@ -87,7 +88,8 @@ function mapStateToProps(state){
   })
   return {
     listOfLists,
-    loadingReducer: state.loadingReducer.loadingReducer
+    loadingReducer: state.loadingReducer.loadingReducer,
+    cityLocation: state.searchList.city
   }
 }
 
