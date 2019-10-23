@@ -29,6 +29,12 @@
         "picksID" : "EFGHID",
       }
     },
+    "picksLocations" : {
+      "ABCDID" : {
+        "SDFDSFID" : "Tacos Maria",
+        "DSFSDVID" : "OMOMO"
+      }
+    },
     "notes" : {                     // NOTES TABLE
       "NNDSFKID" : {
         "content" : "I recommend the carne asada tacos",

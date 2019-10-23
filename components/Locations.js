@@ -8,14 +8,16 @@ import _ from 'lodash';
 class Locations extends Component {
 
   componentDidMount(){
-    this.props.getLocations();
+    const params = this.props.navigation.state.params;
+    this.props.getLocations(params.key);
   }
 
   render() {
+    const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <View style={styles.addLocation}>
-          <Button title="Add a Recommendation!" onPress={() => this.props.navigation.navigate('PostLocation')} color="red"></Button>
+          <Button title="Add a Recommendation!" onPress={() => this.props.navigation.navigate('PostLocation', params)} color="red"></Button>
         </View>
         <View style={styles.locationsContainer}>
           {
