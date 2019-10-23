@@ -48,7 +48,7 @@ export function updateList(title, key){
   }
 }
 
-export function getLocations(){
+export function getLocations(city, pickID){
   return(dispatch) => {
     dispatch({
       type: "LOCATIONS_LOADING_STATUS",
