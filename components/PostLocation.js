@@ -10,7 +10,8 @@ class PostLocation extends Component {
 
   submitLocation = () => {
     const { locationTitle } = this.state;
-    this.props.postLocation(locationTitle);
+    const params = this.props.navigation.state.params;
+    this.props.postLocation(locationTitle, params.key);
     this.setState({ locationTitle:"" });
     this.props.navigation.navigate('Locations')
   }

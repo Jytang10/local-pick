@@ -69,9 +69,9 @@ export function getLocations(){
   }
 }
 
-export function postLocation(locationTitle){
+export function postLocation(locationTitle, pickID){
   return(dispatch) => {
-    firebase.database().ref('/data/locations').push({locationTitle});
+    firebase.database().ref('/data/locations').push({locationTitle, pickID});
   }
 }
 
