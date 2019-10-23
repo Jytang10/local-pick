@@ -55,7 +55,7 @@ export function getLocations(city, pickID){
       payload: true
     })
 
-    firebase.database().ref('/data/locations').on('value', snapshot => {
+    firebase.database().ref('/data/locations').orderByChild('pickID').equalTo(pickID).on('value', snapshot => {
       dispatch({
         type: "LOCATIONS_FETCH",
         payload: snapshot.val()
