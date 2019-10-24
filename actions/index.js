@@ -85,3 +85,42 @@ export function updateLocation(locationTitle, key){
     firebase.database().ref('/data/locations').child(key).update({locationTitle});
   }
 }
+
+export function getNotes(locationID){
+  return(dispatch) => {
+    dispatch({
+      type: "NOTES_LOADING_STATUS",
+      payload: true
+    })
+
+    firebase.database().ref('/data/notes').orderByChild('locationID').equalTo(locationID).on('value', snapshot => {
+      dispatch({
+        type: "NOTES_FETCH",
+        payload: snapshot.val()
+      })
+
+      dispatch({
+        type: "NOTES_LOADING_STATUS",
+        payload: false
+      })
+    })
+  }
+}
+
+export function postNote(content, locationID){
+  return(dispatch) => {
+    firebase.database().ref('/data/notes').push({content, locationID});
+  }
+}
+
+export function deleteNote(key){
+  return(dispatch) => {
+    firebase.database().ref(`/data/notes/${key}`).remove();
+  }
+}
+
+export function updateNote(content, key){
+  return(dispatch) => {
+    firebase.database().ref('/data/notes').child(key).update({content});
+  }
+}
