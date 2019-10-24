@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Button } from 'react-native';
 import Communications from 'react-native-communications';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -42,9 +42,12 @@ class LocationDetails extends Component {
           <Text style={{fontSize:24, fontWeight:'bold'}}>Address</Text>
           <Text style={{fontSize:24, fontWeight:'bold'}}>Website</Text>
         </View>
-        <ScrollView style={{marginTop:6}}>
+        <ScrollView style={styles.noteContainer}>
           <View>
-            <Text style={{lineHeight:23, fontSize:20}}>Details</Text>
+            <Text style={{lineHeight:23, fontSize:20}}>User Notes</Text>
+            <View style={styles.addLocation}>
+              <Button title="Add a Note!" onPress={() => this.props.navigation.navigate('PostNote', params)} color="red"></Button>
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -58,6 +61,10 @@ const styles = StyleSheet.create({
     margin: 8,
     backgroundColor: 'grey',
   },
+  noteContainer: {
+    marginTop: 6,
+    backgroundColor: 'blue'
+  }
 });
 
 export default LocationDetails;
