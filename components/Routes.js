@@ -104,7 +104,7 @@ const MainStack = createStackNavigator({
     }
   },
 },{
-  initialRouteName: 'LocationDetails'
+  initialRouteName: 'Search'
 })
 
 const ProfileStack = createStackNavigator({
