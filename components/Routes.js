@@ -12,6 +12,8 @@ import Locations from './Locations';
 import PostLocation from './PostLocation';
 import UpdateLocation from './UpdateLocation';
 import LocationDetails from './LocationDetails';
+import PostNote from './PostNote';
+import UpdateNote from './UpdateNote';
 import Maps from './Maps';
 import Profile from './Profile.js';
 
@@ -88,9 +90,21 @@ const MainStack = createStackNavigator({
   },
   Map: {
     screen: Maps
-  }
+  },
+  PostNote: {
+    screen: PostNote,
+    navigationOptions: {
+      headerTitle:'Add a Note'
+    }
+  },
+  UpdateNote: {
+    screen: UpdateNote,
+    navigationOptions: {
+      headerTitle:'Update Note'
+    }
+  },
 },{
-  initialRouteName: 'Search'
+  initialRouteName: 'LocationDetails'
 })
 
 const ProfileStack = createStackNavigator({
