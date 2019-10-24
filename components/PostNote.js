@@ -5,29 +5,29 @@ import { connect } from 'react-redux';
 
 class PostNote extends Component {
   state = {
-    locationTitle:""
+    content:""
   }
 
-  submitLocation = () => {
-    const { locationTitle } = this.state;
+  submitNote = () => {
+    const { content } = this.state;
     const params = this.props.navigation.state.params;
-    this.props.postLocation(locationTitle, params.key);
-    this.setState({ locationTitle:"" });
-    this.props.navigation.navigate('Locations')
+    this.props.postNote(content, params.key);
+    this.setState({ content:"" });
+    this.props.navigation.navigate('LocationDetails')
   }
 
   render() {
-    const { locationTitle } = this.state;
+    const { content } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Add a Recommendation</Text>
+        <Text>Add a Note</Text>
         <TextInput 
-          style={styles.locationTitle}
-          placeholder="title"
-          onChangeText={locationTitle => this.setState({ locationTitle })}
-          value={locationTitle}>
+          style={styles.content}
+          placeholder="content"
+          onChangeText={content => this.setState({ content })}
+          value={content}>
         </TextInput>
-        <Button title="submit" onPress={this.submitLocation}></Button>
+        <Button title="submit" onPress={this.submitNote}></Button>
       </View>
     );
   }
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     padding: 30,
     backgroundColor: '#fff',
   },
-  locationTitle: {
+  content: {
     marginTop:20,
     height: 40,
     borderColor: 'grey',
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, {postLocation})(PostNote);
+export default connect(null, {postNote})(PostNote);
