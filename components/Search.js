@@ -22,8 +22,8 @@ class Search extends Component {
     const { city } = this.state;
     return (
       <View style={styles.container}>
-        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4}>
-          {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue }) => (
+        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} componens="country:us">
+          {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
             <React.Fragment>
               {console.log('locationResults', locationResults)}
               <View style={styles.textInputContainer}>
@@ -34,6 +34,7 @@ class Search extends Component {
                   value={inputValue}
                   >
                 </TextInput>
+                <Button title="Clear" onPress={clearSearchs}></Button>
               </View>
               {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
               <ScrollView>
@@ -76,7 +77,8 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   textInputContainer: {
-    marginTop: 30
+    marginTop: 30,
+    flexDirection: 'row'
   },
   textInput: {
     height: 40,
