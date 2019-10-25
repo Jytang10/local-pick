@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
+import { GOOGLE_PLACES_API_KEY } from 'react-native-dotenv';
+import { GoogleAutoComplete } from 'react-native-google-autocomplete';
 import { setCity } from '../actions';
 import { connect } from 'react-redux';
-
 class Search extends Component {
 
   state = {
@@ -20,19 +21,23 @@ class Search extends Component {
     const { city } = this.state;
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Discover')}>
-          <Text>Click me to go to Discover screen directly</Text>
-        </TouchableOpacity>
-        <View>
-          <Text>Set City below</Text>
-          <TextInput
-            style={styles.cityInput}
-            placeholder="Enter city"
-            onChangeText={city => this.setState({ city })}
-            value={city}>
-          </TextInput>
-          <Button title="Submit" onPress={this.submitCity}></Button>
-        </View>
+        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY}>
+          {({}) => (
+            <React.Fragment>
+              <View>
+                <TextInput style={styles.textInput} placeholder="Search for a city"></TextInput>
+              </View>
+            </React.Fragment>
+          )}
+        </GoogleAutoComplete>
+        <Text>Set City below</Text>
+        <TextInput
+          style={styles.cityInput}
+          placeholder="Enter city"
+          onChangeText={city => this.setState({ city })}
+          value={city}>
+        </TextInput>
+        <Button title="Submit" onPress={this.submitCity}></Button>
       </View>
     );
   }
@@ -50,6 +55,12 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'grey',
     borderWidth: 1
+  },
+  textInput: {
+    height: 40,
+    width: 300,
+    borderWidth: 1,
+    paddingHorizontal: 16
   }
 });
 
