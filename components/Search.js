@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button, ScrollView } from 'react-native';
 import { GOOGLE_PLACES_API_KEY } from 'react-native-dotenv';
 import { GoogleAutoComplete } from 'react-native-google-autocomplete';
+import LocationItem from './LocationItem';
 import { setCity } from '../actions';
 import { connect } from 'react-redux';
 class Search extends Component {
@@ -21,12 +22,27 @@ class Search extends Component {
     const { city } = this.state;
     return (
       <View style={styles.container}>
-        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY}>
-          {({}) => (
+        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4}>
+          {({ handleTextChange, locationResults }) => (
             <React.Fragment>
-              <View>
-                <TextInput style={styles.textInput} placeholder="Search for a city"></TextInput>
+              {console.log('locationResults', locationResults)}
+              <View style={styles.textInputContainer}>
+                <TextInput 
+                  style={styles.textInput}
+                  placeholder="Search for a city"
+                  onChangeText={handleTextChange}
+                  >
+                </TextInput>
               </View>
+              <ScrollView>
+                {locationResults.map(ele => (
+                  <LocationItem
+                    {...ele}
+                    key={ele.id}
+                  >
+                  </LocationItem>
+                ))}
+              </ScrollView>
             </React.Fragment>
           )}
         </GoogleAutoComplete>
@@ -55,6 +71,9 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'grey',
     borderWidth: 1
+  },
+  textInputContainer: {
+    marginTop: 30
   },
   textInput: {
     height: 40,
