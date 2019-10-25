@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class LocationItem extends Component {
+
+  handlePress = async () => {
+    const res = await this.props.fetchDetails(this.props.place_id)
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={this.handlePress}>
         <Text>{this.props.description}</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

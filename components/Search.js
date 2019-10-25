@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button, ScrollView, ActivityIndicator } from 'react-native';
 import { GOOGLE_PLACES_API_KEY } from 'react-native-dotenv';
 import { GoogleAutoComplete } from 'react-native-google-autocomplete';
 import LocationItem from './LocationItem';
@@ -23,7 +23,7 @@ class Search extends Component {
     return (
       <View style={styles.container}>
         <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4}>
-          {({ handleTextChange, locationResults }) => (
+          {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue }) => (
             <React.Fragment>
               {console.log('locationResults', locationResults)}
               <View style={styles.textInputContainer}>
@@ -31,14 +31,17 @@ class Search extends Component {
                   style={styles.textInput}
                   placeholder="Search for a city"
                   onChangeText={handleTextChange}
+                  value={inputValue}
                   >
                 </TextInput>
               </View>
+              {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
               <ScrollView>
                 {locationResults.map(ele => (
                   <LocationItem
                     {...ele}
                     key={ele.id}
+                    fetchDetails={fetchDetails}
                   >
                   </LocationItem>
                 ))}
