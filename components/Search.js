@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button, ScrollView, ActivityIndicator } from 'react-native';
+import { GOOGLE_PLACES_API_KEY } from 'react-native-dotenv';
+import { GoogleAutoComplete } from 'react-native-google-autocomplete';
+import LocationItem from './LocationItem';
 import { setCity } from '../actions';
 import { connect } from 'react-redux';
-
 class Search extends Component {
 
   state = {
@@ -20,19 +22,42 @@ class Search extends Component {
     const { city } = this.state;
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Discover')}>
-          <Text>Click me to go to Discover screen directly</Text>
-        </TouchableOpacity>
-        <View>
-          <Text>Set City below</Text>
-          <TextInput
-            style={styles.cityInput}
-            placeholder="Enter city"
-            onChangeText={city => this.setState({ city })}
-            value={city}>
-          </TextInput>
-          <Button title="Submit" onPress={this.submitCity}></Button>
-        </View>
+        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={2} components="country:us" queryTypes="geocode">
+          {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
+            <React.Fragment>
+              {console.log('locationResults', locationResults)}
+              <View style={styles.textInputContainer}>
+                <TextInput 
+                  style={styles.textInput}
+                  placeholder="Search for a city"
+                  onChangeText={handleTextChange}
+                  value={inputValue}
+                  >
+                </TextInput>
+                <Button title="Clear" onPress={clearSearchs}></Button>
+              </View>
+              {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
+              <ScrollView>
+                {locationResults.map(ele => (
+                  <LocationItem
+                    {...ele}
+                    key={ele.id}
+                    fetchDetails={fetchDetails}
+                  >
+                  </LocationItem>
+                ))}
+              </ScrollView>
+            </React.Fragment>
+          )}
+        </GoogleAutoComplete>
+        <Text>Set City below</Text>
+        <TextInput
+          style={styles.cityInput}
+          placeholder="Enter city"
+          onChangeText={city => this.setState({ city })}
+          value={city}>
+        </TextInput>
+        <Button title="Submit" onPress={this.submitCity}></Button>
       </View>
     );
   }
@@ -50,6 +75,16 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'grey',
     borderWidth: 1
+  },
+  textInputContainer: {
+    marginTop: 30,
+    flexDirection: 'row'
+  },
+  textInput: {
+    height: 40,
+    width: 300,
+    borderWidth: 1,
+    paddingHorizontal: 16
   }
 });
 
