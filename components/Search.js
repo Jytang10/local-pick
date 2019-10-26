@@ -22,7 +22,7 @@ class Search extends Component {
     const { city } = this.state;
     return (
       <View style={styles.container}>
-        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} componens="country:us">
+        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={2} components="country:us" queryTypes="geocode">
           {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
             <React.Fragment>
               {console.log('locationResults', locationResults)}
