@@ -20,15 +20,15 @@ class LocationDetails extends Component {
     return (
       <View style={styles.container}>
         <View style={{height:250, width:'100%', alignSelf:'stretch'}}>
-          <Image resizeMode="contain" source={{}} style={{borderRadius:15, width:"100%", height:'100%', alignSelf:'stretch', flex:1}}></Image>
+          <Image resizeMode="contain" source={{uri: params.photo_url}} style={{borderRadius:15, width:"100%", height:'100%', alignSelf:'stretch', flex:1}}></Image>
         </View>
-        <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:8, alignItems:'baseline'}}>
+        {/* <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:8, alignItems:'baseline'}}>
           <View style={{flexDirection:'row', alignItems:'baseline'}}>
             <Text style={{fontSize:16, fontWeight:'bold'}}>Type: </Text>
             <Text>Text</Text>
           </View>
           <Text style={{fontSize:16, fontWeight:'bold'}}>Title</Text>
-        </View>
+        </View> */}
         <View style={{marginTop:15, flexDirection:'row', justifyContent:'center'}}>
           <View style={{marginRight:20}}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Map', {...params})} style={{shadowOpacity:0.4, flexDirection:'row', padding:12, borderRadius:6, backgroundColor:'#86dfe6'}}>
@@ -49,7 +49,7 @@ class LocationDetails extends Component {
         <View style={{marginTop:8}}>
           <Text style={{fontSize:24, fontWeight:'bold'}}>Name: {params.name}</Text>
           <Text style={{fontSize:24, fontWeight:'bold'}}>Address: {params.address}</Text>
-          <Text style={{fontSize:24, fontWeight:'bold'}}>Website: </Text>
+          <Text style={{fontSize:24, fontWeight:'bold'}}>Website: {params.website}</Text>
         </View>
         <ScrollView style={styles.noteSection}>
           <View>
