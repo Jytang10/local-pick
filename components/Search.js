@@ -7,42 +7,36 @@ import { setCity } from '../actions';
 import { connect } from 'react-redux';
 class Search extends Component {
 
-  state = {
-    city:""
-  }
-
-  submitCity = () => {
-    const { city } = this.state;
+  searchCity = (value) => {
+    const city = value.address_components[0].long_name
     this.props.setCity(city);
-    this.setState({ city: "" });
     this.props.navigation.navigate('Discover');
-  } 
+  }
   
   render() {
-    const { city } = this.state;
     return (
       <View style={styles.container}>
-        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={2} components="country:us" queryTypes="geocode">
+        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} components="country:us" queryTypes="(cities)">
           {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
             <React.Fragment>
-              {console.log('locationResults', locationResults)}
               <View style={styles.textInputContainer}>
                 <TextInput 
                   style={styles.textInput}
-                  placeholder="Search for a city"
+                  placeholder="Search and select a city"
                   onChangeText={handleTextChange}
                   value={inputValue}
                   >
                 </TextInput>
-                <Button title="Clear" onPress={clearSearchs}></Button>
+                <Button title="Clear Results" onPress={clearSearchs}></Button>
               </View>
               {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
-              <ScrollView>
-                {locationResults.map(ele => (
+              <ScrollView style={styles.locationResults} keyboardShouldPersistTaps='always'>
+                {locationResults.map((ele, i) => (
                   <LocationItem
                     {...ele}
                     key={ele.id}
                     fetchDetails={fetchDetails}
+                    searchCity={this.searchCity}
                   >
                   </LocationItem>
                 ))}
@@ -50,14 +44,6 @@ class Search extends Component {
             </React.Fragment>
           )}
         </GoogleAutoComplete>
-        <Text>Set City below</Text>
-        <TextInput
-          style={styles.cityInput}
-          placeholder="Enter city"
-          onChangeText={city => this.setState({ city })}
-          value={city}>
-        </TextInput>
-        <Button title="Submit" onPress={this.submitCity}></Button>
       </View>
     );
   }
@@ -68,13 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 30,
-    backgroundColor: 'orange',
-  },
-  cityInput: {
-    marginTop: 20,
-    height: 40,
-    borderColor: 'grey',
-    borderWidth: 1
+    backgroundColor: '#fff',
   },
   textInputContainer: {
     marginTop: 30,
@@ -82,10 +62,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    width: 300,
-    borderWidth: 1,
+    width: 200,
+    borderWidth: 2,
+    borderColor: 'grey',
     paddingHorizontal: 16
-  }
+  },
 });
 
 export default connect(null, {setCity})(Search);
