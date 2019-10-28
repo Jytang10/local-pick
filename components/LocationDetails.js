@@ -25,7 +25,7 @@ class LocationDetails extends Component {
         <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:8, alignItems:'baseline'}}>
           <View style={{flexDirection:'row', alignItems:'baseline'}}>
             <Text style={{fontSize:16, fontWeight:'bold'}}>Type: </Text>
-            <Text>Title</Text>
+            <Text>Text</Text>
           </View>
           <Text style={{fontSize:16, fontWeight:'bold'}}>Title</Text>
         </View>
@@ -47,9 +47,9 @@ class LocationDetails extends Component {
           </View>
         </View>
         <View style={{marginTop:8}}>
-          <Text style={{fontSize:24, fontWeight:'bold'}}>Name</Text>
-          <Text style={{fontSize:24, fontWeight:'bold'}}>Address</Text>
-          <Text style={{fontSize:24, fontWeight:'bold'}}>Website</Text>
+          <Text style={{fontSize:24, fontWeight:'bold'}}>Name: {params.name}</Text>
+          <Text style={{fontSize:24, fontWeight:'bold'}}>Address: {params.address}</Text>
+          <Text style={{fontSize:24, fontWeight:'bold'}}>Website: </Text>
         </View>
         <ScrollView style={styles.noteSection}>
           <View>
