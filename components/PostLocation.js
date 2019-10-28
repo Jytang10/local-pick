@@ -8,34 +8,15 @@ import { connect } from 'react-redux';
 import axios from "axios";
 
 class PostLocation extends Component {
-  state = {
-    website: '',
-    photo_url: ''
-  }
-  // state = {
-  //   locationTitle:""
-  // }
 
-  // submitLocation = () => {
-  //   const { locationTitle } = this.state;
-  //   const params = this.props.navigation.state.params;
-  //   this.props.postLocation(locationTitle, params.key);
-  //   this.setState({ locationTitle:"" });
-  //   this.props.navigation.navigate('Locations')
-  // }
-
-  getWebsiteData = async (place_id) => {
-    const data = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=website&key=${GOOGLE_PLACES_API_KEY}`)
-    // .then(res => console.log('----Places API data----', res.data.result.website))
-    .then(res => this.setState({ website:res.data.result.website }))
-    .catch(err =>{console.log(err)});
-  }
-
-  getPhotoData = async (photo_ref) => {
-    const data = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_ref}&key=${GOOGLE_PLACES_API_KEY}`)
-    // .then(res => console.log('----Places API photo data----', res.config.url))
-    .then(res => this.setState({ photo_url:res.config.url }))
-    .catch(err =>{console.log(err)})
+  getWebsitePhotoData = (params, name, place_id, address, photo_ref, contact) => {
+    Promise.all([
+      axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=website&key=${GOOGLE_PLACES_API_KEY}`),
+      axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_ref}&key=${GOOGLE_PLACES_API_KEY}`)
+    ])
+    .then(([websiteRes, photoRes]) => {this.props.postLocation(name, websiteRes.data.result.website, address, photoRes.config.url, contact, params.key)})
+    .then(this.props.navigation.navigate('Locations'))
+    .catch(err => console.log(err))
   }
 
   searchLocation = (value) => {
@@ -45,16 +26,10 @@ class PostLocation extends Component {
     const address = value.formatted_address;
     const photo_ref = value.photos[0].photo_reference;
     const contact = value.formatted_phone_number;
-    this.getWebsiteData(place_id);
-    this.getPhotoData(photo_ref);
-    const { website, photo_url } = this.state;
-    // this.props.postLocation(name, place_id, address, photo_ref, contact, params.key);
-    this.props.postLocation(name, website, address, photo_url, contact, params.key);
-    this.props.navigation.navigate('Locations');
+    this.getWebsitePhotoData(params, name, place_id, address, photo_ref, contact)
   }
 
   render() {
-    // const { locationTitle } = this.state;
     return (
       <View style={styles.container}>
         <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} components="country:us" queryTypes="establishment">
@@ -85,14 +60,6 @@ class PostLocation extends Component {
             </React.Fragment>
           )}
         </GoogleAutoComplete>
-        {/* <Text>Add a Recommendation</Text>
-        <TextInput 
-          style={styles.locationTitle}
-          placeholder="title"
-          onChangeText={locationTitle => this.setState({ locationTitle })}
-          value={locationTitle}>
-        </TextInput>
-        <Button title="submit" onPress={this.submitLocation}></Button> */}
       </View>
     );
   }
