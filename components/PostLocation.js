@@ -14,7 +14,15 @@ class PostLocation extends Component {
       axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=website&key=${GOOGLE_PLACES_API_KEY}`),
       axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_ref}&key=${GOOGLE_PLACES_API_KEY}`)
     ])
-    .then(([websiteRes, photoRes]) => {this.props.postLocation(name, websiteRes.data.result.website, address, photoRes.config.url, contact, params.key)})
+    .then(([websiteRes, photoRes]) => {
+      let website;
+      if(Object.keys(websiteRes.data.result).length == 0){
+        website = "N/A"
+      } else {
+        website = websiteRes.data.result.website
+      }
+      this.props.postLocation(name, website, address, photoRes.config.url, contact, params.key)
+    })
     .then(this.props.navigation.navigate('Locations'))
     .catch(err => console.log(err))
   }
