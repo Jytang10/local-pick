@@ -34,7 +34,7 @@ class Locations extends Component {
                     <View style={{overflow:'hidden', marginVertical:20, marginHorizontal:15, borderRadius:15, backgroundColor:'#ced6eo'}}>
                       <View style={{padding:15, backgroundColor:'#86dfe5', borderTopLeftRadius:15, borderTopRightRadius:15}}>
                         <Text style={{fontSize:20, fontWeight:'bold'}}>
-                          {item.locationTitle}
+                          {item.name}
                         </Text>
                         <View style={styles.iconsContainer}>
                           <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
