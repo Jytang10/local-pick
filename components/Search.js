@@ -31,7 +31,7 @@ class Search extends Component {
               </View>
               {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
               <ScrollView style={styles.locationResults} keyboardShouldPersistTaps='always'>
-                {locationResults.map((ele, i) => (
+                {locationResults.map(ele => (
                   <LocationItem
                     {...ele}
                     key={ele.id}
