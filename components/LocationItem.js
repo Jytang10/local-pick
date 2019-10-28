@@ -5,7 +5,7 @@ class LocationItem extends Component {
 
   handlePress = async () => {
     const res = await this.props.fetchDetails(this.props.place_id)
-    this.props.searchCity(res);
+    this.props.searchLocation(res);
   }
 
   render() {

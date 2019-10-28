@@ -7,7 +7,7 @@ import { setCity } from '../actions';
 import { connect } from 'react-redux';
 class Search extends Component {
 
-  searchCity = (value) => {
+  searchLocation = (value) => {
     const city = value.address_components[0].long_name
     this.props.setCity(city);
     this.props.navigation.navigate('Discover');
@@ -36,7 +36,7 @@ class Search extends Component {
                     {...ele}
                     key={ele.id}
                     fetchDetails={fetchDetails}
-                    searchCity={this.searchCity}
+                    searchLocation={this.searchLocation}
                   >
                   </LocationItem>
                 ))}
