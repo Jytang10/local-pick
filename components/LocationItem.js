@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class LocationItem extends Component {
 
   handlePress = async () => {
     const res = await this.props.fetchDetails(this.props.place_id)
-    console.log(JSON.stringify(res))
+    this.props.searchCity(res);
   }
 
   render() {
