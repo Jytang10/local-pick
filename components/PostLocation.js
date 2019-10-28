@@ -5,8 +5,13 @@ import { GoogleAutoComplete } from 'react-native-google-autocomplete';
 import LocationItem from './LocationItem';
 import { postLocation } from '../actions';
 import { connect } from 'react-redux';
+import axios from "axios";
 
 class PostLocation extends Component {
+  state = {
+    website: '',
+    photo_url: ''
+  }
   // state = {
   //   locationTitle:""
   // }
@@ -19,6 +24,20 @@ class PostLocation extends Component {
   //   this.props.navigation.navigate('Locations')
   // }
 
+  getWebsiteData = async (place_id) => {
+    const data = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=website&key=${GOOGLE_PLACES_API_KEY}`)
+    // .then(res => console.log('----Places API data----', res.data.result.website))
+    .then(res => this.setState({ website:res.data.result.website }))
+    .catch(err =>{console.log(err)});
+  }
+
+  getPhotoData = async (photo_ref) => {
+    const data = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_ref}&key=${GOOGLE_PLACES_API_KEY}`)
+    // .then(res => console.log('----Places API photo data----', res.config.url))
+    .then(res => this.setState({ photo_url:res.config.url }))
+    .catch(err =>{console.log(err)})
+  }
+
   searchLocation = (value) => {
     const params = this.props.navigation.state.params;
     const name = value.name;
@@ -26,7 +45,11 @@ class PostLocation extends Component {
     const address = value.formatted_address;
     const photo_ref = value.photos[0].photo_reference;
     const contact = value.formatted_phone_number;
-    this.props.postLocation(name, place_id, address, photo_ref, contact, params.key);
+    this.getWebsiteData(place_id);
+    this.getPhotoData(photo_ref);
+    const { website, photo_url } = this.state;
+    // this.props.postLocation(name, place_id, address, photo_ref, contact, params.key);
+    this.props.postLocation(name, website, address, photo_url, contact, params.key);
     this.props.navigation.navigate('Locations');
   }
 
