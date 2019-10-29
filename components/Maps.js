@@ -7,7 +7,8 @@ class Maps extends Component {
     const params = this.props.navigation.state.params
     return (
       <View style={styles.container}>
-        <MapView style={styles.map} initialRegion={{latitude: params.lat, longitude: params.lng, latitudeDelta: 0.09, longitudeDelta: 0.092113}}>
+        <MapView 
+          style={styles.map} initialRegion={{latitude: params.lat, longitude: params.lng, latitudeDelta: 0.08, longitudeDelta: 0.082113}}>
           <Marker title={params.name} coordinate={{latitude: params.lat, longitude: params.lng}}></Marker>
         </MapView>
       </View>
