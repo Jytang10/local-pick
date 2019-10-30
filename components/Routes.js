@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'; 
 import { LinearGradient } from 'expo-linear-gradient';
 import Home from './Home';
 import Login from './Login';
@@ -115,7 +115,7 @@ const MainStack = createStackNavigator({
   }
 },
 {
-  initialRouteName: 'Profile',
+  initialRouteName: 'Search',
   defaultNavigationOptions: {
     headerBackground: (
         <LinearGradient
@@ -128,7 +128,7 @@ const MainStack = createStackNavigator({
       headerTitleStyle: { color: '#fff' },
   }
   },
-)
+);
 
 // const ProfileStack = createStackNavigator({
 //   Profile: {
@@ -139,28 +139,24 @@ const MainStack = createStackNavigator({
 //   },
 // })
 
-// const AppStack = createBottomTabNavigator({
-//   Search: {
-//     screen: SearchStack,
-//     navigationOptions: {
-//       tabBarLabel:'Search'
-//     }
-//   },
-//   Discover: {
-//     screen: DiscoverStack,
-//     navigationOptions: {
-//       tabBarLabel:'Discover'
-//     }
-//   },
-//   Profile: {
-//     screen: ProfileStack,
-//     navigationOptions: {
-//       tabBarLabel:'Profile',
-//     }
-//   },
-// },{
-//   initialRouteName: 'Search'
-// })
+const bottomNav = createMaterialBottomTabNavigator({
+  Home: {
+    screen: Home,
+  },
+  Search: {
+    screen: Search,
+  },
+  Discover: {
+    screen: Discover,
+  },
+  Profile: {
+    screen: Profile,
+  }
+  },
+  {
+  initialRouteName: 'Home'
+  }
+)
 
 const App = createSwitchNavigator({
   Auth: {
@@ -171,7 +167,7 @@ const App = createSwitchNavigator({
   },
   }, 
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Auth',
   },
 )
 
