@@ -12,7 +12,7 @@
     "expo": "^35.0.0",
     "expo-linear-gradient": "^7.0.1",
     "firebase": "^7.2.0",
-    "indicative": "^7.2.1",
+    "indicative": "^7.2.3",
     "lodash": "^4.17.15",
     "metro-react-native-babel-preset": "^0.56.3",
     "react": "16.8.3",
