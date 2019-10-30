@@ -1,6 +1,8 @@
+import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from "react-navigation-tabs";
+import { LinearGradient } from 'expo-linear-gradient';
 import Home from './Home';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -105,18 +107,33 @@ const MainStack = createStackNavigator({
       headerTitle:'Update Note'
     }
   },
-},{
-  initialRouteName: 'Search'
-})
-
-const ProfileStack = createStackNavigator({
   Profile: {
     screen: Profile,
     navigationOptions: {
-      headerTitle:'Profile'
+      headerTitle:'Profile',
+      headerBackground: (
+        <LinearGradient
+          colors={['#3F54E3', '#E089B3']}
+          style={{ flex: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+        />
+      ),
+      headerTitleStyle: { color: '#fff' },
     }
-  },
+  }
+},{
+  initialRouteName: 'Profile'
 })
+
+// const ProfileStack = createStackNavigator({
+//   Profile: {
+//     screen: Profile,
+//     navigationOptions: {
+//       headerTitle:'Profile'
+//     }
+//   },
+// })
 
 // const AppStack = createBottomTabNavigator({
 //   Search: {
@@ -149,7 +166,7 @@ const App = createSwitchNavigator({
     screen: MainStack
   }
 }, {
-  initialRouteName: 'Auth'
+  initialRouteName: 'App'
 })
 
 export default createAppContainer(App);
