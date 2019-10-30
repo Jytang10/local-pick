@@ -10,7 +10,7 @@ class Profile extends Component {
             <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
           </View>
         </View>
-        <View style={styles.infoContainer}>
+        <View style={styles.titleContainer}>
           <Text style={[styles.text, styles.name]}>James T.</Text>
           <Text style={[styles.text, styles.username]}>@codemonkey999</Text>
         </View>
@@ -25,6 +25,9 @@ class Profile extends Component {
           </View>
         </View>
         <View style={styles.mediaContainer}>
+          <View>
+            <Text style={styles.subText}>Media</Text>
+          </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={styles.mediaImageContainer}>
               <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
@@ -42,6 +45,9 @@ class Profile extends Component {
               <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
             </View>
           </ScrollView>
+        </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.subText}>About</Text>
         </View>
       </SafeAreaView>
     );
@@ -78,7 +84,7 @@ const styles = StyleSheet.create({
     width: undefined,
     height: undefined,
   },
-  infoContainer: {
+  titleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
     marginTop: 16,
@@ -116,7 +122,10 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
     marginHorizontal: 10,
-  }
+  },
+  infoContainer: {
+    marginTop: 16,
+  },
 });
 
 export default Profile;
