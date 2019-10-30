@@ -28,17 +28,17 @@ const AuthStack = createStackNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
-      headerTitle:'Login'
+      header: null
     }
   },
   SignUp: {
     screen: SignUp,
     navigationOptions: {
-      headerTitle:'Sign Up'
+      header: null
     }
   }
 },{
-  initialRouteName: 'Login'
+  initialRouteName: 'SignUp'
 })
 
 const MainStack = createStackNavigator({

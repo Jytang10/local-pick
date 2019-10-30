@@ -11,8 +11,8 @@ class Login extends Component {
         style={styles.container}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}>        
-        <View style={styles.title}>
-          <Text>Login or Sign-Up</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Login</Text>
         </View>
         <View style={styles.loginForm}>
           <LoginEmailPassword></LoginEmailPassword>
@@ -32,9 +32,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  title: {
+  titleContainer: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 50,
+  },
+  titleText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 50,
   },
   loginForm: {
     flex: 2
