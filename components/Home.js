@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <LinearGradient 
+        colors={['#3F54E3', '#E089B3']}
+        style={styles.container}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}>
         <View style={styles.mainContainer}>
           <MaterialIcons name="local-dining" color="white" raised size={100}/>        
           <Text style={styles.title}>Local Pick</Text>
@@ -21,7 +26,7 @@ class Home extends Component {
             <Text>Login / Create Account</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </LinearGradient>
     );
   }
 }
@@ -30,7 +35,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'purple',
   },
   mainContainer: {
     alignItems: 'center',
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
   navContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    marginBottom: 150,
+    marginBottom: 125,
     alignItems: 'center',
   },
   guestButton: {
