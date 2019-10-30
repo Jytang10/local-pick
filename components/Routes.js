@@ -37,6 +37,8 @@ const AuthStack = createStackNavigator({
       headerTitle:'Sign Up'
     }
   }
+},{
+  initialRouteName: 'Login'
 })
 
 const MainStack = createStackNavigator({
