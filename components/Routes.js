@@ -111,7 +111,13 @@ const MainStack = createStackNavigator({
     screen: Profile,
     navigationOptions: {
       headerTitle:'Profile',
-      headerBackground: (
+    }
+  }
+},
+{
+  initialRouteName: 'Profile',
+  defaultNavigationOptions: {
+    headerBackground: (
         <LinearGradient
           colors={['#3F54E3', '#E089B3']}
           style={{ flex: 1 }}
@@ -120,11 +126,9 @@ const MainStack = createStackNavigator({
         />
       ),
       headerTitleStyle: { color: '#fff' },
-    }
   }
-},{
-  initialRouteName: 'Profile'
-})
+  },
+)
 
 // const ProfileStack = createStackNavigator({
 //   Profile: {
@@ -164,9 +168,11 @@ const App = createSwitchNavigator({
   },
   App: {
     screen: MainStack
-  }
-}, {
-  initialRouteName: 'App'
-})
+  },
+  }, 
+  {
+    initialRouteName: 'App',
+  },
+)
 
 export default createAppContainer(App);
