@@ -11,7 +11,8 @@ class Profile extends Component {
           </View>
         </View>
         <View style={styles.infoContainer}>
-
+          <Text style={styles.text, styles.name}>JT</Text>
+          <Text style={styles.text, styles.username}>@codemonkey999</Text>
         </View>
       </SafeAreaView>
     );
@@ -22,6 +23,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  text: {
+    fontFamily: 'HelveticaNeu',
+    color: '#52575D'
   },
   profileImageContainer: {
     alignSelf: 'center',
@@ -39,7 +44,17 @@ const styles = StyleSheet.create({
     height: undefined,
   },
   infoContainer: {
-
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  name: {
+    fontWeight: '200',
+    fontSize: 36,
+  },
+  username: {
+    color: '#AEB5BC',
+    fontSize: 16,
   },
 });
 
