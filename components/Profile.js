@@ -28,6 +28,7 @@ class Profile extends Component {
           <View>
             <View style={styles.sectionTitleContainer}>
               <Text style={styles.subText}>About</Text>
+              <Text style={[styles.text, styles.aboutInfo]}>Hello, I'm James, a South Orange County resident who loves food and music. You can find me at the local milk tea shop on the weekends!</Text>
             </View>
           </View>
           <View>
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
     marginTop: 16,
+    marginBottom: 10,
   },
   statsBox: {
     alignItems: 'center',
@@ -133,6 +135,9 @@ const styles = StyleSheet.create({
   sectionTitleContainer: {
     padding: 10,
   },
+  aboutInfo: {
+    fontWeight: '400',
+  },  
   contactInfo: {
     fontWeight: '500',
   }
