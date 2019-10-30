@@ -1,16 +1,19 @@
-//import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 class Profile extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-          <Text>No current user. Please Login or Sign Up to view Profile.</Text>
-          <Text>Go to Login/SignUp page</Text>
-        </TouchableOpacity>      
-      </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.profileImageContainer}>
+          <View style={styles.profileImage}>
+            <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
+          </View>
+        </View>
+        <View style={styles.infoContainer}>
+
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -18,9 +21,25 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#fff',
+  },
+  profileImageContainer: {
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  profileImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    overflow: 'hidden',
+  },
+  image: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+  },
+  infoContainer: {
+
   },
 });
 
