@@ -3021,16 +3021,17 @@ imurmurhash@^0.1.4:
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
 
-indicative-compiler@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/indicative-compiler/-/indicative-compiler-7.0.3.tgz#6c8e2453f82f809f71927d2590539b1e7c4881f6"
-  integrity sha512-vZcFbR5RpoUkCfjM/ne03DRKEAXvChBhpvtNAof+QW7hH+L+v4n/f/m5cLVPWM5HN/dVVnFEsd0WtQixICh9/w==
+indicative-compiler@^7.0.5:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/indicative-compiler/-/indicative-compiler-7.0.5.tgz#9e693d2714ec07d74a84a9f3b19d8de24863052f"
+  integrity sha512-uauztr3Xp4/RDVhxPdjGZ36R4em7qnHuMfqS5JYVJIan5JXLNUbZ4KsUUsaU7FrtcBkx/u8pS5cjQ9m77tTXzw==
   dependencies:
     indicative-parser "^7.0.2"
     isobject "^4.0.0"
     lodash.get "^4.4.2"
     lodash.memoize "^4.1.2"
     lodash.set "^4.3.2"
+    pope "^2.0.2"
 
 indicative-formatters@^7.2.1:
   version "7.2.1"
@@ -3063,12 +3064,12 @@ indicative-utils@^7.0.1:
   dependencies:
     lodash.get "^4.4.2"
 
-indicative@^7.2.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/indicative/-/indicative-7.2.1.tgz#ef300f6e21e0c5aea3a3c6fd57cef0a419ddeff6"
-  integrity sha512-OqHHmKtCJ73fGFNlteAX5fQSMbCwaOAyKcA4nhH8eUPgpdo7o5dZWRLUvBs3QWNbHqPXezZhHdW6bvRwjUVt7A==
+indicative@^7.2.3:
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/indicative/-/indicative-7.2.3.tgz#efc8eb3b0d9f806ae9d32539cf2cb019ecaf84d4"
+  integrity sha512-oMnlgZJUpoK1n+/rcGzETN2MBICF1ZXMNAFoqkWiqyFMzlVSDF627aa8NyagLABntyApHtwNaJeUf96XXrQnaA==
   dependencies:
-    indicative-compiler "^7.0.3"
+    indicative-compiler "^7.0.5"
     indicative-formatters "^7.2.1"
     indicative-parser "^7.0.2"
     indicative-rules "^7.2.1"
@@ -4701,6 +4702,11 @@ pluralize@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
   integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
+
+pope@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/pope/-/pope-2.0.2.tgz#a86a48536b341286ef4b1682452860635ed2b1ee"
+  integrity sha512-baN7bEN2IZvjQEbm14Y+evCkKqXSshB8VrD8/DtxuDw9Qz4weg63ypT5xnd/GSoYE9X2YYIjR6Xy3wQoVc2ymg==
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
