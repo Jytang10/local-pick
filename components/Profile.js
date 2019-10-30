@@ -5,50 +5,60 @@ class Profile extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.profileImageContainer}>
-          <View style={styles.profileImage}>
-            <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.profileImageContainer}>
+            <View style={styles.profileImage}>
+              <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
+            </View>
           </View>
-        </View>
-        <View style={styles.titleContainer}>
-          <Text style={[styles.text, styles.name]}>James T.</Text>
-          <Text style={[styles.text, styles.username]}>@codemonkey999</Text>
-        </View>
-        <View style={styles.statsContainer}>
-          <View style={styles.statsBox}>
-            <Text style={[styles.text, styles.stat]}>Irvine</Text>
-            <Text style={[styles.text, styles.subText]}>Location</Text>
+          <View style={styles.titleContainer}>
+            <Text style={[styles.text, styles.name]}>James T.</Text>
+            <Text style={[styles.text, styles.username]}>@codemonkey999</Text>
           </View>
-          <View style={[styles.statsBox, styles.statsBorder]}>
-            <Text style={[styles.text, styles.stat]}>Yakiniku</Text>
-            <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
+          <View style={styles.statsContainer}>
+            <View style={styles.statsBox}>
+              <Text style={[styles.text, styles.stat]}>Irvine</Text>
+              <Text style={[styles.text, styles.subText]}>Location</Text>
+            </View>
+            <View style={[styles.statsBox, styles.statsBorder]}>
+              <Text style={[styles.text, styles.stat]}>Yakiniku</Text>
+              <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.mediaContainer}>
           <View>
-            <Text style={styles.subText}>Media</Text>
+            <View style={styles.sectionTitleContainer}>
+              <Text style={styles.subText}>About</Text>
+            </View>
           </View>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={styles.mediaImageContainer}>
-              <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
+          <View>
+            <View style={styles.sectionTitleContainer}>
+              <Text style={styles.subText}>Contact</Text>
+              <Text style={[styles.text, styles.contactInfo]}>jamestang@email.com</Text>
             </View>
-            <View style={styles.mediaImageContainer}>
-              <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
+          </View>
+          <View>
+            <View style={styles.sectionTitleContainer}>
+              <Text style={styles.subText}>Media</Text>
             </View>
-            <View style={styles.mediaImageContainer}>
-              <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
-            </View>
-            <View style={styles.mediaImageContainer}>
-              <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
-            </View>
-            <View style={styles.mediaImageContainer}>
-              <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
-            </View>
-          </ScrollView>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.subText}>About</Text>
-        </View>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <View style={styles.mediaImageContainer}>
+                <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
+              </View>
+              <View style={styles.mediaImageContainer}>
+                <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
+              </View>
+              <View style={styles.mediaImageContainer}>
+                <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
+              </View>
+              <View style={styles.mediaImageContainer}>
+                <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
+              </View>
+              <View style={styles.mediaImageContainer}>
+                <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
+              </View>
+            </ScrollView>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -87,7 +97,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: 16,
+    marginTop: 10,
   },
   name: {
     fontWeight: '200',
@@ -100,7 +110,7 @@ const styles = StyleSheet.create({
   statsContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: 32,
+    marginTop: 16,
   },
   statsBox: {
     alignItems: 'center',
@@ -113,9 +123,6 @@ const styles = StyleSheet.create({
     borderColor: '#DFD8C8',
     borderLeftWidth: 1,
   },
-  mediaContainer: {
-    marginTop: 32,
-  },
   mediaImageContainer: {
     width: 100,
     height: 100,
@@ -123,9 +130,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginHorizontal: 10,
   },
-  infoContainer: {
-    marginTop: 16,
+  sectionTitleContainer: {
+    padding: 10,
   },
+  contactInfo: {
+    fontWeight: '500',
+  }
 });
 
 export default Profile;
