@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
 class Profile extends Component {
   render() {
@@ -23,6 +23,25 @@ class Profile extends Component {
             <Text style={[styles.text, styles.stat]}>Yakiniku</Text>
             <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
           </View>
+        </View>
+        <View style={styles.mediaContainer}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={styles.mediaImageContainer}>
+              <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+          </ScrollView>
         </View>
       </SafeAreaView>
     );
@@ -87,6 +106,16 @@ const styles = StyleSheet.create({
   statsBorder: {
     borderColor: '#DFD8C8',
     borderLeftWidth: 1,
+  },
+  mediaContainer: {
+    marginTop: 32,
+  },
+  mediaImageContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 12,
+    overflow: 'hidden',
+    marginHorizontal: 10,
   }
 });
 
