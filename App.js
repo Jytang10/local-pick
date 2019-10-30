@@ -6,6 +6,7 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
 class App extends Component {
+
   render() {
     const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
