@@ -17,9 +17,11 @@ class Login extends Component {
         <View style={styles.loginForm}>
           <LoginEmailPassword></LoginEmailPassword>
         </View>
-        <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('SignUp')}>
-          <Text>New User Sign Up</Text>
-        </TouchableOpacity>
+        <View style={styles.signUpContainer}>
+          <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('SignUp')}>
+            <Text>New User Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </LinearGradient>
     );
   }
@@ -37,8 +39,15 @@ const styles = StyleSheet.create({
   loginForm: {
     flex: 2
   },
-  signUpButton: {
+  signUpContainer: {
     flex: 1,
+    alignItems: 'center',
+  },
+  signUpButton: {
+    width: 250,
+    padding: 13,
+    borderRadius: 20,
+    backgroundColor: '#fff',
     alignItems: 'center'
   }
 });
