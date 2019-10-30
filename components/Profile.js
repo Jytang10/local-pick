@@ -11,8 +11,18 @@ class Profile extends Component {
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.text, styles.name}>JT</Text>
-          <Text style={styles.text, styles.username}>@codemonkey999</Text>
+          <Text style={[styles.text, styles.name]}>James T.</Text>
+          <Text style={[styles.text, styles.username]}>@codemonkey999</Text>
+        </View>
+        <View style={styles.statsContainer}>
+          <View style={styles.statsBox}>
+            <Text style={[styles.text, styles.stat]}>Irvine</Text>
+            <Text style={[styles.text, styles.subText]}>Location</Text>
+          </View>
+          <View style={[styles.statsBox, styles.statsBorder]}>
+            <Text style={[styles.text, styles.stat]}>Yakiniku</Text>
+            <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -25,8 +35,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   text: {
-    fontFamily: 'HelveticaNeu',
+    // fontFamily: 'HelveticaNeu',
     color: '#52575D'
+  },
+  subText: {
+    fontSize: 12,
+    color: '#AEB5BC',
+    textTransform: 'uppercase',
+    fontWeight: '500',
   },
   profileImageContainer: {
     alignSelf: 'center',
@@ -56,6 +72,22 @@ const styles = StyleSheet.create({
     color: '#AEB5BC',
     fontSize: 16,
   },
+  statsContainer: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginTop: 32,
+  },
+  statsBox: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  stat: {
+    fontSize: 24,
+  },
+  statsBorder: {
+    borderColor: '#DFD8C8',
+    borderLeftWidth: 1,
+  }
 });
 
 export default Profile;
