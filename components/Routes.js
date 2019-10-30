@@ -22,8 +22,8 @@ const AuthStack = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      headerTitle: "Home"
-    }
+      header: null
+    },
   },
   Login: {
     screen: Login,
@@ -147,7 +147,7 @@ const App = createSwitchNavigator({
     screen: MainStack
   }
 }, {
-  initialRouteName: 'App'
+  initialRouteName: 'Auth'
 })
 
 export default createAppContainer(App);
