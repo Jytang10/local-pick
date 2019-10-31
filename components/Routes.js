@@ -132,20 +132,21 @@ const MainStack = createStackNavigator({
 );
 
 const BottomNavStack = createMaterialBottomTabNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: {
-      tabBarLabel: 'Home',
-      tabBarColor: ({tintColor}) => (
-        <Icon name="ios-home" color={tintColor} size={24}></Icon>
-      )
-    },
-  },
+  // Home: {
+  //   screen: Home,
+  //   navigationOptions: {
+  //     headerTitle: 'Home',
+  //     tabBarLabel: 'Home',
+  //     tabBarColor: ({activeColor}) => (
+  //       <Icon name="ios-home" color={tintColor} size={24}></Icon>
+  //     )
+  //   },
+  // },
   Search: {
     screen: Search,
     navigationOptions: {
       tabBarLabel: 'Search',
-      tabBarColor: ({tintColor}) => (
+      tabBarColor: ({activeColor}) => (
         <Icon name="ios-home" color={tintColor} size={24}></Icon>
       )
     },
@@ -154,7 +155,7 @@ const BottomNavStack = createMaterialBottomTabNavigator({
     screen: Discover,
     navigationOptions: {
       tabBarLabel: 'Discover',
-      tabBarColor: ({tintColor}) => (
+      tabBarColor: ({activeColor}) => (
         <Icon name="ios-home" color={tintColor} size={24}></Icon>
       )
     },
@@ -163,16 +164,41 @@ const BottomNavStack = createMaterialBottomTabNavigator({
     screen: Profile,
     navigationOptions: {
       tabBarLabel: 'Profile',
-      tabBarColor: ({tintColor}) => (
+      tabBarColor: ({activeColor}) => (
         <Icon name="ios-home" color={tintColor} size={24}></Icon>
       )
     },
   }
   },
   {
-  initialRouteName: 'Home',
-  activeTintColor: 'grey',
+  initialRouteName: 'Search',
+  activeColor: '#fff',
+  navigationOptions: ({ navigation }) => {
+    const { routeName } = navigation.state.routes
+    [navigation.state.index];
+    return {
+      headerTitle: routeName
+    }
   }
+  }
+)
+
+const BottomStackNav = createStackNavigator({
+  BottomNavStack: BottomNavStack
+  },
+  {
+  defaultNavigationOptions: {
+    headerBackground: (
+        <LinearGradient
+          colors={['#3F54E3', '#E089B3']}
+          style={{ flex: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+        />
+      ),
+      headerTitleStyle: { color: '#fff' },
+  }
+  },
 )
 
 const App = createSwitchNavigator({
@@ -180,7 +206,7 @@ const App = createSwitchNavigator({
     screen: AuthStack,
   },
   App: {
-    screen: BottomNavStack
+    screen: BottomStackNav
   },
   }, 
   {
