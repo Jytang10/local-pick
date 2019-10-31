@@ -3,6 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'; 
 import { LinearGradient } from 'expo-linear-gradient';
+import { Icon } from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -130,31 +131,47 @@ const MainStack = createStackNavigator({
   },
 );
 
-// const ProfileStack = createStackNavigator({
-//   Profile: {
-//     screen: Profile,
-//     navigationOptions: {
-//       headerTitle:'Profile'
-//     }
-//   },
-// })
-
-const bottomNav = createMaterialBottomTabNavigator({
+const BottomNavStack = createMaterialBottomTabNavigator({
   Home: {
     screen: Home,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarColor: ({tintColor}) => (
+        <Icon name="ios-home" color={tintColor} size={24}></Icon>
+      )
+    },
   },
   Search: {
     screen: Search,
+    navigationOptions: {
+      tabBarLabel: 'Search',
+      tabBarColor: ({tintColor}) => (
+        <Icon name="ios-home" color={tintColor} size={24}></Icon>
+      )
+    },
   },
   Discover: {
     screen: Discover,
+    navigationOptions: {
+      tabBarLabel: 'Discover',
+      tabBarColor: ({tintColor}) => (
+        <Icon name="ios-home" color={tintColor} size={24}></Icon>
+      )
+    },
   },
   Profile: {
     screen: Profile,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+      tabBarColor: ({tintColor}) => (
+        <Icon name="ios-home" color={tintColor} size={24}></Icon>
+      )
+    },
   }
   },
   {
-  initialRouteName: 'Home'
+  initialRouteName: 'Home',
+  activeTintColor: 'grey',
   }
 )
 
@@ -163,7 +180,7 @@ const App = createSwitchNavigator({
     screen: AuthStack,
   },
   App: {
-    screen: MainStack
+    screen: BottomNavStack
   },
   }, 
   {
