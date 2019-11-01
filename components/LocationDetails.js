@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, FlatList, 
 import Communications from 'react-native-communications';
 import { getNotes, deleteNote } from '../actions';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { MaterialIcons } from '@expo/vector-icons';
 import _ from 'lodash';
 
 class LocationDetails extends Component {
@@ -14,8 +14,8 @@ class LocationDetails extends Component {
   }
 
   render() {
-    const map = <Icon style={{paddingRight:5}} name="map" color="black" size={20}></Icon>
-    const phone = <Icon style={{paddingRight:5}} name="copy" color="black" size={20}></Icon>
+    const map = <MaterialIcons style={{paddingRight:5}} name="map" color="black" size={20}></MaterialIcons>
+    const phone = <MaterialIcons style={{paddingRight:5}} name="phone" color="black" size={20}></MaterialIcons>
     const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
@@ -77,12 +77,12 @@ class LocationDetails extends Component {
                           <View style={styles.iconsContainer}>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
                               <View style={{marginRight:15}}>
-                                <Icon size={30} color="white" name="edit"></Icon>
+                                <MaterialIcons size={30} color="white" name="edit"></MaterialIcons>
                               </View>
                             </TouchableOpacity> 
                             <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
                               <View>
-                                <Icon size={30} color="red" name="close"></Icon>
+                                <MaterialIcons size={30} color="red" name="delete"></MaterialIcons>
                               </View>
                             </TouchableOpacity> 
                           </View>

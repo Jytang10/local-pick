@@ -114,6 +114,7 @@ const DiscoverStack = createStackNavigator({
         />
       ),
       headerTitleStyle: { color: '#fff' },
+      headerTintColor: '#fff',
     }
   }
 )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Button, ActivityIndicator } from 'react-native';
 import { getLocations, deleteLocation } from '../actions';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { MaterialIcons } from '@expo/vector-icons';
 import _ from 'lodash';
 
 class Locations extends Component {
@@ -39,12 +39,12 @@ class Locations extends Component {
                         <View style={styles.iconsContainer}>
                           <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
                             <View style={{marginRight:15}}>
-                              <Icon size={30} color="white" name="edit"></Icon>
+                              <MaterialIcons size={30} color="white" name="edit"></MaterialIcons>
                             </View>
                           </TouchableOpacity> 
                           <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
                             <View>
-                              <Icon size={30} color="red" name="close"></Icon>
+                              <MaterialIcons size={30} color="red" name="delete"></MaterialIcons>
                             </View>
                           </TouchableOpacity> 
                         </View>
