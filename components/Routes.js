@@ -18,8 +18,7 @@ import LocationDetails from './LocationDetails';
 import PostNote from './PostNote';
 import UpdateNote from './UpdateNote';
 import Maps from './Maps';
-import Profile from './Profile.js';
-
+import Profile from './Profile';
 
 const AuthStack = createStackNavigator({
   Home: {
@@ -104,6 +103,7 @@ const DiscoverStack = createStackNavigator({
   },
   },
   {
+    initialRouteName: 'Discover',
     defaultNavigationOptions: {
       headerBackground: (
         <LinearGradient
@@ -206,7 +206,7 @@ const App = createSwitchNavigator({
   },
   }, 
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'App',
   },
 )
 
