@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Button, ScrollView, ActivityIndicator } from 'react-native';
 import { GOOGLE_PLACES_API_KEY } from 'react-native-dotenv';
 import { GoogleAutoComplete } from 'react-native-google-autocomplete';
+import { MaterialIcons } from '@expo/vector-icons';
 import LocationItem from './LocationItem';
 import { setCity } from '../actions';
 import { connect } from 'react-redux';
@@ -20,9 +21,10 @@ class Search extends Component {
           {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
             <React.Fragment>
               <View style={styles.textInputContainer}>
+                <MaterialIcons name='search' size={26} color='grey'></MaterialIcons>
                 <TextInput 
                   style={styles.textInput}
-                  placeholder="Search and select a city"
+                  placeholder="Search for a city"
                   onChangeText={handleTextChange}
                   value={inputValue}
                   >
@@ -53,12 +55,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 30,
+    padding: 10,
     backgroundColor: '#fff',
   },
   textInputContainer: {
     marginTop: 30,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   textInput: {
     height: 40,
