@@ -17,14 +17,18 @@ class Home extends Component {
         </View>
         <View style={styles.navContainer}>
           <TouchableOpacity style={styles.guestButton} onPress={() => this.props.navigation.navigate('Search')}>
-            <Text>Guest User</Text>
+            <Text style={styles.buttonText}>Guest</Text>
           </TouchableOpacity>
           <View style={styles.dividerContainer}>
             <Text style={styles.buttonDivider}>────────  OR  ────────</Text>
           </View>
           <TouchableOpacity style={styles.loginButton} onPress={() => this.props.navigation.navigate('Login')}>
-            <Text>Login / Create Account</Text>
+            <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
+          <View style={styles.signUpContainer}>
+            <Text style={styles.signUpText}>New user? Sign up </Text>
+            <Text style={[styles.signUpText, {color: '#1B53E2', fontWeight: '500'}]} onPress={() => this.props.navigation.navigate('SignUp')}>here</Text>
+          </View>
         </View>
       </LinearGradient>
     );
@@ -50,6 +54,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     marginTop: 10,
+    textAlign: 'center',
   },
   navContainer: {
     flex: 1,
@@ -64,6 +69,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center'
   },
+  buttonText: {
+    fontSize: 25,
+    fontWeight: '500',
+    color: '#1B53E2',
+  },
   buttonDivider: {
     color: '#fff',
     padding: 20,
@@ -74,6 +84,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#fff',
     alignItems: 'center'
+  },
+  signUpContainer: {
+    marginTop: 15,
+    flexDirection: 'row',
+  },
+  signUpText: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#fff',
   }
 });
 
