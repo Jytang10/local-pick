@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'; 
 import { LinearGradient } from 'expo-linear-gradient';
-import { Icon } from 'react-native-vector-icons/Ionicons';
+import { MaterialIcons } from '@expo/vector-icons';
 import Home from './Home';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -44,54 +44,48 @@ const AuthStack = createStackNavigator({
   initialRouteName: 'Home'
 })
 
-const MainStack = createStackNavigator({
-  Search: {
-    screen: Search,
-    navigationOptions: {
-      headerTitle:'Search'
-    }
-  },
+const DiscoverStack = createStackNavigator({
   Discover: {
     screen: Discover,
     navigationOptions: {
       headerTitle:'Discover'
-    }
+    },
   },
   PostList: {
     screen: PostList,
     navigationOptions: {
-      headerTitle:'Add a List'
-    }
+      headerTitle:'Add List'
+    },
   },
   UpdateList: {
     screen: UpdateList,
     navigationOptions: {
-      headerTitle:'Update List'
-    }
+      headerTitle:'Update List Category'
+    },
   },
   Locations: {
     screen: Locations,
     navigationOptions: {
-      headerTitle:'**Locations**'
-    }
+      headerTitle:'Locations'
+    },
   },
   PostLocation: {
     screen: PostLocation,
     navigationOptions: {
-      headerTitle:'Add a Location'
-    }
+      headerTitle:'Add Location'
+    },
   },
   UpdateLocation: {
     screen: UpdateLocation,
     navigationOptions: {
       headerTitle:'Update Location'
-    }
+    },
   },
   LocationDetails: {
     screen: LocationDetails,
     navigationOptions: {
-      headerTitle:'Location Details'
-    }
+      headerTitle:'Details'
+    },
   },
   Map: {
     screen: Maps
@@ -99,26 +93,19 @@ const MainStack = createStackNavigator({
   PostNote: {
     screen: PostNote,
     navigationOptions: {
-      headerTitle:'Add a Note'
-    }
+      headerTitle:'Add Note'
+    },
   },
   UpdateNote: {
     screen: UpdateNote,
     navigationOptions: {
       headerTitle:'Update Note'
-    }
+    },
   },
-  Profile: {
-    screen: Profile,
-    navigationOptions: {
-      headerTitle:'Profile',
-    }
-  }
-},
-{
-  initialRouteName: 'Search',
-  defaultNavigationOptions: {
-    headerBackground: (
+  },
+  {
+    defaultNavigationOptions: {
+      headerBackground: (
         <LinearGradient
           colors={['#3F54E3', '#E089B3']}
           style={{ flex: 1 }}
@@ -127,68 +114,16 @@ const MainStack = createStackNavigator({
         />
       ),
       headerTitleStyle: { color: '#fff' },
-  }
-  },
-);
-
-const BottomNavStack = createMaterialBottomTabNavigator({
-  // Home: {
-  //   screen: Home,
-  //   navigationOptions: {
-  //     headerTitle: 'Home',
-  //     tabBarLabel: 'Home',
-  //     tabBarColor: ({activeColor}) => (
-  //       <Icon name="ios-home" color={tintColor} size={24}></Icon>
-  //     )
-  //   },
-  // },
-  Search: {
-    screen: Search,
-    navigationOptions: {
-      tabBarLabel: 'Search',
-      tabBarColor: ({activeColor}) => (
-        <Icon name="ios-home" color={tintColor} size={24}></Icon>
-      )
-    },
-  },
-  Discover: {
-    screen: Discover,
-    navigationOptions: {
-      tabBarLabel: 'Discover',
-      tabBarColor: ({activeColor}) => (
-        <Icon name="ios-home" color={tintColor} size={24}></Icon>
-      )
-    },
-  },
-  Profile: {
-    screen: Profile,
-    navigationOptions: {
-      tabBarLabel: 'Profile',
-      tabBarColor: ({activeColor}) => (
-        <Icon name="ios-home" color={tintColor} size={24}></Icon>
-      )
-    },
-  }
-  },
-  {
-  initialRouteName: 'Search',
-  activeColor: '#fff',
-  navigationOptions: ({ navigation }) => {
-    const { routeName } = navigation.state.routes
-    [navigation.state.index];
-    return {
-      headerTitle: routeName
     }
-  }
   }
 )
 
-const BottomStackNav = createStackNavigator({
-  BottomNavStack: BottomNavStack
-  },
-  {
-  defaultNavigationOptions: {
-    headerBackground: (
+const SearchStack = createStackNavigator({
+  Search: {
+    screen: Search,
+    navigationOptions: {
+      headerTitle: 'Search',
+      headerBackground: (
         <LinearGradient
           colors={['#3F54E3', '#E089B3']}
           style={{ flex: 1 }}
@@ -197,8 +132,68 @@ const BottomStackNav = createStackNavigator({
         />
       ),
       headerTitleStyle: { color: '#fff' },
+    },
+  },
+})
+
+const ProfileStack = createStackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      headerTitle: 'Profile',
+      headerBackground: (
+        <LinearGradient
+          colors={['#3F54E3', '#E089B3']}
+          style={{ flex: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+        />
+      ),
+      headerTitleStyle: { color: '#fff' },
+    },
+  },
+})
+
+const BottomNavigator = createMaterialBottomTabNavigator({
+  Search: {
+    screen: SearchStack,
+    navigationOptions: {
+      tabBarLabel: 'Search',
+      tabBarIcon: ({ tintColor}) => (
+        <MaterialIcons name='search' size={26} color={tintColor}></MaterialIcons>
+      ),
+    },
+  },
+  Discover: {
+    screen: DiscoverStack,
+    navigationOptions: {
+      tabBarLabel: 'Discover',
+      tabBarIcon: ({tintColor}) => (
+        <MaterialIcons name='local-dining' size={26} color={tintColor}></MaterialIcons>
+      ),
+    },
+  },
+  Profile: {
+    screen: ProfileStack,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({tintColor}) => (
+        <MaterialIcons name='person-outline' size={26} color={tintColor}></MaterialIcons>
+      ),
+    },
   }
   },
+  {
+  initialRouteName: 'Search',
+  activeColor: '#4654FF',
+  inactiveColor: 'grey',
+  barStyle: { backgroundColor: "#fff" },
+  labeled: true,
+  shifting: true,
+  tabBarOptions: { 
+    showIcon: true 
+  }, 
+  }
 )
 
 const App = createSwitchNavigator({
@@ -206,7 +201,7 @@ const App = createSwitchNavigator({
     screen: AuthStack,
   },
   App: {
-    screen: BottomStackNav
+    screen: BottomNavigator
   },
   }, 
   {
