@@ -7,11 +7,14 @@ import LocationItem from './LocationItem';
 import { LinearGradient } from 'expo-linear-gradient';
 import { setCity } from '../actions';
 import { connect } from 'react-redux';
+import { StackActions, NavigationActions } from 'react-navigation';
+
 class Search extends Component {
 
   searchLocation = (value) => {
     const city = value.address_components[0].long_name
     this.props.setCity(city);
+    this.textInput.clear();
     this.props.navigation.navigate('Discover');
   }
   
@@ -34,6 +37,7 @@ class Search extends Component {
                     placeholder="Search for a city"
                     onChangeText={handleTextChange}
                     value={inputValue}
+                    ref={input => { this.textInput = input }}
                     >
                   </TextInput>
                   <TouchableOpacity style={styles.clear} onPress={clearSearchs}>
@@ -48,6 +52,7 @@ class Search extends Component {
                       key={ele.id}
                       fetchDetails={fetchDetails}
                       searchLocation={this.searchLocation}
+                      clearResults={clearSearchs}
                     >
                     </LocationItem>
                   ))}
@@ -55,8 +60,6 @@ class Search extends Component {
               </React.Fragment>
             )}
           </GoogleAutoComplete>
-        </View>
-        <View style={styles.fillContainer}>
           <ImageBackground source={require('../assets/images/truck.png')} style={styles.fillImage}></ImageBackground>
         </View>
       </View>
@@ -111,14 +114,11 @@ const styles = StyleSheet.create({
   clearText: {
     color: 'grey',
   },
-  fillContainer: {
-    flex: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   fillImage: {
     height: 250,
     width: 250,
+    alignSelf: 'center',
+    marginTop: 35,
   },
 });
 
