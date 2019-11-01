@@ -19,7 +19,7 @@ class LocationDetails extends Component {
     const phone = <MaterialIcons style={{paddingRight:5}} name="phone" color="#fff" size={20}></MaterialIcons>
     const params = this.props.navigation.state.params;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <ImageBackground source={{uri: params.photo_url}} style={styles.heroImage}></ImageBackground>   
         <View style={styles.contentContainer}>
           <View style={styles.titleContainer}>
@@ -49,54 +49,57 @@ class LocationDetails extends Component {
           </View>
           <View style={styles.sectionContainer}>
             <Text style={styles.subText}>User Notes</Text>
-            <ScrollView style={styles.noteSection}>
               <View>
                 <View style={styles.addLocation}>
                   <Button title="Add a Note!" onPress={() => this.props.navigation.navigate('PostNote', params)} color="red"></Button>
                 </View>
-                <View style={styles.notesContainer}>
-                {
-                  this.props.loadingReducer
-                  ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
-                  : <FlatList
-                      style={{width:'100%'}}
-                      data={this.props.listOfNotes}
-                      keyExtractor={(item) => item.key}
-                      showsVerticalScrollIndicator={false}
-                      renderItem={({item}) => {
-                      return (
-                        <View style={{shadowOpacity:0.5}}>
-                          <View style={{overflow:'hidden', marginVertical:20, marginHorizontal:15, borderRadius:15, backgroundColor:'#ced6eo'}}>
-                            <View style={{padding:15, backgroundColor:'#86dfe5', borderTopLeftRadius:15, borderTopRightRadius:15}}>
-                              <Text style={{fontSize:20, fontWeight:'bold'}}>
-                                {item.content}
-                              </Text>
-                              <View style={styles.iconsContainer}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
-                                  <View style={{marginRight:15}}>
-                                    <MaterialIcons size={30} color="white" name="edit"></MaterialIcons>
+                  {
+                    this.props.listOfNotes
+                    ? <View><Text>No Notes Found</Text></View>
+                    : 
+                    <View style={styles.notesContainer}>
+                    {
+                      this.props.loadingReducer
+                      ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
+                      : <FlatList
+                          style={{width:'100%'}}
+                          data={this.props.listOfNotes}
+                          keyExtractor={(item) => item.key}
+                          showsVerticalScrollIndicator={false}
+                          renderItem={({item}) => {
+                          return (
+                            <View style={{shadowOpacity:0.5}}>
+                              <View style={{overflow:'hidden', marginVertical:20, marginHorizontal:15, borderRadius:15, backgroundColor:'#ced6eo'}}>
+                                <View style={{padding:15, backgroundColor:'#86dfe5', borderTopLeftRadius:15, borderTopRightRadius:15}}>
+                                  <Text style={{fontSize:20, fontWeight:'bold'}}>
+                                    {item.content}
+                                  </Text>
+                                  <View style={styles.iconsContainer}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
+                                      <View style={{marginRight:15}}>
+                                        <MaterialIcons size={30} color="white" name="edit"></MaterialIcons>
+                                      </View>
+                                    </TouchableOpacity> 
+                                    <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
+                                      <View>
+                                        <MaterialIcons size={30} color="red" name="delete"></MaterialIcons>
+                                      </View>
+                                    </TouchableOpacity> 
                                   </View>
-                                </TouchableOpacity> 
-                                <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
-                                  <View>
-                                    <MaterialIcons size={30} color="red" name="delete"></MaterialIcons>
-                                  </View>
-                                </TouchableOpacity> 
+                                </View>
                               </View>
                             </View>
-                          </View>
-                        </View>
-                      )
-                    }}
-                  >
-                  </FlatList>
-                }
+                          )
+                        }}
+                      >
+                      </FlatList>
+                    }
+                  </View>
+                  }
               </View>
-              </View>
-            </ScrollView>
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
