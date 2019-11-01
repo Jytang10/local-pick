@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     marginTop: 10,
+    textAlign: 'center',
   },
   navContainer: {
     flex: 1,
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 25,
-    fontWeight: '600',
+    fontWeight: '500',
     color: '#1B53E2',
   },
   buttonDivider: {
