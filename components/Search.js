@@ -56,6 +56,9 @@ class Search extends Component {
             )}
           </GoogleAutoComplete>
         </View>
+        <View style={styles.fillContainer}>
+          <ImageBackground source={require('../assets/images/truck.png')} style={styles.fillImage}></ImageBackground>
+        </View>
       </View>
     );
   }
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
   },
   heroTextContainer: {
     flexDirection:'row',
-    borderRadius:10,
+    borderRadius: 10,
     position:'absolute',
     left:0,
     right:0,
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     padding: 10,
-    marginTop: 10,
+    marginTop: 25,
   },
   textInputContainer: {
     flexDirection: 'row',
@@ -107,6 +110,15 @@ const styles = StyleSheet.create({
   },
   clearText: {
     color: 'grey',
+  },
+  fillContainer: {
+    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fillImage: {
+    height: 250,
+    width: 250,
   },
 });
 
