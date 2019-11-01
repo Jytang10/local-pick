@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TextInput, Button, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TextInput, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { GOOGLE_PLACES_API_KEY } from 'react-native-dotenv';
 import { GoogleAutoComplete } from 'react-native-google-autocomplete';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -28,7 +28,7 @@ class Search extends Component {
             {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
               <React.Fragment>
                 <View style={styles.textInputContainer}>
-                  <MaterialIcons name='search' size={26} color='grey'></MaterialIcons>
+                  <MaterialIcons name='search' size={30} color='#3F54E3'></MaterialIcons>
                   <TextInput 
                     style={styles.textInput}
                     placeholder="Search for a city"
@@ -36,7 +36,9 @@ class Search extends Component {
                     value={inputValue}
                     >
                   </TextInput>
-                  <Button title="Clear Results" onPress={clearSearchs}></Button>
+                  <TouchableOpacity style={styles.clear} onPress={clearSearchs}>
+                    <Text style={styles.clearText}>Clear</Text>
+                  </TouchableOpacity>
                 </View>
                 {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
                 <ScrollView style={styles.locationResults} keyboardShouldPersistTaps='always'>
@@ -85,19 +87,26 @@ const styles = StyleSheet.create({
     paddingBottom:20
   },
   searchContainer: {
-    padding: 5,
+    padding: 10,
+    marginTop: 10,
   },
   textInputContainer: {
-    marginTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
   },
   textInput: {
-    height: 40,
-    width: 200,
-    borderWidth: 2,
-    borderColor: 'grey',
-    paddingHorizontal: 16
+    height: 45,
+    width: 275,
+    borderWidth: 3,
+    borderColor: '#3F54E3',
+    paddingHorizontal: 16,
+    marginLeft: 5,
+  },
+  clear: {
+    padding: 10,
+  },
+  clearText: {
+    color: 'grey',
   },
 });
 
