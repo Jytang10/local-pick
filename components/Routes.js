@@ -161,7 +161,7 @@ const BottomNavigator = createMaterialBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Search',
       tabBarIcon: ({ tintColor}) => (
-        <MaterialIcons name='search' size={30} color={tintColor}></MaterialIcons>
+        <MaterialIcons name='search' size={26} color={tintColor}></MaterialIcons>
       ),
     },
   },
@@ -170,7 +170,7 @@ const BottomNavigator = createMaterialBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Discover',
       tabBarIcon: ({tintColor}) => (
-        <MaterialIcons name='local-dining' size={30} color={tintColor}></MaterialIcons>
+        <MaterialIcons name='local-dining' size={26} color={tintColor}></MaterialIcons>
       ),
     },
   },
@@ -179,7 +179,7 @@ const BottomNavigator = createMaterialBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Profile',
       tabBarIcon: ({tintColor}) => (
-        <MaterialIcons name='person-outline' size={30} color={tintColor}></MaterialIcons>
+        <MaterialIcons name='person-outline' size={26} color={tintColor}></MaterialIcons>
       ),
     },
   }

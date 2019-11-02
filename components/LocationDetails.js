@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, FlatList, Button, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, FlatList, Image, ActivityIndicator } from 'react-native';
 import Communications from 'react-native-communications';
 import { getNotes, deleteNote } from '../actions';
 import { connect } from 'react-redux';
@@ -22,7 +22,7 @@ class LocationDetails extends Component {
       <ScrollView style={styles.container}>
         <ImageBackground source={{uri: params.photo_url}} style={styles.heroImage}></ImageBackground>   
         <View style={styles.contentContainer}>
-          <View style={styles.titleContainer}>
+          <View style={styles.mainTitleContainer}>
             <Text style={[styles.text, styles.name]}>{params.name}</Text>
           </View>
           <View style={styles.infoContainer}>
@@ -47,51 +47,76 @@ class LocationDetails extends Component {
             <Text style={styles.subText}>Website</Text>
             <Text style={[styles.text, styles.sectionText]}>{params.website}</Text>
           </View>
-          <View style={styles.sectionContainer}>
-            <Text style={styles.subText}>User Notes</Text>
-              <View>
-                <View style={styles.addLocation}>
-                  <Button title="Add a Note!" onPress={() => this.props.navigation.navigate('PostNote', params)} color="red"></Button>
-                </View>
-                  <View style={styles.notesContainer}>
-                  {
-                    this.props.loadingReducer
-                    ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
-                    : <FlatList
-                        style={{width:'100%'}}
-                        data={this.props.listOfNotes}
-                        keyExtractor={(item) => item.key}
-                        showsVerticalScrollIndicator={false}
-                        renderItem={({item}) => {
-                        return (
-                          <View style={{shadowOpacity:0.5}}>
-                            <View style={{overflow:'hidden', marginVertical:20, marginHorizontal:15, borderRadius:15, backgroundColor:'#ced6eo'}}>
-                              <View style={{padding:15, backgroundColor:'#86dfe5', borderTopLeftRadius:15, borderTopRightRadius:15}}>
-                                <Text style={{fontSize:20, fontWeight:'bold'}}>
-                                  {item.content}
-                                </Text>
-                                <View style={styles.iconsContainer}>
-                                  <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
-                                    <View style={{marginRight:15}}>
-                                      <MaterialIcons size={30} color="white" name="edit"></MaterialIcons>
+          <View style={styles.titleContainer}>
+            <View style={styles.contentBox}>
+              <Text style={[styles.text, styles.title]}>Notes</Text>
+              <Text style={[styles.subText]}>User Comments</Text>
+            </View>
+            <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostNote', params)}>
+              <MaterialIcons size={35} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
+              <Text style={styles.subText}>Add Note</Text>
+            </TouchableOpacity>
+          </View>   
+          <View style={styles.notesContainer}>
+          {
+            this.props.loadingReducer
+            ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
+            : <FlatList
+                style={{width:'100%'}}
+                data={this.props.listOfNotes}
+                keyExtractor={(item) => item.key}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => {
+                return (
+                  <View>
+                    {
+                      this.props.loadingReducer
+                      ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
+                      : <FlatList
+                          style={{width:'100%'}}
+                          data={this.props.listOfNotes}
+                          keyExtractor={(item) => item.key}
+                          showsVerticalScrollIndicator={false}
+                          renderItem={({item}) => {
+                          return (
+                            <View style={{shadowOpacity:0.4}}>
+                              <View style={styles.itemContainer}>
+                                <View style={styles.itemInfoContainer}>
+                                  <View style={styles.profileContainer}>
+                                    <View style={styles.profileImage}>
+                                      <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
                                     </View>
-                                  </TouchableOpacity> 
-                                  <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
-                                    <View>
-                                      <MaterialIcons size={30} color="red" name="delete"></MaterialIcons>
-                                    </View>
-                                  </TouchableOpacity> 
+                                    <Text style={[styles.subText, {marginLeft: 10}]}>@codemonkey999</Text>
+                                  </View>
+                                  <View style={styles.iconContainer}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
+                                      <View style={{marginRight:10}}>
+                                        <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                                      </View>
+                                    </TouchableOpacity> 
+                                    <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
+                                      <View>
+                                        <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                                      </View>
+                                    </TouchableOpacity> 
+                                  </View>
+                                </View>
+                                <View style={styles.noteContentContainer}>
+                                  <Text style={[styles.text, {fontSize: 16}]}>"{item.content}"</Text>
                                 </View>
                               </View>
                             </View>
-                          </View>
-                        )
-                      }}
-                    >
-                    </FlatList>
-                  }
-                </View>
-              </View>
+                          )
+                        }}
+                        >
+                      </FlatList>
+                    }
+                  </View>
+                  )
+                }}
+              >
+              </FlatList>
+            }
           </View>
         </View>
       </ScrollView>
@@ -121,13 +146,13 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10,
   },
-  titleContainer: {
+  mainTitleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
     marginTop: 10,
   },
   name: {
-    fontWeight: '200',
+    fontWeight: '500',
     fontSize: 38,
   },
   infoContainer: {
@@ -161,7 +186,63 @@ const styles = StyleSheet.create({
   sectionText: {
     fontSize: 16,
     fontWeight: '400',
-  },  
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  contentBox: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  title: {
+    fontSize: 28,
+  },
+  itemContainer: {
+    overflow:'hidden',
+    marginVertical:20,
+    marginHorizontal:15,
+    borderRadius:15,
+    backgroundColor:'grey',
+  },
+  itemInfoContainer: {
+    padding:10,
+    backgroundColor:'#f1f6ff',
+    borderTopLeftRadius:15,
+    borderTopRightRadius:15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  itemText: {
+    fontSize: 22,
+    fontWeight:'bold',
+    color: '#5e90fb',
+  },
+  iconContainer: {
+    flexDirection: 'row',
+  },
+  profileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    overflow: 'hidden',
+  },
+  image: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+  },
+  noteContentContainer: {
+    backgroundColor:'#f1f6ff',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+  },
 });
 
 function mapStateToProps(state){

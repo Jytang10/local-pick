@@ -29,9 +29,9 @@ export function getLists(city){
   }
 }
 
-export function postList(title, city){
+export function postList(title, description, city){
   return(dispatch) => {
-    firebase.database().ref('/data/lists').push({title, city})
+    firebase.database().ref('/data/lists').push({title, description, city})
   }
 }
 
@@ -80,9 +80,9 @@ export function deleteLocation(key){
   }
 }
 
-export function updateLocation(locationTitle, key){
+export function updateLocation(name, key){
   return(dispatch) => {
-    firebase.database().ref('/data/locations').child(key).update({locationTitle});
+    firebase.database().ref('/data/locations').child(key).update({name});
   }
 }
 
