@@ -5,30 +5,30 @@ import { connect } from 'react-redux';
 
 class UpdateLocation extends Component {
   state = {
-    locationTitle: this.props.navigation.state.params.locationTitle,
+    name: this.props.navigation.state.params.name,
     key: this.props.navigation.state.params.key
   }
 
   submitUpdate = () => {
-    const { locationTitle, key } = this.state;
-    this.props.updateLocation(locationTitle, key);
+    const { name, key } = this.state;
+    this.props.updateLocation(name, key);
     this.setState({
-      locationTitle: "",
+      name: "",
       key: ""
     })
     this.props.navigation.navigate('Locations');
   }
 
   render() {
-    const { locationTitle } = this.state;
+    const { name } = this.state;
     return (
       <View style={styles.container}>
         <Text>Update Location Screen</Text>
         <TextInput
           style={styles.titleInput}
           placeholder="title"
-          onChangeText={locationTitle => this.setState({ locationTitle })}
-          value={locationTitle}>
+          onChangeText={name => this.setState({ name })}
+          value={name}>
         </TextInput>
         <Button title="Submit" onPress={this.submitUpdate}></Button>
       </View>
