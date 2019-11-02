@@ -44,12 +44,12 @@ class Locations extends Component {
                         <View style={styles.iconContainer}>
                           <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
                             <View style={{marginRight:10}}>
-                              <MaterialIcons size={28} color="white" name="edit"></MaterialIcons>
+                              <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
                             </View>
                           </TouchableOpacity> 
                           <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
                             <View>
-                              <MaterialIcons size={28} color="#ff0404" name="delete"></MaterialIcons>
+                              <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
                             </View>
                           </TouchableOpacity> 
                         </View>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   itemInfoContainer: {
     padding:15,
-    backgroundColor:'#5580fa',
+    backgroundColor:'#f1f6ff',
     borderTopLeftRadius:15,
     borderTopRightRadius:15,
     flexDirection: 'row',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 20,
     fontWeight:'bold',
-    color: '#fff',
+    color: '#5e90fb',
   },
   itemImage: {
     width:'100%',
