@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Button, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
 import { getLocations, deleteLocation } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -15,10 +15,10 @@ class Locations extends Component {
   render() {
     const params = this.props.navigation.state.params;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.titleContainer}>
           <View style={styles.contentBox}>
-            <Text style={[styles.text, styles.title]}>Best AYCE</Text>
+            <Text style={[styles.text, styles.title]}>{params.title}</Text>
             <Text style={styles.subText}>Category</Text>
           </View>
           <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostLocation', params)}>
@@ -49,7 +49,7 @@ class Locations extends Component {
                           </TouchableOpacity> 
                           <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
                             <View>
-                              <MaterialIcons size={28} color="#f87776" name="delete"></MaterialIcons>
+                              <MaterialIcons size={28} color="#ff0404" name="delete"></MaterialIcons>
                             </View>
                           </TouchableOpacity> 
                         </View>
@@ -65,7 +65,7 @@ class Locations extends Component {
             </FlatList>
           }
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

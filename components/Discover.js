@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
 import { getLists, deleteList } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -19,48 +19,60 @@ class Discover extends Component {
   }
 
   render() {
+    const params = this.props.navigation.state.params;
     return (
         this.state.city
-        ?  <View style={styles.container}>
-            <View style={styles.addList}>
-              <Button title="Add a List!!" onPress={() => this.props.navigation.navigate('PostList')} color="red"></Button>
-            </View>
-            <View style={styles.listsContainer}>
-              {
-                this.props.loadingReducer
-                ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
-                : <FlatList
-                    style={{width:'100%'}}
-                    data={this.props.listOfLists}
-                    keyExtractor={(item) => item.key}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({item}) => {
-                        return (
-                          <TouchableOpacity style={{shadowOpacity:0.5, marginBottom:15, borderRadius:15, backgroundColor:'#575FCF', padding:20}} onPress={() => this.props.navigation.navigate('Locations', {...item})}>
-                            <View style={{overflow:'hidden'}} >
-                              <Text style={{fontSize:30, fontWeight:'bold', color:'#fff', marginBottom:10}}>{item.title}</Text>
-                              <View style={styles.iconsContainer}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
-                                  <View style={{marginRight:15}}>
-                                    <MaterialIcons size={30} color="white" name="edit"></MaterialIcons>
-                                  </View>
-                                </TouchableOpacity> 
-                                <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
-                                  <View>
-                                    <MaterialIcons size={30} color="red" name="delete"></MaterialIcons>
-                                  </View>
-                                </TouchableOpacity> 
-                              </View>
+        ?   <ScrollView style={styles.container}>
+              <View style={styles.titleContainer}>
+                <View style={styles.contentBox}>
+                  <Text style={[styles.text, styles.title]}>{this.props.cityLocation}</Text>
+                  <Text style={[styles.subText, {textTransform: 'uppercase'}]}>City</Text>
+                </View>
+                <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostList', params)}>
+                  <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
+                  <Text style={[styles.subText, {textTransform: 'uppercase'}]}>Add Category</Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                {
+                  this.props.loadingReducer
+                  ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
+                  : <FlatList
+                      style={{width:'100%'}}
+                      data={this.props.listOfLists}
+                      keyExtractor={(item) => item.key}
+                      showsVerticalScrollIndicator={false}
+                      renderItem={({item}) => {
+                      return (
+                        <TouchableOpacity style={{shadowOpacity:0.4}} onPress={() => this.props.navigation.navigate('Locations', {...item})}>
+                        <View style={styles.itemContainer}>
+                          <View style={styles.itemInfoContainer}>
+                            <View style={styles.textContainer}>
+                              <Text style={styles.itemText}>{item.title}</Text>
+                              <Text style={styles.subText}>{item.description}</Text>
                             </View>
-                          </TouchableOpacity>
-                        )
-                      }
-                    }
+                            <View style={styles.iconContainer}>
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
+                                <View style={{marginRight:10}}>
+                                  <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                                </View>
+                              </TouchableOpacity> 
+                              <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
+                                <View>
+                                  <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                                </View>
+                              </TouchableOpacity> 
+                            </View>
+                          </View>
+                        </View>
+                      </TouchableOpacity>
+                      )
+                    }}
                   >
-                </FlatList>
-              }        
-            </View>
-          </View>
+                  </FlatList>
+                }
+              </View>
+            </ScrollView>
         : <View style={styles.emptyResults}>
             <MaterialIcons size={150} color="red" name="error-outline"></MaterialIcons>
             <Text style={styles.errorText}>No current city found. Please select a city at the Search page.</Text>
@@ -72,33 +84,52 @@ class Discover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#fff',
-    padding:10
   },
-  emptyResults: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 20,
+  text: {
+    // fontFamily: 'HelveticaNeu',
+    color: '#52575D'
   },
-  errorText: {
+  subText: {
+    fontSize: 14,
+    color: '#AEB5BC',
     fontWeight: '500',
-    fontSize: 35,
-    textAlign: 'center',
   },
-  addList: {
-
-  },
-  listContainer: {
-
-  },
-  iconsContainer: {
+  titleContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: 25
+    marginTop: 10,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  contentBox: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  title: {
+    fontSize: 30,
+  },
+  itemContainer: {
+    overflow:'hidden',
+    marginVertical:20,
+    marginHorizontal:15,
+    borderRadius:15,
+    backgroundColor:'grey',
+  },
+  itemInfoContainer: {
+    padding:15,
+    backgroundColor:'#f1f6ff',
+    borderTopLeftRadius:15,
+    borderTopRightRadius:15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  itemText: {
+    fontSize: 22,
+    fontWeight:'bold',
+    color: '#5e90fb',
+  },
+  iconContainer: {
+    flexDirection: 'row',
   }
 });
 
