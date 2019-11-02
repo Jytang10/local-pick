@@ -16,10 +16,17 @@ class Locations extends Component {
     const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <View style={styles.addLocation}>
-          <Button title="Add a Recommendation!" onPress={() => this.props.navigation.navigate('PostLocation', params)} color="red"></Button>
+        <View style={styles.titleContainer}>
+          <View style={styles.contentBox}>
+            <Text style={[styles.text, styles.title]}>Best AYCE</Text>
+            <Text style={styles.subText}>Category</Text>
+          </View>
+          <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostLocation', params)}>
+            <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
+            <Text style={styles.subText}>Add Local Pick</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.locationsContainer}>
+        <View>
           {
             this.props.loadingReducer
             ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
@@ -30,28 +37,25 @@ class Locations extends Component {
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) => {
                 return (
-                  <TouchableOpacity style={{shadowOpacity:0.5}} onPress={() => this.props.navigation.navigate('LocationDetails', {...item})}>
-                    <View style={{overflow:'hidden', marginVertical:20, marginHorizontal:15, borderRadius:15, backgroundColor:'#ced6eo'}}>
-                      <View style={{padding:15, backgroundColor:'#86dfe5', borderTopLeftRadius:15, borderTopRightRadius:15}}>
-                        <Text style={{fontSize:20, fontWeight:'bold'}}>
-                          {item.name}
-                        </Text>
-                        <View style={styles.iconsContainer}>
+                  <TouchableOpacity style={{shadowOpacity:0.4}} onPress={() => this.props.navigation.navigate('LocationDetails', {...item})}>
+                    <View style={styles.itemContainer}>
+                      <View style={styles.itemInfoContainer}>
+                        <Text style={styles.itemText}>{item.name}</Text>
+                        <View style={styles.iconContainer}>
                           <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
-                            <View style={{marginRight:15}}>
-                              <MaterialIcons size={30} color="white" name="edit"></MaterialIcons>
+                            <View style={{marginRight:10}}>
+                              <MaterialIcons size={28} color="white" name="edit"></MaterialIcons>
                             </View>
                           </TouchableOpacity> 
                           <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
                             <View>
-                              <MaterialIcons size={30} color="red" name="delete"></MaterialIcons>
+                              <MaterialIcons size={28} color="#f87776" name="delete"></MaterialIcons>
                             </View>
                           </TouchableOpacity> 
                         </View>
                       </View>
                       <View>
-                        <Image source={{uri:item.image}}>
-                        </Image> 
+                        <Image source={{uri:item.photo_url}} style={styles.itemImage}></Image>
                       </View>
                     </View>
                   </TouchableOpacity>
@@ -69,21 +73,60 @@ class Locations extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#fff',
-    padding: 10
   },
-  addLocation: {
-
+  text: {
+    // fontFamily: 'HelveticaNeu',
+    color: '#52575D'
   },
-  locationsContainer: {
-
+  subText: {
+    fontSize: 12,
+    color: '#AEB5BC',
+    textTransform: 'uppercase',
+    fontWeight: '500',
   },
-  iconsContainer: {
+  titleContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: 25
+    marginTop: 10,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  contentBox: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  title: {
+    fontSize: 30,
+  },
+  itemContainer: {
+    overflow:'hidden',
+    marginVertical:20,
+    marginHorizontal:15,
+    borderRadius:15,
+    backgroundColor:'grey',
+  },
+  itemInfoContainer: {
+    padding:15,
+    backgroundColor:'#5580fa',
+    borderTopLeftRadius:15,
+    borderTopRightRadius:15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  itemText: {
+    fontSize: 20,
+    fontWeight:'bold',
+    color: '#fff',
+  },
+  itemImage: {
+    width:'100%',
+    height:175,
+    borderBottomLeftRadius:15,
+    borderBottomRightRadius:15, 
+    alignSelf:'stretch',
+  },
+  iconContainer: {
+    flexDirection: 'row',
   }
 });
 
