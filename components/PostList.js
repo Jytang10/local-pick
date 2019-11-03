@@ -20,7 +20,11 @@ class PostList extends Component {
     const { title, description } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Add a Category</Text>
+        <View style={styles.textContainer}>
+          <Text style={[styles.text, styles.topText]}>Input Example: </Text>
+          <Text style={[styles.text, styles.topText, {fontStyle: 'italic'}]}>Best burgers</Text>
+          <Text style={[styles.text, styles.topText, {fontStyle: 'italic'}]}>Find the best hamburgers in town</Text>
+        </View>
         <View style={styles.inputContainer}>
           <TextInput 
             style={styles.input}
@@ -51,6 +55,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 30,
     backgroundColor: '#fff',
+  },
+  text: {
+    // fontFamily: 'HelveticaNeu',
+    color: '#52575D'
+  },
+  textContainer: {
+    textAlign: 'center',
+    marginBottom: 15,
+  },
+  topText: {
+    fontSize: 18,
+    fontWeight: '400',
   },
   inputContainer: {
     backgroundColor: '#f1f6ff',
