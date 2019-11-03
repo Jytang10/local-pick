@@ -103,7 +103,7 @@ const DiscoverStack = createStackNavigator({
   },
   },
   {
-    initialRouteName: 'PostList',
+    initialRouteName: 'Discover',
     defaultNavigationOptions: {
       headerBackground: (
         <LinearGradient
@@ -185,7 +185,7 @@ const BottomNavigator = createMaterialBottomTabNavigator({
   }
   },
   {
-  initialRouteName: 'Discover',
+  initialRouteName: 'Search',
   activeColor: '#4654FF',
   inactiveColor: 'grey',
   barStyle: { backgroundColor: "#fff" },
