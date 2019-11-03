@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { postList } from '../actions';
 import { connect } from 'react-redux';
 class PostList extends Component {
@@ -21,19 +21,25 @@ class PostList extends Component {
     return (
       <View style={styles.container}>
         <Text>Add a Category</Text>
-        <TextInput 
-          style={styles.title}
-          placeholder="title"
-          onChangeText={title => this.setState({ title })}
-          value={title}>
-        </TextInput>
-        <TextInput 
-          style={styles.title}
-          placeholder="description"
-          onChangeText={description => this.setState({ description })}
-          value={description}>
-        </TextInput>
-        <Button title="submit" onPress={this.submitList}></Button>
+        <View style={styles.inputContainer}>
+          <TextInput 
+            style={styles.input}
+            placeholder="Title"
+            onChangeText={title => this.setState({ title })}
+            value={title}>
+          </TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput 
+            style={styles.input}
+            placeholder="Short Description"
+            onChangeText={description => this.setState({ description })}
+            value={description}>
+          </TextInput>
+        </View>
+        <TouchableOpacity style={styles.buttonContainer} onPress={this.submitList}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -46,12 +52,29 @@ const styles = StyleSheet.create({
     padding: 30,
     backgroundColor: '#fff',
   },
-  title: {
-    marginTop:20,
+  inputContainer: {
+    backgroundColor: '#f1f6ff',
+    borderRadius: 5,
     height: 40,
-    borderColor: 'grey',
-    borderWidth: 1
-  }
+    paddingLeft: 10,
+    marginBottom: 15,
+    borderRadius: 5,
+  },
+  input: {
+    height: 40,
+    fontSize: 15,
+  },
+  buttonContainer: {
+    backgroundColor:'#5580f9',
+    padding: 10,
+    borderRadius: 8,
+  },
+  buttonText: {
+    textAlign:'center',
+    color:'#fff',
+    fontWeight:'bold',
+    fontSize: 20,
+  },
 });
 
 function mapStateToProps(state){

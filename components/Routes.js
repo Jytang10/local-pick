@@ -53,7 +53,7 @@ const DiscoverStack = createStackNavigator({
   PostList: {
     screen: PostList,
     navigationOptions: {
-      headerTitle:'Add List'
+      headerTitle:'Add Category'
     },
   },
   UpdateList: {
@@ -103,7 +103,7 @@ const DiscoverStack = createStackNavigator({
   },
   },
   {
-    initialRouteName: 'Discover',
+    initialRouteName: 'PostList',
     defaultNavigationOptions: {
       headerBackground: (
         <LinearGradient
@@ -185,7 +185,7 @@ const BottomNavigator = createMaterialBottomTabNavigator({
   }
   },
   {
-  initialRouteName: 'Search',
+  initialRouteName: 'Discover',
   activeColor: '#4654FF',
   inactiveColor: 'grey',
   barStyle: { backgroundColor: "#fff" },
