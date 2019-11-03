@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
 import { GOOGLE_PLACES_API_KEY } from 'react-native-dotenv';
 import { GoogleAutoComplete } from 'react-native-google-autocomplete';
+import { MaterialIcons } from '@expo/vector-icons';
 import LocationItem from './LocationItem';
 import { postLocation } from '../actions';
 import { connect } from 'react-redux';
@@ -42,34 +43,43 @@ class PostLocation extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} components="country:us" queryTypes="establishment">
-          {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
-            <React.Fragment>
-              <View style={styles.textInputContainer}>
-                <TextInput 
-                  style={styles.textInput}
-                  placeholder="Search for an establishment"
-                  onChangeText={handleTextChange}
-                  value={inputValue}
-                  >
-                </TextInput>
-                <Button title="Clear Results" onPress={clearSearchs}></Button>
-              </View>
-              {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
-              <ScrollView style={styles.locationResults} keyboardShouldPersistTaps='always'>
-                {locationResults.map(ele => (
-                  <LocationItem
-                    {...ele}
-                    key={ele.id}
-                    fetchDetails={fetchDetails}
-                    searchLocation={this.searchLocation}
-                  >
-                  </LocationItem>
-                ))}
-              </ScrollView>
-            </React.Fragment>
-          )}
-        </GoogleAutoComplete>
+        <View style={styles.topTextContainer}>
+          <Text style={[styles.text, styles.topText]}>Search for an establishment</Text>
+        </View>
+        <View style={styles.searchContainer}>
+          <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} components="country:us" queryTypes="establishment">
+            {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
+              <React.Fragment>
+                <View style={styles.textInputContainer}>
+                  <MaterialIcons name='search' size={30} color='#3F54E3'></MaterialIcons>
+                  <TextInput 
+                    style={styles.textInput}
+                    placeholder="Search for an establishment"
+                    onChangeText={handleTextChange}
+                    value={inputValue}
+                    >
+                  </TextInput>
+                  <TouchableOpacity style={styles.clear} onPress={clearSearchs}>
+                    <Text style={styles.clearText}>Clear</Text>
+                  </TouchableOpacity>
+                </View>
+                {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
+                <ScrollView style={styles.locationResults} keyboardShouldPersistTaps='always'>
+                  {locationResults.map(ele => (
+                    <LocationItem
+                      {...ele}
+                      key={ele.id}
+                      fetchDetails={fetchDetails}
+                      searchLocation={this.searchLocation}
+                    >
+                    </LocationItem>
+                  ))}
+                </ScrollView>
+              </React.Fragment>
+            )}
+          </GoogleAutoComplete>
+          <ImageBackground source={require('../assets/images/truck.png')} style={styles.fillImage}></ImageBackground>
+        </View>
       </View>
     );
   }
@@ -78,26 +88,47 @@ class PostLocation extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 30,
     backgroundColor: '#fff',
   },
-  locationTitle: {
-    marginTop:20,
-    height: 40,
-    borderColor: 'grey',
-    borderWidth: 1
+  text: {
+    // fontFamily: 'HelveticaNeu',
+    color: '#52575D'
+  },
+  topTextContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  topText: {
+    fontSize: 20,
+    fontWeight: '400',
+  },
+  searchContainer: {
+    padding: 10,
+    marginTop: 10,
   },
   textInputContainer: {
-    marginTop: 30,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   textInput: {
-    height: 40,
-    width: 200,
-    borderWidth: 2,
-    borderColor: 'grey',
-    paddingHorizontal: 16
+    height: 45,
+    width: 275,
+    borderWidth: 3,
+    borderColor: '#3F54E3',
+    paddingHorizontal: 16,
+    marginLeft: 5,
+  },
+  clear: {
+    padding: 10,
+  },
+  clearText: {
+    color: 'grey',
+  },
+  fillImage: {
+    height: 250,
+    width: 250,
+    alignSelf: 'center',
+    marginTop: 35,
   },
 });
 
