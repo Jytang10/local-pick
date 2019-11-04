@@ -36,11 +36,23 @@ const AuthStack = createStackNavigator({
   SignUp: {
     screen: SignUp,
     navigationOptions: {
-      header: null
+      headerTitle: 'User Sign Up'
     }
   }
 },{
-  initialRouteName: 'Home'
+  initialRouteName: 'SignUp',
+  defaultNavigationOptions: {
+    headerBackground: (
+      <LinearGradient
+        colors={['#3F54E3', '#E089B3']}
+        style={{ flex: 1 }}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+      />
+    ),
+    headerTitleStyle: { color: '#fff' },
+    headerTintColor: '#fff',
+  }
 })
 
 const DiscoverStack = createStackNavigator({

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { validateAll } from 'indicative/validator';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Hoshi } from 'react-native-textinput-effects';
 import Axios from 'axios';
 
@@ -59,18 +58,11 @@ class SignUp extends Component {
   
   render() {
     return (
-      <LinearGradient 
-        colors={['#3F54E3', '#E089B3']}
-        style={styles.container}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}>          
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Sign Up Form</Text>
-        </View>
+       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <Hoshi 
             style={{marginBottom:20}}
-            label={"name"}
+            label={"Full Name"}
             backgroundColor={'#fff'}
             borderColor={'#b76c94'}
             borderHeight={3}
@@ -84,7 +76,7 @@ class SignUp extends Component {
           }
           <Hoshi
             style={{marginBottom:20}}
-            label={"email"}
+            label={"Email"}
             backgroundColor={'#fff'}
             borderColor={'#b76c94'}
             borderHeight={3}
@@ -98,7 +90,7 @@ class SignUp extends Component {
           }
           <Hoshi
             style={{marginBottom:20}}
-            label={"password"}
+            label={"Password"}
             secureTextEntry
             backgroundColor={'#fff'}
             borderColor={'#b76c94'}
@@ -112,7 +104,7 @@ class SignUp extends Component {
             this.state.error['password'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['password']}</Text>
           }
           <Hoshi 
-            label={"Reconfirm password"}
+            label={"Reconfirm Password"}
             secureTextEntry
             backgroundColor={'#fff'}
             borderColor={'#b76c94'}
@@ -125,11 +117,11 @@ class SignUp extends Component {
           </Hoshi>
           <View style={styles.submitButtonContainer}>
             <TouchableOpacity style={styles.submitButton} onPress={() => this.registerUser(this.state)}>
-              <Text>Register</Text>
+              <Text style={styles.submitText}>Register</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </LinearGradient>
+      </View>
     );
   }
 }
@@ -139,18 +131,10 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
   },
-  titleContainer: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: 50,
-  },
-  titleText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 50,
-  },
   inputContainer: {
+    backgroundColor: '#fff',
     flex: 5,
+    marginTop: 20,
   },
   submitButtonContainer: {
     alignItems: 'center',
@@ -159,9 +143,13 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 13,
     borderRadius: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center'
+    backgroundColor: '#1491f5',
   },
+  submitText: {
+    textAlign:'center',
+    color:'#fff',
+    fontWeight:'bold',
+    fontSize:20  }
 });
 
 export default SignUp;
