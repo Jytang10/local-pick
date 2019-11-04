@@ -30,7 +30,7 @@ const AuthStack = createStackNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
-      header: null
+      headerTitle: 'User Login'
     }
   },
   SignUp: {
