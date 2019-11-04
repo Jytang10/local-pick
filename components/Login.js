@@ -12,7 +12,7 @@ class Login extends Component {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}>        
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Login</Text>
+          <Text style={styles.titleText}>User Login</Text>
         </View>
         <View style={styles.loginForm}>
           <LoginEmailPassword></LoginEmailPassword>

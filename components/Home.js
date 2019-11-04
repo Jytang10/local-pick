@@ -17,7 +17,7 @@ class Home extends Component {
         </View>
         <View style={styles.navContainer}>
           <TouchableOpacity style={styles.guestButton} onPress={() => this.props.navigation.navigate('Search')}>
-            <Text style={styles.buttonText}>Guest</Text>
+            <Text style={[styles.buttonText, {color: '#5e90fb'}]}>Guest</Text>
           </TouchableOpacity>
           <View style={styles.dividerContainer}>
             <Text style={styles.buttonDivider}>────────  OR  ────────</Text>

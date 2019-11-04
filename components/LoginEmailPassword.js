@@ -30,21 +30,25 @@ class LoginEmailPassword extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput 
-          placeholder="email" 
-          style={styles.input}
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
-          >
-        </TextInput>
-        <TextInput 
-          placeholder="password" 
-          style={styles.input}
-          secureTextEntry
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-          >
-        </TextInput>
+        <View style={styles.inputContainer}>
+          <TextInput 
+            placeholder="Email" 
+            style={styles.input}
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+            >
+          </TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput 
+            placeholder="Password" 
+            style={styles.input}
+            secureTextEntry
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            >
+          </TextInput>
+        </View>
         <TouchableOpacity style={styles.buttonContainer} onPress={this.onButtonPress}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
@@ -61,12 +65,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding:20
   },
-  input: {
+  inputContainer: {
+    backgroundColor: '#f1f6ff',
+    borderRadius: 5,
     height: 40,
-    backgroundColor: 'rgba(255,255,255,0.5)',
     paddingLeft: 10,
     marginBottom: 15,
     borderRadius: 5,
+  },
+  input: {
+    height: 40,
     fontSize: 15,
   },
   errorText: {
