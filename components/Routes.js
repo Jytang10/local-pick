@@ -53,7 +53,7 @@ const DiscoverStack = createStackNavigator({
   PostList: {
     screen: PostList,
     navigationOptions: {
-      headerTitle:'Add List'
+      headerTitle:'Add Category'
     },
   },
   UpdateList: {
@@ -206,7 +206,7 @@ const App = createSwitchNavigator({
   },
   }, 
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Auth',
   },
 )
 

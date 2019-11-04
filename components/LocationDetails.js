@@ -68,53 +68,36 @@ class LocationDetails extends Component {
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) => {
                 return (
-                  <View>
-                    {
-                      this.props.loadingReducer
-                      ? <ActivityIndicator size="large" color="#0000ff"></ActivityIndicator>
-                      : <FlatList
-                          style={{width:'100%'}}
-                          data={this.props.listOfNotes}
-                          keyExtractor={(item) => item.key}
-                          showsVerticalScrollIndicator={false}
-                          renderItem={({item}) => {
-                          return (
-                            <View style={{shadowOpacity:0.4}}>
-                              <View style={styles.itemContainer}>
-                                <View style={styles.itemInfoContainer}>
-                                  <View style={styles.profileContainer}>
-                                    <View style={styles.profileImage}>
-                                      <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
-                                    </View>
-                                    <Text style={[styles.subText, {marginLeft: 10}]}>@codemonkey999</Text>
-                                  </View>
-                                  <View style={styles.iconContainer}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
-                                      <View style={{marginRight:10}}>
-                                        <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                                      </View>
-                                    </TouchableOpacity> 
-                                    <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
-                                      <View>
-                                        <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                                      </View>
-                                    </TouchableOpacity> 
-                                  </View>
-                                </View>
-                                <View style={styles.noteContentContainer}>
-                                  <Text style={[styles.text, {fontSize: 16}]}>"{item.content}"</Text>
-                                </View>
-                              </View>
+                    <View style={{shadowOpacity:0.4}}>
+                      <View style={styles.itemContainer}>
+                        <View style={styles.itemInfoContainer}>
+                          <View style={styles.profileContainer}>
+                            <View style={styles.profileImage}>
+                              <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
                             </View>
-                          )
-                        }}
-                        >
-                      </FlatList>
-                    }
-                  </View>
-                  )
-                }}
-              >
+                            <Text style={[styles.subText, {marginLeft: 10}]}>@codemonkey999</Text>
+                          </View>
+                          <View style={styles.iconContainer}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
+                              <View style={{marginRight:10}}>
+                                <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                              </View>
+                            </TouchableOpacity> 
+                            <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
+                              <View>
+                                <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                              </View>
+                            </TouchableOpacity> 
+                          </View>
+                        </View>
+                        <View style={styles.noteContentContainer}>
+                          <Text style={[styles.text, {fontSize: 16}]}>"{item.content}"</Text>
+                        </View>
+                      </View>
+                    </View>
+                    )
+                  }}
+                >
               </FlatList>
             }
           </View>
