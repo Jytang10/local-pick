@@ -7,23 +7,23 @@ class LoginEmailPassword extends Component {
     email: '',
     password: '',
     error: '',
-    loading:false
+    loading: false
   }
 
   onButtonPress = () => {
-    // firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-    // .then(this.onLoginSuccess)
-    // .catch(err => {
-    //   this.setState({
-    //     error:err.message
-    //   })
-    // })
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    .then(this.onLoginSuccess)
+    .catch(err => {
+      this.setState({
+        error:err.message
+      })
+    })
   }
 
   onLoginSuccess = () => {
     this.setState({
-      error:'',
-      loading:false
+      error: '',
+      loading: false
     })
   }
 

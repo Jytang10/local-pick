@@ -7,9 +7,7 @@ import LocationItem from './LocationItem';
 import { LinearGradient } from 'expo-linear-gradient';
 import { setCity } from '../actions';
 import { connect } from 'react-redux';
-
 import { StackActions, NavigationActions } from 'react-navigation'
-
 
 class Search extends Component {
 
