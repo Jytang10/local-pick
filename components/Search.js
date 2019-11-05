@@ -8,13 +8,21 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { setCity } from '../actions';
 import { connect } from 'react-redux';
 
+import { StackActions, NavigationActions } from 'react-navigation'
+
+
 class Search extends Component {
 
   searchLocation = (value) => {
     const city = value.address_components[0].long_name
     this.props.setCity(city);
     this.textInput.clear();
-    this.props.navigation.navigate('Discover');
+    const resetAction = StackActions.reset({
+      index: 0,
+      key: null,
+      actions: [NavigationActions.navigate({ routeName: 'Discover' })],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
   
   render() {

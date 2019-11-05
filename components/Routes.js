@@ -30,17 +30,29 @@ const AuthStack = createStackNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
-      header: null
+      headerTitle: 'User Login'
     }
   },
   SignUp: {
     screen: SignUp,
     navigationOptions: {
-      header: null
+      headerTitle: 'User Sign Up'
     }
   }
 },{
-  initialRouteName: 'Home'
+  initialRouteName: 'Home',
+  defaultNavigationOptions: {
+    headerBackground: (
+      <LinearGradient
+        colors={['#3F54E3', '#E089B3']}
+        style={{ flex: 1 }}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+      />
+    ),
+    headerTitleStyle: { color: '#fff' },
+    headerTintColor: '#fff',
+  }
 })
 
 const DiscoverStack = createStackNavigator({
@@ -101,6 +113,18 @@ const DiscoverStack = createStackNavigator({
       headerTitle:'Update Note'
     },
   },
+  Search: {
+    screen: Search,
+    navigationOptions: {
+      headerTitle: 'Search',
+    },
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      headerTitle: 'Search',
+    },
+  },
   },
   {
     initialRouteName: 'Discover',
@@ -119,45 +143,9 @@ const DiscoverStack = createStackNavigator({
   }
 )
 
-const SearchStack = createStackNavigator({
-  Search: {
-    screen: Search,
-    navigationOptions: {
-      headerTitle: 'Search',
-      headerBackground: (
-        <LinearGradient
-          colors={['#3F54E3', '#E089B3']}
-          style={{ flex: 1 }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-        />
-      ),
-      headerTitleStyle: { color: '#fff' },
-    },
-  },
-})
-
-const ProfileStack = createStackNavigator({
-  Profile: {
-    screen: Profile,
-    navigationOptions: {
-      headerTitle: 'Profile',
-      headerBackground: (
-        <LinearGradient
-          colors={['#3F54E3', '#E089B3']}
-          style={{ flex: 1 }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-        />
-      ),
-      headerTitleStyle: { color: '#fff' },
-    },
-  },
-})
-
 const BottomNavigator = createMaterialBottomTabNavigator({
   Search: {
-    screen: SearchStack,
+    screen: Search,
     navigationOptions: {
       tabBarLabel: 'Search',
       tabBarIcon: ({ tintColor}) => (
@@ -175,7 +163,7 @@ const BottomNavigator = createMaterialBottomTabNavigator({
     },
   },
   Profile: {
-    screen: ProfileStack,
+    screen: Profile,
     navigationOptions: {
       tabBarLabel: 'Profile',
       tabBarIcon: ({tintColor}) => (
