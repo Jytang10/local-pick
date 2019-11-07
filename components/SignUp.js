@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { validateAll } from 'indicative/validator';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 import Axios from 'axios';
 
 class SignUp extends Component {
   state = {
     name:'',
+    displayName:'',
+    location:'',
+    food:'',
+    about:'',
     email:'',
     password:'',
     password_confirmation:'',
@@ -58,7 +62,7 @@ class SignUp extends Component {
   
   render() {
     return (
-       <View style={styles.container}>
+       <ScrollView style={styles.container}>
         <View style={styles.inputContainer}>
           <Hoshi 
             style={{marginBottom:20}}
@@ -73,6 +77,62 @@ class SignUp extends Component {
           </Hoshi>
           {
             this.state.error['name'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['name']}</Text>
+          }
+          <Hoshi 
+            style={{marginBottom:20}}
+            label={"Display Name"}
+            backgroundColor={'#fff'}
+            borderColor={'#b76c94'}
+            borderHeight={3}
+            inputPadding={16}
+            value={this.state.displayName}
+            onChangeText={displayName => this.setState({displayName})}
+            >
+          </Hoshi>
+          {
+            this.state.error['displayName'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['displayName']}</Text>
+          }
+          <Hoshi 
+            style={{marginBottom:20}}
+            label={"Location"}
+            backgroundColor={'#fff'}
+            borderColor={'#b76c94'}
+            borderHeight={3}
+            inputPadding={16}
+            value={this.state.location}
+            onChangeText={location => this.setState({location})}
+            >
+          </Hoshi>
+          {
+            this.state.error['location'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['location']}</Text>
+          }
+          <Hoshi 
+            style={{marginBottom:20}}
+            label={"Favorite Food"}
+            backgroundColor={'#fff'}
+            borderColor={'#b76c94'}
+            borderHeight={3}
+            inputPadding={16}
+            value={this.state.food}
+            onChangeText={food => this.setState({food})}
+            >
+          </Hoshi>
+          {
+            this.state.error['food'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['food']}</Text>
+          }
+          <Hoshi 
+            style={{marginBottom:20}}
+            label={"User Bio / About"}
+            backgroundColor={'#fff'}
+            borderColor={'#b76c94'}
+            borderHeight={3}
+            inputPadding={16}
+            value={this.state.about}
+            onChangeText={about => this.setState({about})}
+            >
+          </Hoshi>
+          {
+            this.state.error['about'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['about']}</Text>
           }
           <Hoshi
             style={{marginBottom:20}}
@@ -121,7 +181,7 @@ class SignUp extends Component {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
