@@ -124,3 +124,21 @@ export function updateNote(content, key){
     firebase.database().ref('/data/notes').child(key).update({content});
   }
 }
+
+export function setLoginTrue(){
+  return(dispatch) => {
+    dispatch({
+      type: "LOGIN_STATUS",
+      payload: true
+    })
+  }
+}
+
+export function setLoginFalse(){
+  return(dispatch) => {
+    dispatch({
+      type: "LOGIN_STATUS",
+      payload: true
+    })
+  }
+}
