@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { validateAll } from 'indicative/validator';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
-import Axios from 'axios';
+import firebase from 'firebase';
+import 'firebase/firestore';
 
 class SignUp extends Component {
   state = {
@@ -21,6 +22,10 @@ class SignUp extends Component {
   registerUser = async(data) => {
     const rules = {
       name:'required|string',
+      displayName:'required|string',
+      location:'required|string',
+      food:'required|string',
+      about:'required|string',
       email:'required|email',
       password:'required|string|min:6|confirmed',
     }
@@ -34,17 +39,30 @@ class SignUp extends Component {
 
     try {
       await validateAll(data, rules, messages)
-      const response = await Axios.post('https://react-blog-api.bahdcasts.com/api/auth/register',{
-        name:data.name,
-        email:data.email,
-        password:data.password
-      })
+      ({ name, display, location, food, about, email, password } = data)
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((user) => {
+          const fbRootRefFS = firebase.firestore();
+          const userID = user.user.uid;
+          console.log('user ID is', userID)
+          const userRef = fbRootRefFS.collection('users').doc(userID);
+          userRef.set({
+            name,
+            display,
+            location,
+            food,
+            about,
+            email,
+            password
+          });
+        });
+
       this.setState({
         userData: response.data.data.user
       })
-      this.props.navigation.navigate("Profile",{...this.state.userData})
+
+      // this.props.navigation.navigate("Profile",{...this.state.userData})
     } catch(errors) {
-      console.log('-------', errors.response)
       const formattedErrors = {}
       if(errors.response && errors.response.status === 422){
         formattedErrors['email'] = errors.response.data['email'][0]
