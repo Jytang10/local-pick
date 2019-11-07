@@ -138,7 +138,7 @@ export function setLoginFalse(){
   return(dispatch) => {
     dispatch({
       type: "LOGIN_STATUS",
-      payload: true
+      payload: false
     })
   }
 }

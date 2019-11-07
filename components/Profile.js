@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+
 
 class Profile extends Component {
+  state = {
+    loginStatus: null
+  }
+
+  componentDidMount(){
+    if(this.props.loginStatus){
+      const loginStatus = this.props.loginStatus;
+      this.setState({ loginStatus: loginStatus });
+    }
+  }
+
   render() {
+    const params = this.props.navigation.state.params;
+    console.log(params)
     return (
-      <SafeAreaView style={styles.container}>
+      this.state.loginStatus
+      ? <View><Text>You are logged in</Text></View>
+      : <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.profileImageContainer}>
             <View style={styles.profileImage}>
@@ -143,4 +160,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Profile;
+function mapStateToProps(state){
+  return {
+    loginStatus: state.loginReducer.loginStatus
+  }
+}
+
+export default connect(mapStateToProps, {})(Profile);

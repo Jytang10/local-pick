@@ -40,7 +40,7 @@ const AuthStack = createStackNavigator({
     }
   }
 },{
-  initialRouteName: 'SignUp',
+  initialRouteName: 'Home',
   defaultNavigationOptions: {
     headerBackground: (
       <LinearGradient

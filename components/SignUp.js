@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
+import { setLoginTrue } from '../actions';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -13,7 +15,7 @@ class SignUp extends Component {
     about:'',
     email:'',
     password:'',
-    userData:'',
+    userData:{},
   }
 
   registerUser = data => {
@@ -22,7 +24,6 @@ class SignUp extends Component {
       .then((user) => {
         const fbRootRefFS = firebase.firestore();
         const userID = user.user.uid;
-        console.log('user ID is', userID)
         const userRef = fbRootRefFS.collection('users').doc(userID);
         userRef.set({
           name,
@@ -36,6 +37,8 @@ class SignUp extends Component {
       }).catch((error) => {
         console.log('Could not register User', error)
       });
+  
+    this.props.setLoginTrue();
 
     this.setState({
       userData: data
@@ -163,4 +166,5 @@ const styles = StyleSheet.create({
     fontSize:20  }
 });
 
-export default SignUp;
+export default connect(null, {setLoginTrue})(SignUp);
+
