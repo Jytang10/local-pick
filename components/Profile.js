@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 class Profile extends Component {
@@ -83,8 +84,13 @@ class Profile extends Component {
           </ScrollView>
         </SafeAreaView>
       : <View style={styles.emptyResults}>
-          <MaterialIcons size={150} color="red" name="error-outline"></MaterialIcons>
+          <MaterialIcons size={150} color="red" name="person-pin"></MaterialIcons>
           <Text style={[styles.errorText, {textAlign: 'center'}]}>No current user. Please sign up for an account!</Text>
+          <View style={styles.signUpButtonContainer}>
+            <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('Home')}>
+              <Text style={styles.signUpText}>Login or Sign Up</Text>
+            </TouchableOpacity>
+          </View>
         </View>
     );
   }
@@ -105,6 +111,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     padding: 20,
+  },
+  errorText: {
+    fontSize: 26,
   },
   subText: {
     fontSize: 12,
@@ -172,6 +181,22 @@ const styles = StyleSheet.create({
   },  
   contactInfo: {
     fontWeight: '500',
+  },
+  signUpButtonContainer: {
+    alignItems: 'center',
+    padding: 10,
+  },
+  signUpButton: {
+    width: 250,
+    padding: 13,
+    borderRadius: 20,
+    backgroundColor: '#1491f5',
+  },
+  signUpText: {
+    textAlign:'center',
+    color:'#fff',
+    fontWeight:'bold',
+    fontSize:20  
   }
 });
 
