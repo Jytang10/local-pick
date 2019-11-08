@@ -15,7 +15,6 @@ class SignUp extends Component {
     about:'',
     email:'',
     password:'',
-    // userData:'',
   }
 
   registerUser = data => {
@@ -40,10 +39,8 @@ class SignUp extends Component {
     //   });
   
     this.props.setLoginTrue();
-    // this.setState({userData: data})
     this.props.setUser(data);
     this.props.navigation.navigate("Profile");
-    // this.props.navigation.navigate("Profile",{...this.state.userData})
   };
   
   render() {
