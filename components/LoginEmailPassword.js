@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { setLoginTrue, setUser } from '../actions';
+import firebase from 'firebase';
+import 'firebase/firestore';
+
 
 class LoginEmailPassword extends Component {
   state = {
@@ -24,6 +28,26 @@ class LoginEmailPassword extends Component {
     this.setState({
       error: '',
       loading: false
+    })
+    firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).get().then(snapshot => {
+      if(snapshot.exists){
+        const fbData = snapshot['_document'].proto.fields;
+        let data = {
+          "about": fbData.about.stringValue,
+          "displayName": fbData.displayName.stringValue,
+          "email": fbData.email.stringValue,
+          "food": fbData.food.stringValue,
+          "location": fbData.location.stringValue,
+          "name": fbData.name.stringValue,
+          }
+          this.props.setUser(data)
+          this.props.setLoginTrue()
+          this.props.navigation.navigate("Profile")
+      } else {
+        console.log("No such data!");
+        result = "No such data!";
+        return result;
+      }
     })
   }
 
@@ -96,4 +120,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginEmailPassword;
+export default connect(null, {setLoginTrue, setUser})(LoginEmailPassword);
+

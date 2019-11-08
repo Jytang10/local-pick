@@ -19,25 +19,24 @@ class SignUp extends Component {
 
   registerUser = data => {
     ({ name, displayName, location, food, about, email, password } = data)
-    // firebase.auth().createUserWithEmailAndPassword(email, password)
-    //   .then((user) => {
-    //     const fbRootRefFS = firebase.firestore();
-    //     const userID = user.user.uid;
-    //     const userRef = fbRootRefFS.collection('users').doc(userID);
-    //     userRef.set({
-    //       name,
-    //       displayName,
-    //       location,
-    //       food,
-    //       about,
-    //       email,
-    //       password
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log('Could not register User', error)
-    //   });
-  
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        const fbRootRefFS = firebase.firestore();
+        const userID = user.user.uid;
+        const userRef = fbRootRefFS.collection('users').doc(userID);
+        userRef.set({
+          name,
+          displayName,
+          location,
+          food,
+          about,
+          email,
+          password
+        });
+      })
+      .catch((error) => {
+        console.log('Could not register User', error)
+      });
     this.props.setLoginTrue();
     this.props.setUser(data);
     this.props.navigation.navigate("Profile");

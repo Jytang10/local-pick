@@ -11,7 +11,6 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props)
     if(this.props.loginStatus){
       const loginStatus = this.props.loginStatus;
       this.setState({ loginStatus });
