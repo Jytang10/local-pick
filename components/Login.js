@@ -3,11 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import LoginEmailPassword from './LoginEmailPassword';
 
 class Login extends Component {
+  
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.loginForm}>
-          <LoginEmailPassword></LoginEmailPassword>
+          <LoginEmailPassword navigation={navigation}></LoginEmailPassword>
         </View>
       </View>
     );
