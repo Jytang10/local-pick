@@ -11,7 +11,12 @@ class PostNote extends Component {
   submitNote = () => {
     const { content } = this.state;
     const params = this.props.navigation.state.params;
-    this.props.postNote(content, params.key);
+    if(this.props.loginStatus){
+      let userName = this.props.userData.displayName;
+      this.props.postNote(content, userName, params.key);
+    } else {
+      this.props.postNote(content, 'anonymous', params.key);
+    }
     this.setState({ content:"" });
     this.props.navigation.navigate('LocationDetails')
   }
@@ -83,4 +88,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, {postNote})(PostNote);
+function mapStateToProps(state){
+  return {
+    loginStatus: state.loginReducer.loginStatus,
+    userData: state.userReducer.userData,
+  }
+}
+
+export default connect(mapStateToProps, {postNote})(PostNote);
