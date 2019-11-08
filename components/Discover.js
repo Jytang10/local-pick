@@ -93,6 +93,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
   },
+  errorText: {
+    fontSize: 26,
+  },
   text: {
     // fontFamily: 'HelveticaNeu',
     color: '#52575D'

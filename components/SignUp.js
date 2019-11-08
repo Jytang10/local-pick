@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { validateAll } from 'indicative/validator';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
+import { setLoginTrue, setUser } from '../actions';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -14,69 +15,33 @@ class SignUp extends Component {
     about:'',
     email:'',
     password:'',
-    password_confirmation:'',
-    userData:'',
-    error:{}
   }
 
-  registerUser = async(data) => {
-    const rules = {
-      name:'required|string',
-      displayName:'required|string',
-      location:'required|string',
-      food:'required|string',
-      about:'required|string',
-      email:'required|email',
-      password:'required|string|min:6|confirmed',
-    }
-
-    const messages = {
-      required: (field) => `${field} is required`,
-      'email.email': 'The email syntax is wrong',
-      'password.confirmed': 'THe password did not match',
-      'password.min': 'Password is too short'
-    }
-
-    try {
-      await validateAll(data, rules, messages)
-      ({ name, display, location, food, about, email, password } = data)
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then((user) => {
-          const fbRootRefFS = firebase.firestore();
-          const userID = user.user.uid;
-          console.log('user ID is', userID)
-          const userRef = fbRootRefFS.collection('users').doc(userID);
-          userRef.set({
-            name,
-            display,
-            location,
-            food,
-            about,
-            email,
-            password
-          });
-        });
-
-      this.setState({
-        userData: response.data.data.user
-      })
-
-      // this.props.navigation.navigate("Profile",{...this.state.userData})
-    } catch(errors) {
-      const formattedErrors = {}
-      if(errors.response && errors.response.status === 422){
-        formattedErrors['email'] = errors.response.data['email'][0]
-        this.setState({
-          error:formattedErrors
-        })
-      }else{
-        errors.forEach(error => formattedErrors[error.field] = error.message)
-        this.setState({
-          error:formattedErrors
-        })
-      }
-    }
-  }
+  registerUser = data => {
+    ({ name, displayName, location, food, about, email, password } = data)
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //   .then((user) => {
+    //     const fbRootRefFS = firebase.firestore();
+    //     const userID = user.user.uid;
+    //     const userRef = fbRootRefFS.collection('users').doc(userID);
+    //     userRef.set({
+    //       name,
+    //       displayName,
+    //       location,
+    //       food,
+    //       about,
+    //       email,
+    //       password
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log('Could not register User', error)
+    //   });
+  
+    this.props.setLoginTrue();
+    this.props.setUser(data);
+    this.props.navigation.navigate("Profile");
+  };
   
   render() {
     return (
@@ -93,9 +58,6 @@ class SignUp extends Component {
             onChangeText={name => this.setState({name})}
             >
           </Hoshi>
-          {
-            this.state.error['name'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['name']}</Text>
-          }
           <Hoshi 
             style={{marginBottom:20}}
             label={"Display Name"}
@@ -107,9 +69,6 @@ class SignUp extends Component {
             onChangeText={displayName => this.setState({displayName})}
             >
           </Hoshi>
-          {
-            this.state.error['displayName'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['displayName']}</Text>
-          }
           <Hoshi 
             style={{marginBottom:20}}
             label={"Location"}
@@ -121,9 +80,6 @@ class SignUp extends Component {
             onChangeText={location => this.setState({location})}
             >
           </Hoshi>
-          {
-            this.state.error['location'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['location']}</Text>
-          }
           <Hoshi 
             style={{marginBottom:20}}
             label={"Favorite Food"}
@@ -135,12 +91,9 @@ class SignUp extends Component {
             onChangeText={food => this.setState({food})}
             >
           </Hoshi>
-          {
-            this.state.error['food'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['food']}</Text>
-          }
           <Hoshi 
             style={{marginBottom:20}}
-            label={"User Bio / About"}
+            label={"Short User Bio"}
             backgroundColor={'#fff'}
             borderColor={'#b76c94'}
             borderHeight={3}
@@ -149,9 +102,6 @@ class SignUp extends Component {
             onChangeText={about => this.setState({about})}
             >
           </Hoshi>
-          {
-            this.state.error['about'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['about']}</Text>
-          }
           <Hoshi
             style={{marginBottom:20}}
             label={"Email"}
@@ -163,9 +113,6 @@ class SignUp extends Component {
             onChangeText={email => this.setState({email})}
             >
           </Hoshi>
-          {
-            this.state.error['email'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['email']}</Text>
-          }
           <Hoshi
             style={{marginBottom:20}}
             label={"Password"}
@@ -176,21 +123,6 @@ class SignUp extends Component {
             inputPadding={16}
             value={this.state.password}
             onChangeText={password => this.setState({password})}
-            >
-          </Hoshi>
-          {
-            this.state.error['password'] && <Text style={{fontSize:25, color:'red'}}>{this.state.error['password']}</Text>
-          }
-          <Hoshi 
-            label={"Reconfirm Password"}
-            secureTextEntry
-            backgroundColor={'#fff'}
-            borderColor={'#b76c94'}
-            borderHeight={3}
-            inputPadding={16}
-            style={{marginBottom:45}}
-            value={this.state.password_confirmation}
-            onChangeText={password_confirmation => this.setState({password_confirmation})}
             >
           </Hoshi>
           <View style={styles.submitButtonContainer}>
@@ -230,4 +162,5 @@ const styles = StyleSheet.create({
     fontSize:20  }
 });
 
-export default SignUp;
+export default connect(null, {setLoginTrue, setUser})(SignUp);
+

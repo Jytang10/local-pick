@@ -40,7 +40,7 @@ const AuthStack = createStackNavigator({
     }
   }
 },{
-  initialRouteName: 'SignUp',
+  initialRouteName: 'Home',
   defaultNavigationOptions: {
     headerBackground: (
       <LinearGradient
@@ -122,7 +122,7 @@ const DiscoverStack = createStackNavigator({
   Profile: {
     screen: Profile,
     navigationOptions: {
-      headerTitle: 'Search',
+      headerTitle: 'Profile',
     },
   },
   },

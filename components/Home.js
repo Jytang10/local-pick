@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { connect } from 'react-redux';
+import { setLoginFalse } from '../actions';
 class Home extends Component {
+
+  componentDidMount(){
+    this.props.setLoginFalse();
+  }
+
   render() {
     return (
       <LinearGradient 
@@ -96,4 +103,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Home;
+export default connect(null, {setLoginFalse})(Home);
+

@@ -1,66 +1,97 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 class Profile extends Component {
+  state = {
+    loginStatus: null,
+    userData: {}
+  }
+
+  componentDidMount(){
+    console.log(this.props)
+    if(this.props.loginStatus){
+      const loginStatus = this.props.loginStatus;
+      this.setState({ loginStatus });
+    }
+    if(this.props.userData){
+      const userData = this.props.userData;
+      this.setState({ userData });
+    }
+  }
+
   render() {
+    ({ name, displayName, location, food, about, email } = this.state.userData)
     return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.profileImageContainer}>
-            <View style={styles.profileImage}>
-              <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
-            </View>
-          </View>
-          <View style={styles.titleContainer}>
-            <Text style={[styles.text, styles.name]}>James T.</Text>
-            <Text style={[styles.text, styles.username]}>@codemonkey999</Text>
-          </View>
-          <View style={styles.statsContainer}>
-            <View style={styles.statsBox}>
-              <Text style={[styles.text, styles.stat]}>Irvine</Text>
-              <Text style={[styles.text, styles.subText]}>Location</Text>
-            </View>
-            <View style={[styles.statsBox, styles.statsBorder]}>
-              <Text style={[styles.text, styles.stat]}>Yakiniku</Text>
-              <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
-            </View>
-          </View>
-          <View>
-            <View style={styles.sectionTitleContainer}>
-              <Text style={styles.subText}>About</Text>
-              <Text style={[styles.text, styles.aboutInfo]}>Hello, I'm James, a South Orange County resident who loves food and music. You can find me at the local milk tea shop on the weekends!</Text>
-            </View>
-          </View>
-          <View>
-            <View style={styles.sectionTitleContainer}>
-              <Text style={styles.subText}>Contact</Text>
-              <Text style={[styles.text, styles.contactInfo]}>jamestang@email.com</Text>
-            </View>
-          </View>
-          <View>
-            <View style={styles.sectionTitleContainer}>
-              <Text style={styles.subText}>Media</Text>
-            </View>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              <View style={styles.mediaImageContainer}>
-                <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
+      this.state.loginStatus
+      ? <SafeAreaView style={styles.container}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.profileImageContainer}>
+              <View style={styles.profileImage}>
+                <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
               </View>
-              <View style={styles.mediaImageContainer}>
-                <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+            <View style={styles.titleContainer}>
+              <Text style={[styles.text, styles.name]}>{name}</Text>
+              <Text style={[styles.text, styles.username]}>@{displayName}</Text>
+            </View>
+            <View style={styles.statsContainer}>
+              <View style={styles.statsBox}>
+                <Text style={[styles.text, styles.stat]}>{location}</Text>
+                <Text style={[styles.text, styles.subText]}>Location</Text>
               </View>
-              <View style={styles.mediaImageContainer}>
-                <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
+              <View style={[styles.statsBox, styles.statsBorder]}>
+                <Text style={[styles.text, styles.stat]}>{food}</Text>
+                <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
               </View>
-              <View style={styles.mediaImageContainer}>
-                <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+            <View>
+              <View style={styles.sectionTitleContainer}>
+                <Text style={styles.subText}>About</Text>
+                <Text style={[styles.text, styles.aboutInfo]}>{about}</Text>
               </View>
-              <View style={styles.mediaImageContainer}>
-                <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
+            </View>
+            <View>
+              <View style={styles.sectionTitleContainer}>
+                <Text style={styles.subText}>Contact</Text>
+                <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
               </View>
-            </ScrollView>
+            </View>
+            {/* <View>
+              <View style={styles.sectionTitleContainer}>
+                <Text style={styles.subText}>Media</Text>
+              </View>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+              </ScrollView>
+            </View> */}
+          </ScrollView>
+        </SafeAreaView>
+      : <View style={styles.emptyResults}>
+          <MaterialIcons size={150} color="red" name="person-pin"></MaterialIcons>
+          <Text style={[styles.errorText, {textAlign: 'center'}]}>No current user. Please sign up for an account!</Text>
+          <View style={styles.signUpButtonContainer}>
+            <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('Home')}>
+              <Text style={styles.signUpText}>Login or Sign Up</Text>
+            </TouchableOpacity>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        </View>
     );
   }
 }
@@ -73,6 +104,16 @@ const styles = StyleSheet.create({
   text: {
     // fontFamily: 'HelveticaNeu',
     color: '#52575D'
+  },
+  emptyResults: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  errorText: {
+    fontSize: 26,
   },
   subText: {
     fontSize: 12,
@@ -98,7 +139,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 5,
   },
   name: {
     fontWeight: '200',
@@ -140,7 +181,30 @@ const styles = StyleSheet.create({
   },  
   contactInfo: {
     fontWeight: '500',
+  },
+  signUpButtonContainer: {
+    alignItems: 'center',
+    padding: 10,
+  },
+  signUpButton: {
+    width: 250,
+    padding: 13,
+    borderRadius: 20,
+    backgroundColor: '#1491f5',
+  },
+  signUpText: {
+    textAlign:'center',
+    color:'#fff',
+    fontWeight:'bold',
+    fontSize:20  
   }
 });
 
-export default Profile;
+function mapStateToProps(state){
+  return {
+    loginStatus: state.loginReducer.loginStatus,
+    userData: state.userReducer.userData,
+  }
+}
+
+export default connect(mapStateToProps, {})(Profile);
