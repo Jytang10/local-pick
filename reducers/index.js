@@ -5,6 +5,7 @@ import ListsReducer from './ListsReducer';
 import LocationsReducer from './LocationsReducer';
 import NotesReducer from './NotesReducer';
 import LoginReducer from './LoginReducer';
+import UserReducer from './UserReducer';
 
 const rootReducer = combineReducers({
   searchList: SearchReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   locationsList: LocationsReducer,
   notesList: NotesReducer,
   loginReducer: LoginReducer,
+  userReducer: UserReducer,
 })
 
 export default rootReducer;

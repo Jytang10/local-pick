@@ -9,6 +9,7 @@ class Profile extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props)
     if(this.props.loginStatus){
       const loginStatus = this.props.loginStatus;
       this.setState({ loginStatus: loginStatus });
@@ -17,7 +18,6 @@ class Profile extends Component {
 
   render() {
     const params = this.props.navigation.state.params;
-    console.log(params)
     return (
       this.state.loginStatus
       ? <View><Text>You are logged in</Text></View>
@@ -162,7 +162,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
   return {
-    loginStatus: state.loginReducer.loginStatus
+    loginStatus: state.loginReducer.loginStatus,
+    userData: state.userReducer.userData,
   }
 }
 

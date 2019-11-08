@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
-import { setLoginTrue } from '../actions';
+import { setLoginTrue, setUser } from '../actions';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import 'firebase/firestore';
@@ -15,36 +15,35 @@ class SignUp extends Component {
     about:'',
     email:'',
     password:'',
-    userData:{},
+    // userData:'',
   }
 
   registerUser = data => {
     ({ name, displayName, location, food, about, email, password } = data)
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        const fbRootRefFS = firebase.firestore();
-        const userID = user.user.uid;
-        const userRef = fbRootRefFS.collection('users').doc(userID);
-        userRef.set({
-          name,
-          displayName,
-          location,
-          food,
-          about,
-          email,
-          password
-        });
-      }).catch((error) => {
-        console.log('Could not register User', error)
-      });
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //   .then((user) => {
+    //     const fbRootRefFS = firebase.firestore();
+    //     const userID = user.user.uid;
+    //     const userRef = fbRootRefFS.collection('users').doc(userID);
+    //     userRef.set({
+    //       name,
+    //       displayName,
+    //       location,
+    //       food,
+    //       about,
+    //       email,
+    //       password
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log('Could not register User', error)
+    //   });
   
     this.props.setLoginTrue();
-
-    this.setState({
-      userData: data
-    })
-
-    this.props.navigation.navigate("Profile",{...this.state.userData})
+    // this.setState({userData: data})
+    this.props.setUser(data);
+    this.props.navigation.navigate("Profile");
+    // this.props.navigation.navigate("Profile",{...this.state.userData})
   };
   
   render() {
@@ -166,5 +165,5 @@ const styles = StyleSheet.create({
     fontSize:20  }
 });
 
-export default connect(null, {setLoginTrue})(SignUp);
+export default connect(null, {setLoginTrue, setUser})(SignUp);
 

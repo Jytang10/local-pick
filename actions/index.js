@@ -142,3 +142,13 @@ export function setLoginFalse(){
     })
   }
 }
+
+export function setUser(userData){
+  return(dispatch) => {
+    dispatch({
+      type: "SET_USER",
+      payload: userData
+    })
+  }
+}
+
