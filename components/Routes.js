@@ -122,7 +122,7 @@ const DiscoverStack = createStackNavigator({
   Profile: {
     screen: Profile,
     navigationOptions: {
-      headerTitle: 'Search',
+      headerTitle: 'Profile',
     },
   },
   },

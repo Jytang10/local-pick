@@ -30,7 +30,7 @@ class Profile extends Component {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.profileImageContainer}>
               <View style={styles.profileImage}>
-                <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
+                <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
               </View>
             </View>
             <View style={styles.titleContainer}>
@@ -59,7 +59,7 @@ class Profile extends Component {
                 <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
               </View>
             </View>
-            <View>
+            {/* <View>
               <View style={styles.sectionTitleContainer}>
                 <Text style={styles.subText}>Media</Text>
               </View>
@@ -80,7 +80,7 @@ class Profile extends Component {
                   <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
                 </View>
               </ScrollView>
-            </View>
+            </View> */}
           </ScrollView>
         </SafeAreaView>
       : <View style={styles.emptyResults}>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 5,
   },
   name: {
     fontWeight: '200',
