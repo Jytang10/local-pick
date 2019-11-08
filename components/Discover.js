@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     overflow:'hidden',
-    marginVertical:20,
+    marginVertical:15,
     marginHorizontal:15,
     borderRadius:15,
     backgroundColor:'grey',

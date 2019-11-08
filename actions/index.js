@@ -107,9 +107,9 @@ export function getNotes(locationID){
   }
 }
 
-export function postNote(content, locationID){
+export function postNote(content, userName, locationID){
   return(dispatch) => {
-    firebase.database().ref('/data/notes').push({content, locationID});
+    firebase.database().ref('/data/notes').push({content, userName, locationID});
   }
 }
 

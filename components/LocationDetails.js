@@ -73,9 +73,9 @@ class LocationDetails extends Component {
                         <View style={styles.itemInfoContainer}>
                           <View style={styles.profileContainer}>
                             <View style={styles.profileImage}>
-                              <Image source={require('../assets/images/jt.jpg')} style={styles.image} resizeMode='center'></Image>
+                              <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
                             </View>
-                            <Text style={[styles.subText, {marginLeft: 10}]}>@codemonkey999</Text>
+                            <Text style={[styles.subText, {marginLeft: 10}]}>@{item.userName}</Text>
                           </View>
                           <View style={styles.iconContainer}>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     overflow:'hidden',
-    marginVertical:20,
+    marginVertical:15,
     marginHorizontal:15,
     borderRadius:15,
     backgroundColor:'grey',
