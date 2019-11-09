@@ -152,17 +152,3 @@ export function setUser(userData){
     })
   }
 }
-
-export function updateProfile(name, displayName, location, food, about, email){
-  return(dispatch) => {
-    const userDB = firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid);
-    userDB.update({
-      name,
-      displayName,
-      location,
-      food,
-      about,
-      email,
-    })
-  }
-}

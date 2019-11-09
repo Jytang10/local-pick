@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { updateProfile } from '../actions';
+import { setUser } from '../actions';
 import { connect } from 'react-redux';
 import { StackActions, NavigationActions } from 'react-navigation'
+import firebase from 'firebase';
+import 'firebase/firestore';
 
 class UpdateProfile extends Component {
   state = {
@@ -16,21 +18,20 @@ class UpdateProfile extends Component {
 
   submitUpdate = () => {
     const { name, displayName, location, food, about, email } = this.state;
-    this.props.updateProfile(name, displayName, location, food, about, email);
-    this.setState({
-      name: "",
-      displayName: "",
-      location: "",
-      food: "",
-      about: "",
-      email: "",
-    })
+    let data = this.state;
+    const userDB = firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid);
+    userDB.update({ name, displayName, location, food, about, email })
+    .then(this.props.setUser(data))
+    .then(this.resetStack)
+  }
+
+  resetStack = () => {
     const resetAction = StackActions.reset({
       index: 0,
       key: null,
       actions: [NavigationActions.navigate({ routeName: 'Profile' })],
     });
-    this.props.navigation.dispatch(resetAction);
+    this.props.navigation.dispatch(resetAction)
   }
 
   render() {
@@ -104,7 +105,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   text: {
-    // fontFamily: 'HelveticaNeu',
     color: '#52575D'
   },
   textContainer: {
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, {updateProfile})(UpdateProfile);
+export default connect(null, {setUser})(UpdateProfile);
