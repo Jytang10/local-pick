@@ -67,6 +67,11 @@ class Profile extends Component {
               </View>
             </View>
             <View style={styles.signUpButtonContainer}>
+              <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('UpdateProfile', {...userData})}>
+                <Text style={styles.signUpText}>Update User Info</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.signUpButtonContainer}>
               <TouchableOpacity style={styles.signUpButton} onPress={this.logout}>
                 <Text style={styles.signUpText}>Logout</Text>
               </TouchableOpacity>

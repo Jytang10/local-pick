@@ -19,6 +19,7 @@ import PostNote from './PostNote';
 import UpdateNote from './UpdateNote';
 import Maps from './Maps';
 import Profile from './Profile';
+import UpdateProfile from './UpdateProfile';
 
 const AuthStack = createStackNavigator({
   Home: {
@@ -123,6 +124,12 @@ const DiscoverStack = createStackNavigator({
     screen: Profile,
     navigationOptions: {
       headerTitle: 'Profile',
+    },
+  },
+  UpdateProfile: {
+    screen: UpdateProfile,
+    navigationOptions: {
+      headerTitle:'Update Profile'
     },
   },
   },
