@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
+import firebase from 'firebase';
 
 
 class Profile extends Component {
@@ -19,6 +20,13 @@ class Profile extends Component {
       const userData = this.props.userData;
       this.setState({ userData });
     }
+  }
+
+  logout = () => {
+    firebase.auth().signOut()
+    .then(() => {
+      this.props.navigation.navigate('Home')
+    })
   }
 
   render() {
@@ -57,6 +65,11 @@ class Profile extends Component {
                 <Text style={styles.subText}>Contact</Text>
                 <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
               </View>
+            </View>
+            <View style={styles.signUpButtonContainer}>
+              <TouchableOpacity style={styles.signUpButton} onPress={this.logout}>
+                <Text style={styles.signUpText}>Logout</Text>
+              </TouchableOpacity>
             </View>
             {/* <View>
               <View style={styles.sectionTitleContainer}>
