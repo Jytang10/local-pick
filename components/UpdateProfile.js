@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { updateProfile } from '../actions';
 import { connect } from 'react-redux';
+import { StackActions, NavigationActions } from 'react-navigation'
 
 class UpdateProfile extends Component {
   state = {
@@ -24,7 +25,12 @@ class UpdateProfile extends Component {
       about: "",
       email: "",
     })
-    this.props.navigation.navigate('Profile');
+    const resetAction = StackActions.reset({
+      index: 0,
+      key: null,
+      actions: [NavigationActions.navigate({ routeName: 'Profile' })],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
   render() {

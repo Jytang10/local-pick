@@ -3,6 +3,7 @@ import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView, TouchableOpaci
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import firebase from 'firebase';
+import { StackActions, NavigationActions } from 'react-navigation'
 
 
 class Profile extends Component {
@@ -29,8 +30,18 @@ class Profile extends Component {
     })
   }
 
+  updateProfileNav = (userData) => {
+    // const resetAction = StackActions.reset({
+    //   index: 0,
+    //   key: null,
+    //   actions: [NavigationActions.navigate({ routeName: 'UpdateProfile', params: {userData: {...userData}}})],
+    // });
+    // this.props.navigation.dispatch(resetAction);
+  }
+
   render() {
     ({ name, displayName, location, food, about, email } = this.state.userData)
+    let userData = this.state.userData;
     return (
       this.state.loginStatus
       ? <SafeAreaView style={styles.container}>
@@ -67,7 +78,7 @@ class Profile extends Component {
               </View>
             </View>
             <View style={styles.signUpButtonContainer}>
-              <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('UpdateProfile', {...userData})}>
+              <TouchableOpacity style={[styles.signUpButton, {backgroundColor: '#4654FF'}]} onPress={() => this.props.navigation.navigate('UpdateProfile', {...userData})}>
                 <Text style={styles.signUpText}>Update User Info</Text>
               </TouchableOpacity>
             </View>
