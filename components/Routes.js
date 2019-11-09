@@ -19,6 +19,7 @@ import PostNote from './PostNote';
 import UpdateNote from './UpdateNote';
 import Maps from './Maps';
 import Profile from './Profile';
+import UpdateProfile from './UpdateProfile';
 
 const AuthStack = createStackNavigator({
   Home: {
@@ -119,12 +120,18 @@ const DiscoverStack = createStackNavigator({
       headerTitle: 'Search',
     },
   },
-  Profile: {
-    screen: Profile,
-    navigationOptions: {
-      headerTitle: 'Profile',
-    },
-  },
+  // Profile: {
+  //   screen: Profile,
+  //   navigationOptions: {
+  //     headerTitle: 'Profile',
+  //   },
+  // },
+  // UpdateProfile: {
+  //   screen: UpdateProfile,
+  //   navigationOptions: {
+  //     headerTitle:'Update Profile'
+  //   },
+  // },
   },
   {
     initialRouteName: 'Discover',
@@ -142,6 +149,36 @@ const DiscoverStack = createStackNavigator({
     }
   }
 )
+
+const ProfileStack = createStackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      headerTitle: 'Profile',
+    },
+  },
+  UpdateProfile: {
+    screen: UpdateProfile,
+    navigationOptions: {
+      headerTitle:'Update Profile'
+    },
+  },
+},
+{
+  initialRouteName: 'Profile',
+  defaultNavigationOptions: {
+    headerBackground: (
+      <LinearGradient
+        colors={['#3F54E3', '#E089B3']}
+        style={{ flex: 1 }}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+      />
+    ),
+    headerTitleStyle: { color: '#fff' },
+    headerTintColor: '#fff',
+  }
+})
 
 const BottomNavigator = createMaterialBottomTabNavigator({
   Search: {
@@ -163,7 +200,7 @@ const BottomNavigator = createMaterialBottomTabNavigator({
     },
   },
   Profile: {
-    screen: Profile,
+    screen: ProfileStack,
     navigationOptions: {
       tabBarLabel: 'Profile',
       tabBarIcon: ({tintColor}) => (

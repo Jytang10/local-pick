@@ -1,4 +1,5 @@
 import firebase from '../fb';
+import 'firebase/firestore';
 
 export function setCity(city){
   return(dispatch) => {
@@ -151,4 +152,3 @@ export function setUser(userData){
     })
   }
 }
-

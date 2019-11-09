@@ -3,6 +3,7 @@ import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView, TouchableOpaci
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import firebase from 'firebase';
+import { StackActions, NavigationActions } from 'react-navigation'
 
 
 class Profile extends Component {
@@ -27,6 +28,16 @@ class Profile extends Component {
     .then(() => {
       this.props.navigation.navigate('Home')
     })
+  }
+
+  updateProfileNav = () => {
+    let userData = this.state.userData;
+    const resetAction = StackActions.reset({
+      index: 0,
+      key: null,
+      actions: [NavigationActions.navigate({ routeName: 'UpdateProfile', params: {...userData}})],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
   render() {
@@ -67,7 +78,12 @@ class Profile extends Component {
               </View>
             </View>
             <View style={styles.signUpButtonContainer}>
-              <TouchableOpacity style={styles.signUpButton} onPress={this.logout}>
+              <TouchableOpacity style={[styles.signUpButton, {backgroundColor: '#4654FF'}]} onPress={this.updateProfileNav}>
+                <Text style={styles.signUpText}>Update User Info</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.signUpButtonContainer}>
+              <TouchableOpacity style={[styles.signUpButton, {backgroundColor: '#ff0404'}]} onPress={this.logout}>
                 <Text style={styles.signUpText}>Logout</Text>
               </TouchableOpacity>
             </View>
@@ -114,7 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   text: {
-    // fontFamily: 'HelveticaNeu',
     color: '#52575D'
   },
   emptyResults: {
