@@ -7,7 +7,10 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
 class App extends Component {
+  
   render() {
+    console.disableYellowBox = true;
+
     const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={state}>
