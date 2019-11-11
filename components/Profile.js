@@ -87,28 +87,6 @@ class Profile extends Component {
                 <Text style={styles.signUpText}>Logout</Text>
               </TouchableOpacity>
             </View>
-            {/* <View>
-              <View style={styles.sectionTitleContainer}>
-                <Text style={styles.subText}>Media</Text>
-              </View>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={styles.mediaImageContainer}>
-                  <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
-                </View>
-                <View style={styles.mediaImageContainer}>
-                  <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
-                </View>
-                <View style={styles.mediaImageContainer}>
-                  <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
-                </View>
-                <View style={styles.mediaImageContainer}>
-                  <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
-                </View>
-                <View style={styles.mediaImageContainer}>
-                  <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
-                </View>
-              </ScrollView>
-            </View> */}
           </ScrollView>
         </SafeAreaView>
       : <View style={styles.emptyResults}>

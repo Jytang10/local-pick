@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   text: {
-    // fontFamily: 'HelveticaNeu',
     color: '#52575D'
   },
   subText: {
