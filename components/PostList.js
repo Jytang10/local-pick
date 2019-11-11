@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   text: {
-    // fontFamily: 'HelveticaNeu',
     color: '#52575D'
   },
   textContainer: {
