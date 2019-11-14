@@ -90,7 +90,7 @@ class Profile extends Component {
           </ScrollView>
         </SafeAreaView>
       : <View style={styles.emptyResults}>
-          <MaterialIcons size={150} color="red" name="person-pin"></MaterialIcons>
+          <MaterialIcons size={150} color="#E089B3" name="person-pin"></MaterialIcons>
           <Text style={[styles.errorText, {textAlign: 'center'}]}>No current user. Please sign up for an account!</Text>
           <View style={styles.signUpButtonContainer}>
             <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('Home')}>
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
   },
   profileImageContainer: {
     alignSelf: 'center',
-    marginTop: 20,
   },
   profileImage: {
     width: 200,
@@ -144,7 +143,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: 5,
   },
   name: {
     fontWeight: '200',
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
   statsContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: 16,
+    marginTop: 10,
     marginBottom: 10,
   },
   statsBox: {
@@ -179,6 +177,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   sectionTitleContainer: {
+    alignItems: 'center',
     padding: 10,
   },
   aboutInfo: {
@@ -195,7 +194,7 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 13,
     borderRadius: 20,
-    backgroundColor: '#1491f5',
+    backgroundColor: '#3F54E3',
   },
   signUpText: {
     textAlign:'center',

@@ -74,7 +74,7 @@ class Discover extends Component {
               </View>
             </ScrollView>
         : <View style={styles.emptyResults}>
-            <MaterialIcons size={150} color="red" name="error-outline"></MaterialIcons>
+            <MaterialIcons size={150} color="#E089B3" name="error-outline"></MaterialIcons>
             <Text style={[styles.errorText, {textAlign: 'center'}]}>No current city found. Please select a city at the Search page.</Text>
           </View>
     );

@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 13,
     borderRadius: 20,
-    backgroundColor: '#1491f5',
+    backgroundColor: '#3F54E3',
   },
   submitText: {
     textAlign:'center',
