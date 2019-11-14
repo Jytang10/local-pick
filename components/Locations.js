@@ -37,7 +37,7 @@ class Locations extends Component {
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) => {
                 return (
-                  <TouchableOpacity style={{shadowOpacity:0.4}} onPress={() => this.props.navigation.navigate('LocationDetails', {...item})}>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('LocationDetails', {...item})}>
                     <View style={styles.itemContainer}>
                       <View style={styles.itemInfoContainer}>
                         <Text style={styles.itemText}>{item.name}</Text>
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     marginVertical:15,
     marginHorizontal:15,
     borderRadius:15,
-    backgroundColor:'grey',
+    borderWidth: 0.3,
+    backgroundColor:'#d6d7da',
   },
   itemInfoContainer: {
     padding:15,
