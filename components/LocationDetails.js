@@ -68,31 +68,29 @@ class LocationDetails extends Component {
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) => {
                 return (
-                    <View style={{shadowOpacity:0.4}}>
-                      <View style={styles.itemContainer}>
-                        <View style={styles.itemInfoContainer}>
-                          <View style={styles.profileContainer}>
-                            <View style={styles.profileImage}>
-                              <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
+                    <View style={styles.itemContainer}>
+                      <View style={styles.itemInfoContainer}>
+                        <View style={styles.profileContainer}>
+                          <View style={styles.profileImage}>
+                            <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
+                          </View>
+                          <Text style={[styles.subText, {marginLeft: 10}]}>@{item.userName}</Text>
+                        </View>
+                        <View style={styles.iconContainer}>
+                          <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
+                            <View style={{marginRight:10}}>
+                              <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
                             </View>
-                            <Text style={[styles.subText, {marginLeft: 10}]}>@{item.userName}</Text>
-                          </View>
-                          <View style={styles.iconContainer}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
-                              <View style={{marginRight:10}}>
-                                <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                              </View>
-                            </TouchableOpacity> 
-                            <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
-                              <View>
-                                <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                              </View>
-                            </TouchableOpacity> 
-                          </View>
+                          </TouchableOpacity> 
+                          <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
+                            <View>
+                              <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                            </View>
+                          </TouchableOpacity> 
                         </View>
-                        <View style={styles.noteContentContainer}>
-                          <Text style={[styles.text, {fontSize: 16}]}>"{item.content}"</Text>
-                        </View>
+                      </View>
+                      <View style={styles.noteContentContainer}>
+                        <Text style={[styles.text, {fontSize: 16}]}>"{item.content}"</Text>
                       </View>
                     </View>
                     )
@@ -140,7 +138,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: 16,
+    marginTop: 10,
     marginBottom: 10,
   },
   infoBox: {
@@ -148,11 +146,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   infoButton: {
-    shadowOpacity:0.2,
     flexDirection: 'row',
     padding:12,
     borderRadius:6,
-    backgroundColor:'#3F54E3'
+    backgroundColor:'#3F54E3',
   },
   infoText: {
     color:'#fff',
@@ -182,10 +179,11 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     overflow:'hidden',
-    marginVertical:15,
+    marginVertical:10,
     marginHorizontal:15,
     borderRadius:15,
-    backgroundColor:'grey',
+    borderWidth: 0.3,
+    backgroundColor:'#d6d7da',
   },
   itemInfoContainer: {
     padding:10,

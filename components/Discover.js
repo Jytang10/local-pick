@@ -44,7 +44,7 @@ class Discover extends Component {
                       showsVerticalScrollIndicator={false}
                       renderItem={({item}) => {
                       return (
-                        <TouchableOpacity style={{shadowOpacity:0.4}} onPress={() => this.props.navigation.navigate('Locations', {...item})}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Locations', {...item})}>
                         <View style={styles.itemContainer}>
                           <View style={styles.itemInfoContainer}>
                             <View style={styles.textContainer}>
@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
     marginVertical:15,
     marginHorizontal:15,
     borderRadius:15,
-    backgroundColor:'grey',
+    borderWidth: 0.3,
+    backgroundColor:'#d6d7da',
   },
   itemInfoContainer: {
     padding:15,
