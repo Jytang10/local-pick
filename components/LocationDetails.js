@@ -15,8 +15,8 @@ class LocationDetails extends Component {
   }
 
   render() {
-    const map = <MaterialIcons style={{paddingRight:5}} name="map" color="#fff" size={20}></MaterialIcons>
-    const phone = <MaterialIcons style={{paddingRight:5}} name="phone" color="#fff" size={20}></MaterialIcons>
+    const map = <MaterialIcons style={{paddingRight:5}} name="map" color="#fff" size={22}></MaterialIcons>
+    const phone = <MaterialIcons style={{paddingRight:5}} name="phone" color="#fff" size={22}></MaterialIcons>
     const params = this.props.navigation.state.params;
     return (
       <ScrollView style={styles.container}>
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   infoBox: {
     alignItems: 'center',
     flex: 1,
+    justifyContent: 'center', 
   },
   infoButton: {
     flexDirection: 'row',
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     paddingBottom: 10,
+    alignItems: 'center',
   },
   sectionText: {
     fontSize: 16,
@@ -180,7 +182,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     overflow:'hidden',
     marginVertical:10,
-    marginHorizontal:15,
+    marginHorizontal:10,
     borderRadius:15,
     borderWidth: 0.3,
     backgroundColor:'#d6d7da',
