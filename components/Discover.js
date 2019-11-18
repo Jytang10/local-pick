@@ -51,7 +51,23 @@ class Discover extends Component {
                               <Text style={styles.itemText}>{item.title}</Text>
                               <Text style={styles.subText}>{item.description}</Text>
                             </View>
-                            <View style={styles.iconContainer}>
+                            {
+                            this.props.userData && this.props.userData.userID === item.userID
+                            ? <View style={styles.iconContainer}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
+                                  <View style={{marginRight:10}}>
+                                    <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                                  </View>
+                                </TouchableOpacity> 
+                                <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
+                                  <View>
+                                    <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                                  </View>
+                                </TouchableOpacity> 
+                              </View>
+                            : <View></View>
+                            }                         
+                            {/* <View style={styles.iconContainer}>
                               <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
                                 <View style={{marginRight:10}}>
                                   <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
@@ -62,7 +78,7 @@ class Discover extends Component {
                                   <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
                                 </View>
                               </TouchableOpacity> 
-                            </View>
+                            </View> */}
                           </View>
                         </View>
                       </TouchableOpacity>
@@ -153,7 +169,8 @@ function mapStateToProps(state){
   return {
     listOfLists,
     loadingReducer: state.loadingReducer.loadingReducer,
-    cityLocation: state.searchList.city
+    cityLocation: state.searchList.city,
+    userData: state.userReducer.userData,
   }
 }
 
