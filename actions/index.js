@@ -30,9 +30,9 @@ export function getLists(city){
   }
 }
 
-export function postList(title, description, city, creatorID){
+export function postList(title, description, city, userID){
   return(dispatch) => {
-    firebase.database().ref('/data/lists').push({title, description, city, creatorID})
+    firebase.database().ref('/data/lists').push({title, description, city, userID})
   }
 }
 

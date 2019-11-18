@@ -11,7 +11,8 @@ class PostList extends Component {
   submitList = () => {
     const { title, description } = this.state;
     const city = this.props.cityLocation;
-    this.props.postList(title, description, city);
+    const userID = this.props.userData.userID;
+    this.props.postList(title, description, city, userID);
     this.setState({ title:"", description:"" });
     this.props.navigation.navigate('Discover')
   }
@@ -94,7 +95,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
   return {
-    cityLocation: state.searchList.city
+    cityLocation: state.searchList.city,
+    userData: state.userReducer.userData,
   }
 }
 
