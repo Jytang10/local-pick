@@ -39,6 +39,7 @@ class LoginEmailPassword extends Component {
           "food": fbData.food.stringValue,
           "location": fbData.location.stringValue,
           "name": fbData.name.stringValue,
+          "userID": fbData.userID.stringValue
           }
           this.props.setUser(data)
           this.props.setLoginTrue()

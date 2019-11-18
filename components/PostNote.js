@@ -11,9 +11,10 @@ class PostNote extends Component {
   submitNote = () => {
     const { content } = this.state;
     const params = this.props.navigation.state.params;
+    const userID = this.props.userData.userID;
     if(this.props.loginStatus){
       let userName = this.props.userData.displayName;
-      this.props.postNote(content, userName, params.key);
+      this.props.postNote(content, userName, params.key, userID);
     } else {
       this.props.postNote(content, 'anonymous', params.key);
     }

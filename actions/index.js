@@ -30,9 +30,9 @@ export function getLists(city){
   }
 }
 
-export function postList(title, description, city){
+export function postList(title, description, city, userID){
   return(dispatch) => {
-    firebase.database().ref('/data/lists').push({title, description, city})
+    firebase.database().ref('/data/lists').push({title, description, city, userID})
   }
 }
 
@@ -69,9 +69,9 @@ export function getLocations(pickID){
   }
 }
 
-export function postLocation(name, website, address, lat, lng, photo_url, contact, pickID){
+export function postLocation(name, website, address, lat, lng, photo_url, contact, userID, pickID){
   return(dispatch) => {
-    firebase.database().ref('/data/locations').push({name, website, address, lat, lng, photo_url, contact, pickID});
+    firebase.database().ref('/data/locations').push({name, website, address, lat, lng, photo_url, contact, userID, pickID});
   }
 }
 
@@ -108,9 +108,9 @@ export function getNotes(locationID){
   }
 }
 
-export function postNote(content, userName, locationID){
+export function postNote(content, userName, locationID, userID){
   return(dispatch) => {
-    firebase.database().ref('/data/notes').push({content, userName, locationID});
+    firebase.database().ref('/data/notes').push({content, userName, locationID, userID});
   }
 }
 

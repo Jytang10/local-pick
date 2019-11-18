@@ -31,7 +31,8 @@ class SignUp extends Component {
           food,
           about,
           email,
-          password
+          password,
+          userID
         });
       })
       .catch((error) => {

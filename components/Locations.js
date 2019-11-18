@@ -21,10 +21,14 @@ class Locations extends Component {
             <Text style={[styles.text, styles.title]}>{params.title}</Text>
             <Text style={styles.subText}>Category</Text>
           </View>
-          <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostLocation', params)}>
-            <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-            <Text style={styles.subText}>Add Local Pick</Text>
-          </TouchableOpacity>
+          {
+            this.props.userData
+            ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostLocation', params)}>
+                <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
+                <Text style={styles.subText}>Add Local Pick</Text>
+              </TouchableOpacity>
+            : <View></View>
+          }
         </View>
         <View>
           {
@@ -41,18 +45,22 @@ class Locations extends Component {
                     <View style={styles.itemContainer}>
                       <View style={styles.itemInfoContainer}>
                         <Text style={styles.itemText}>{item.name}</Text>
-                        <View style={styles.iconContainer}>
-                          <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
-                            <View style={{marginRight:10}}>
-                              <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                            </View>
-                          </TouchableOpacity> 
-                          <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
-                            <View>
-                              <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                            </View>
-                          </TouchableOpacity> 
-                        </View>
+                        {
+                        this.props.userData && this.props.userData.userID === item.userID
+                        ?  <View style={styles.iconContainer}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
+                              <View style={{marginRight:10}}>
+                                <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                              </View>
+                            </TouchableOpacity> 
+                            <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
+                              <View>
+                                <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                              </View>
+                            </TouchableOpacity> 
+                          </View>
+                        : <View></View>
+                        }
                       </View>
                       <View>
                         <Image source={{uri:item.photo_url}} style={styles.itemImage}></Image>
@@ -139,7 +147,8 @@ function mapStateToProps(state){
   })
   return {
     listOfLocations,
-    loadingReducer: state.loadingReducer.loadingReducer
+    loadingReducer: state.loadingReducer.loadingReducer,
+    userData: state.userReducer.userData,
   }
 }
 

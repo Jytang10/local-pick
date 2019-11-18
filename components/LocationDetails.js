@@ -52,10 +52,14 @@ class LocationDetails extends Component {
               <Text style={[styles.text, styles.title]}>Notes</Text>
               <Text style={[styles.subText]}>User Comments</Text>
             </View>
-            <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostNote', params)}>
-              <MaterialIcons size={35} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-              <Text style={styles.subText}>Add Note</Text>
-            </TouchableOpacity>
+            {
+              this.props.userData
+              ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostNote', params)}>
+                  <MaterialIcons size={35} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
+                  <Text style={styles.subText}>Add Note</Text>
+                </TouchableOpacity>
+              : <View></View>
+            }
           </View>   
           <View style={styles.notesContainer}>
           {
@@ -76,18 +80,22 @@ class LocationDetails extends Component {
                           </View>
                           <Text style={[styles.subText, {marginLeft: 10}]}>@{item.userName}</Text>
                         </View>
-                        <View style={styles.iconContainer}>
-                          <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
-                            <View style={{marginRight:10}}>
-                              <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                            </View>
-                          </TouchableOpacity> 
-                          <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
-                            <View>
-                              <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                            </View>
-                          </TouchableOpacity> 
-                        </View>
+                        {
+                        this.props.userData && this.props.userData.userID === item.userID
+                        ?  <View style={styles.iconContainer}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
+                              <View style={{marginRight:10}}>
+                                <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                              </View>
+                            </TouchableOpacity> 
+                            <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
+                              <View>
+                                <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                              </View>
+                            </TouchableOpacity> 
+                          </View>
+                        : <View></View>
+                        }
                       </View>
                       <View style={styles.noteContentContainer}>
                         <Text style={[styles.text, {fontSize: 16}]}>"{item.content}"</Text>
@@ -236,7 +244,8 @@ function mapStateToProps(state){
   })
   return {
     listOfNotes,
-    loadingReducer: state.loadingReducer.loadingReducer
+    loadingReducer: state.loadingReducer.loadingReducer,
+    userData: state.userReducer.userData,
   }
 }
 
