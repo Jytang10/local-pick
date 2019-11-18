@@ -28,10 +28,14 @@ class Discover extends Component {
                   <Text style={[styles.text, styles.title]}>{this.props.cityLocation}</Text>
                   <Text style={[styles.subText, {textTransform: 'uppercase'}]}>City</Text>
                 </View>
-                <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostList', params)}>
-                  <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-                  <Text style={[styles.subText, {textTransform: 'uppercase'}]}>Add Category</Text>
-                </TouchableOpacity>
+                {
+                  this.props.userData
+                  ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostList', params)}>
+                      <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
+                      <Text style={[styles.subText, {textTransform: 'uppercase'}]}>Add Category</Text>
+                    </TouchableOpacity>
+                  : <View></View>
+                }
               </View>
               <View>
                 {
@@ -66,19 +70,7 @@ class Discover extends Component {
                                 </TouchableOpacity> 
                               </View>
                             : <View></View>
-                            }                         
-                            {/* <View style={styles.iconContainer}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
-                                <View style={{marginRight:10}}>
-                                  <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                                </View>
-                              </TouchableOpacity> 
-                              <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
-                                <View>
-                                  <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                                </View>
-                              </TouchableOpacity> 
-                            </View> */}
+                            }
                           </View>
                         </View>
                       </TouchableOpacity>

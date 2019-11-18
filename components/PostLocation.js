@@ -10,7 +10,7 @@ import axios from "axios";
 
 class PostLocation extends Component {
 
-  getWebsitePhotoData = (params, name, place_id, address, lat, lng, photo_ref, contact) => {
+  getWebsitePhotoData = (params, name, place_id, address, lat, lng, photo_ref, contact, userID) => {
     Promise.all([
       axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=website&key=${GOOGLE_PLACES_API_KEY}`),
       axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_ref}&key=${GOOGLE_PLACES_API_KEY}`)
@@ -22,7 +22,7 @@ class PostLocation extends Component {
       } else {
         website = websiteRes.data.result.website
       }
-      this.props.postLocation(name, website, address, lat, lng, photoRes.config.url, contact, params.key)
+      this.props.postLocation(name, website, address, lat, lng, photoRes.config.url, contact, userID, params.key)
     })
     .then(this.props.navigation.navigate('Locations'))
     .catch(err => console.log(err))
@@ -37,7 +37,8 @@ class PostLocation extends Component {
     const lng = value.geometry.location["lng"];
     const photo_ref = value.photos[0].photo_reference;
     const contact = value.formatted_phone_number;
-    this.getWebsitePhotoData(params, name, place_id, address, lat, lng, photo_ref, contact)
+    const userID = this.props.userData.userID;
+    this.getWebsitePhotoData(params, name, place_id, address, lat, lng, photo_ref, contact, userID)
   }
 
   render() {
@@ -131,4 +132,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, {postLocation})(PostLocation);
+function mapStateToProps(state){
+  return {
+    userData: state.userReducer.userData,
+  }
+}
+
+export default connect(mapStateToProps, {postLocation})(PostLocation);
+
