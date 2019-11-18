@@ -46,6 +46,18 @@ class Profile extends Component {
       this.state.loginStatus
       ? <SafeAreaView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={this.updateProfileNav}>
+                <View style={{marginRight:10}}>
+                  <MaterialIcons size={30} color="#5580f9" name="edit"></MaterialIcons>
+                </View>
+              </TouchableOpacity> 
+              <TouchableOpacity onPress={this.logout}>
+                <View>
+                  <MaterialIcons size={30} color="red" name="exit-to-app"></MaterialIcons>
+                </View>
+              </TouchableOpacity> 
+            </View>
             <View style={styles.profileImageContainer}>
               <View style={styles.profileImage}>
                 <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
@@ -77,15 +89,27 @@ class Profile extends Component {
                 <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
               </View>
             </View>
-            <View style={styles.signUpButtonContainer}>
-              <TouchableOpacity style={[styles.signUpButton, {backgroundColor: '#4654FF'}]} onPress={this.updateProfileNav}>
-                <Text style={styles.signUpText}>Update User Info</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.signUpButtonContainer}>
-              <TouchableOpacity style={[styles.signUpButton, {backgroundColor: '#ff0404'}]} onPress={this.logout}>
-                <Text style={styles.signUpText}>Logout</Text>
-              </TouchableOpacity>
+            <View>
+              <View style={styles.sectionTitleContainer}>
+                <Text style={styles.subText}>Media</Text>
+              </View>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+              </ScrollView>
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -131,7 +155,7 @@ const styles = StyleSheet.create({
   },
   profileImage: {
     width: 200,
-    height: 200,
+    height: 170,
     borderRadius: 100,
     overflow: 'hidden',
   },
@@ -201,6 +225,11 @@ const styles = StyleSheet.create({
     color:'#fff',
     fontWeight:'bold',
     fontSize:20  
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginRight: 10,
   }
 });
 
