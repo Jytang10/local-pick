@@ -244,7 +244,8 @@ function mapStateToProps(state){
   })
   return {
     listOfNotes,
-    loadingReducer: state.loadingReducer.loadingReducer
+    loadingReducer: state.loadingReducer.loadingReducer,
+    userData: state.userReducer.userData,
   }
 }
 

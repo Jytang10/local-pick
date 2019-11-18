@@ -147,7 +147,8 @@ function mapStateToProps(state){
   })
   return {
     listOfLocations,
-    loadingReducer: state.loadingReducer.loadingReducer
+    loadingReducer: state.loadingReducer.loadingReducer,
+    userData: state.userReducer.userData,
   }
 }
 

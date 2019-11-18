@@ -19,6 +19,7 @@ class PostList extends Component {
 
   render() {
     const { title, description } = this.state;
+    console.log(this.props.userData)
     return (
       <View style={styles.container}>
         <View style={styles.textContainer}>
