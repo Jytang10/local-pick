@@ -12,11 +12,11 @@ class Locations extends Component {
     const params = navigation.state.params;
     if(state.params != undefined){
       return { 
-          headerRight: 
-          <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostLocation', params)}>
-            <MaterialIcons size={35} color="#fff" name="add-circle-outline"></MaterialIcons>
-          </TouchableOpacity>
-        }
+        headerRight: 
+        <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostLocation', params)}>
+          <MaterialIcons size={35} color="#fff" name="add-circle-outline"></MaterialIcons>
+        </TouchableOpacity>
+      }
     }
   };
 

@@ -37,6 +37,7 @@ class Discover extends Component {
   }
 
   render() {
+    let colors = ['#525bdc', '#906dc8', '#b67bbf', '#d684b5'];
     return (
         this.state.city
         ?   <ScrollView style={styles.container}>
@@ -54,32 +55,32 @@ class Discover extends Component {
                       data={this.props.listOfLists}
                       keyExtractor={(item) => item.key}
                       showsVerticalScrollIndicator={false}
-                      renderItem={({item}) => {
+                      renderItem={({item, index}) => {
                       return (
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Locations', {...item})}>
-                        <View style={styles.itemContainer}>
-                          <View style={styles.itemInfoContainer}>
-                            <View style={styles.textContainer}>
-                              <Text style={styles.itemText}>{item.title}</Text>
-                              <Text style={styles.subText}>{item.description}</Text>
-                            </View>
-                            {
-                            this.props.userData && this.props.userData.userID === item.userID
-                            ? <View style={styles.iconContainer}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
-                                  <View style={{marginRight:10}}>
-                                    <MaterialIcons size={25} color="#5580f9" name="edit"></MaterialIcons>
-                                  </View>
-                                </TouchableOpacity>
+                          <View style={styles.itemContainer}>
+                            <View style={[styles.itemInfoContainer, {backgroundColor: colors[index % colors.length]}]}>
+                              <View style={styles.textContainer}>
+                                <Text style={styles.itemText}>{item.title}</Text>
+                                <Text style={styles.subText}>{item.description}</Text>
                               </View>
-                            : <View></View>
-                            }
+                              {
+                              this.props.userData && this.props.userData.userID === item.userID
+                              ? <View>
+                                  <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
+                                    <View style={{marginRight:10}}>
+                                      <MaterialIcons size={25} color="#5580f9" name="edit"></MaterialIcons>
+                                    </View>
+                                  </TouchableOpacity>
+                                </View>
+                              : <View></View>
+                              }
+                            </View>
                           </View>
-                        </View>
-                      </TouchableOpacity>
-                      )
-                    }}
-                  >
+                        </TouchableOpacity>
+                        )
+                      }}
+                    >
                   </FlatList>
                 }
               </View>
@@ -95,7 +96,7 @@ class Discover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'snow',
   },
   emptyResults: {
     flex: 1,
@@ -112,8 +113,8 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: 14,
-    color: '#AEB5BC',
-    fontWeight: '500',
+    color: '#fff',
+    fontWeight: '400',
   },
   titleContainer: {
     flexDirection: 'row',
@@ -132,11 +133,9 @@ const styles = StyleSheet.create({
     marginVertical:10,
     marginHorizontal:10,
     borderRadius: 15,
-    backgroundColor:'#d6d7da',
   },
   itemInfoContainer: {
     padding: 15,
-    backgroundColor:'#f1f6ff',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     flexDirection: 'row',
@@ -145,11 +144,8 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 22,
     fontWeight:'bold',
-    color: '#5e90fb',
+    color: '#fff',
   },
-  iconContainer: {
-    flexDirection: 'row',
-  }
 });
 
 function mapStateToProps(state){
