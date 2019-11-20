@@ -10,6 +10,19 @@ class Discover extends Component {
     city: ''
   }
 
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return { 
+          headerRight: 
+          <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostList', params)}>
+            <MaterialIcons size={40} color="#fff" name="add-circle-outline"></MaterialIcons>
+          </TouchableOpacity>
+        }
+    }
+  };
+
   componentDidMount(){
     if(this.props.cityLocation){
       const city = this.props.cityLocation;
@@ -18,24 +31,19 @@ class Discover extends Component {
     }
   }
 
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ userData: this.props.userData });
+  }
+
   render() {
-    const params = this.props.navigation.state.params;
     return (
         this.state.city
         ?   <ScrollView style={styles.container}>
               <View style={styles.titleContainer}>
                 <View style={styles.contentBox}>
                   <Text style={[styles.text, styles.title]}>{this.props.cityLocation}</Text>
-                  <Text style={[styles.subText, {textTransform: 'uppercase'}]}>City</Text>
                 </View>
-                {
-                  this.props.userData
-                  ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostList', params)}>
-                      <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-                      <Text style={[styles.subText, {textTransform: 'uppercase'}]}>Add Category</Text>
-                    </TouchableOpacity>
-                  : <View></View>
-                }
               </View>
               <View>
                 {
