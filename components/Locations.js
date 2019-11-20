@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
-import { getLocations, deleteLocation } from '../actions';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, ImageBackground, ScrollView, ActivityIndicator } from 'react-native';
+import { getLocations } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import _ from 'lodash';
 
 class Locations extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return { 
+        headerRight: 
+        <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostLocation', params)}>
+          <MaterialIcons size={35} color="#fff" name="add-circle-outline"></MaterialIcons>
+        </TouchableOpacity>
+      }
+    }
+  };
+
   componentDidMount(){
     const params = this.props.navigation.state.params;
     this.props.getLocations(params.key);
+  }
+
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ userData: this.props.userData });
   }
 
   render() {
@@ -19,16 +38,7 @@ class Locations extends Component {
         <View style={styles.titleContainer}>
           <View style={styles.contentBox}>
             <Text style={[styles.text, styles.title]}>{params.title}</Text>
-            <Text style={styles.subText}>Category</Text>
           </View>
-          {
-            this.props.userData
-            ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostLocation', params)}>
-                <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-                <Text style={styles.subText}>Add Local Pick</Text>
-              </TouchableOpacity>
-            : <View></View>
-          }
         </View>
         <View>
           {
@@ -43,28 +53,22 @@ class Locations extends Component {
                 return (
                   <TouchableOpacity onPress={() => this.props.navigation.navigate('LocationDetails', {...item})}>
                     <View style={styles.itemContainer}>
-                      <View style={styles.itemInfoContainer}>
-                        <Text style={styles.itemText}>{item.name}</Text>
-                        {
-                        this.props.userData && this.props.userData.userID === item.userID
-                        ?  <View style={styles.iconContainer}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
-                              <View style={{marginRight:10}}>
-                                <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                              </View>
-                            </TouchableOpacity> 
-                            <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
-                              <View>
-                                <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                              </View>
-                            </TouchableOpacity> 
-                          </View>
-                        : <View></View>
-                        }
-                      </View>
-                      <View>
-                        <Image source={{uri:item.photo_url}} style={styles.itemImage}></Image>
-                      </View>
+                      <ImageBackground source={{uri:item.photo_url}} style={styles.heroImage}>
+                        <LinearGradient style={styles.heroTextContainer} start={{x: 0.1, y: 0.6}} end={{x: 0.1, y: 1}} colors={['rgba(0,0,0,0.1)', 'rgba(0,0,0,1)']}>
+                          <Text style={styles.heroText}>{item.name}</Text>
+                        </LinearGradient>
+                          {
+                          this.props.userData && this.props.userData.userID === item.userID
+                          ?  <View style={styles.iconContainer}>
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
+                                <View style={{marginRight:10}}>
+                                  <MaterialIcons size={22} color="#fff" name="edit"></MaterialIcons>
+                                </View>
+                              </TouchableOpacity> 
+                            </View>
+                          : <View></View>
+                          }   
+                      </ImageBackground>
                     </View>
                   </TouchableOpacity>
                 )
@@ -81,22 +85,41 @@ class Locations extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F6F6F6',
   },
   text: {
     color: '#52575D'
   },
   subText: {
     fontSize: 12,
-    color: '#AEB5BC',
+    color: '#fff',
     textTransform: 'uppercase',
-    fontWeight: '500',
+    fontWeight: '400',
   },
   titleContainer: {
     flexDirection: 'row',
     marginTop: 10,
-    marginBottom: 10,
     alignItems: 'center',
+  },
+  heroImage: {
+    height: 150,
+  },
+  heroTextContainer: {
+    flexDirection:'row',
+    borderRadius: 10,
+    position:'absolute',
+    left:0,
+    right:0,
+    bottom:0,
+    top:0
+  },
+  heroText: {
+    fontSize: 22,
+    fontWeight:'bold',
+    color:'#fff',
+    alignSelf:'flex-end',
+    paddingLeft: 20,
+    paddingBottom: 20
   },
   contentBox: {
     alignItems: 'center',
@@ -110,31 +133,12 @@ const styles = StyleSheet.create({
     marginVertical:15,
     marginHorizontal:15,
     borderRadius:15,
-    borderWidth: 0.3,
-    backgroundColor:'#d6d7da',
-  },
-  itemInfoContainer: {
-    padding:15,
-    backgroundColor:'#f1f6ff',
-    borderTopLeftRadius:15,
-    borderTopRightRadius:15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  itemText: {
-    fontSize: 20,
-    fontWeight:'bold',
-    color: '#5e90fb',
-  },
-  itemImage: {
-    width:'100%',
-    height:175,
-    borderBottomLeftRadius:15,
-    borderBottomRightRadius:15, 
-    alignSelf:'stretch',
+    borderWidth: 0.1,
   },
   iconContainer: {
-    flexDirection: 'row',
+    alignSelf:'flex-end',
+    paddingRight: 10,
+    paddingTop: 110,
   }
 });
 
@@ -152,4 +156,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {getLocations, deleteLocation})(Locations);
+export default connect(mapStateToProps, {getLocations})(Locations);

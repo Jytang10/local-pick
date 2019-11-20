@@ -20,6 +20,8 @@ import UpdateNote from './UpdateNote';
 import Maps from './Maps';
 import Profile from './Profile';
 import UpdateProfile from './UpdateProfile';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 const AuthStack = createStackNavigator({
   Home: {
@@ -40,7 +42,7 @@ const AuthStack = createStackNavigator({
       headerTitle: 'User Sign Up'
     }
   }
-},{
+  },{
   initialRouteName: 'Home',
   defaultNavigationOptions: {
     headerBackground: (
@@ -60,7 +62,7 @@ const DiscoverStack = createStackNavigator({
   Discover: {
     screen: Discover,
     navigationOptions: {
-      headerTitle:'Discover'
+      headerTitle:'Discover',
     },
   },
   PostList: {
@@ -120,18 +122,6 @@ const DiscoverStack = createStackNavigator({
       headerTitle: 'Search',
     },
   },
-  // Profile: {
-  //   screen: Profile,
-  //   navigationOptions: {
-  //     headerTitle: 'Profile',
-  //   },
-  // },
-  // UpdateProfile: {
-  //   screen: UpdateProfile,
-  //   navigationOptions: {
-  //     headerTitle:'Update Profile'
-  //   },
-  // },
   },
   {
     initialRouteName: 'Discover',

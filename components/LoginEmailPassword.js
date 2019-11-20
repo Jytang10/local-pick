@@ -43,7 +43,7 @@ class LoginEmailPassword extends Component {
           }
           this.props.setUser(data)
           this.props.setLoginTrue()
-          this.props.navigation.navigate("Profile")
+          this.props.navigation.navigate("Search")
       } else {
         console.log("No such data!");
         result = "No such data!";
