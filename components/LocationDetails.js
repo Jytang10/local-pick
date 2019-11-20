@@ -122,7 +122,7 @@ class LocationDetails extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
   },
   text: {
     color: '#52575D'
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingRight: 10,
     paddingLeft: 10,
-    backgroundColor:'#f1f6ff',
+    backgroundColor:'#fff',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     flexDirection: 'row',
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     height: undefined,
   },
   noteContentContainer: {
-    backgroundColor:'#f1f6ff',
+    backgroundColor:'#fff',
     paddingBottom: 10,
     paddingRight: 10,
     paddingLeft: 10,
