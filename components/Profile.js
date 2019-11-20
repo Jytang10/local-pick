@@ -2,15 +2,32 @@ import React, { Component } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackActions, NavigationActions } from 'react-navigation'
-
-
 class Profile extends Component {
   state = {
     loginStatus: null,
     userData: {}
   }
+
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return { 
+          headerRight:
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={state.params.updateProfileNav}>
+              <MaterialIcons size={30} color="#fff" name="edit"></MaterialIcons>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={state.params.logout}>
+              <MaterialIcons size={30} color="grey" name="exit-to-app"></MaterialIcons>
+            </TouchableOpacity>
+          </View>
+        }
+    }
+  };
 
   componentDidMount(){
     if(this.props.loginStatus){
@@ -21,6 +38,11 @@ class Profile extends Component {
       const userData = this.props.userData;
       this.setState({ userData });
     }
+  }
+
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ updateProfileNav: this.updateProfileNav, logout: this.logout });
   }
 
   logout = () => {
@@ -46,22 +68,8 @@ class Profile extends Component {
       this.state.loginStatus
       ? <SafeAreaView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.iconContainer}>
-              <TouchableOpacity onPress={this.updateProfileNav}>
-                <View style={{marginRight:10}}>
-                  <MaterialIcons size={30} color="#5580f9" name="edit"></MaterialIcons>
-                </View>
-              </TouchableOpacity> 
-              <TouchableOpacity onPress={this.logout}>
-                <View>
-                  <MaterialIcons size={30} color="red" name="exit-to-app"></MaterialIcons>
-                </View>
-              </TouchableOpacity> 
-            </View>
             <View style={styles.profileImageContainer}>
-              <View style={styles.profileImage}>
-                <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
-              </View>
+              <Avatar rounded source={require('../assets/images/avatar.png')} size="xlarge" overlayContainerStyle={{backgroundColor: '#F6F6F6'}} />
             </View>
             <View style={styles.titleContainer}>
               <Text style={[styles.text, styles.name]}>{name}</Text>
@@ -77,23 +85,19 @@ class Profile extends Component {
                 <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
               </View>
             </View>
-            <View>
-              <View style={styles.sectionTitleContainer}>
-                <Text style={styles.subText}>About</Text>
-                <Text style={[styles.text, styles.aboutInfo]}>{about}</Text>
-              </View>
+            <View style={styles.sectionTitleContainer}>
+              <Text style={styles.subText}>About</Text>
+              <Text style={[styles.text, styles.aboutInfo]}>{about}</Text>
             </View>
-            <View>
-              <View style={styles.sectionTitleContainer}>
-                <Text style={styles.subText}>Contact</Text>
-                <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
-              </View>
+            <View style={styles.sectionTitleContainer}>
+              <Text style={styles.subText}>Contact</Text>
+              <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
             </View>
             <View>
               <View style={styles.sectionTitleContainer}>
                 <Text style={styles.subText}>Media</Text>
               </View>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{paddingTop: 10}}>
                 <View style={styles.mediaImageContainer}>
                   <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
                 </View>
@@ -129,7 +133,7 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F6F6F6',
   },
   text: {
     color: '#52575D'
@@ -145,19 +149,14 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   subText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#AEB5BC',
     textTransform: 'uppercase',
     fontWeight: '500',
   },
   profileImageContainer: {
     alignSelf: 'center',
-  },
-  profileImage: {
-    width: 200,
-    height: 170,
-    borderRadius: 100,
-    overflow: 'hidden',
+    marginTop: 15,
   },
   image: {
     flex: 1,
@@ -170,24 +169,23 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: '200',
-    fontSize: 36,
+    fontSize: 38,
   },
   username: {
     color: '#AEB5BC',
-    fontSize: 16,
+    fontSize: 18,
   },
   statsContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 15,
   },
   statsBox: {
     alignItems: 'center',
     flex: 1,
   },
   stat: {
-    fontSize: 24,
+    fontSize: 26,
   },
   statsBorder: {
     borderColor: '#DFD8C8',
@@ -202,12 +200,14 @@ const styles = StyleSheet.create({
   },
   sectionTitleContainer: {
     alignItems: 'center',
-    padding: 10,
+    paddingTop: 15,
   },
   aboutInfo: {
+    fontSize: 16,
     fontWeight: '400',
   },  
   contactInfo: {
+    fontSize: 16,
     fontWeight: '500',
   },
   signUpButtonContainer: {
