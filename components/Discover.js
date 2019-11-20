@@ -68,14 +68,9 @@ class Discover extends Component {
                             ? <View style={styles.iconContainer}>
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
                                   <View style={{marginRight:10}}>
-                                    <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                                    <MaterialIcons size={25} color="#5580f9" name="edit"></MaterialIcons>
                                   </View>
-                                </TouchableOpacity> 
-                                <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
-                                  <View>
-                                    <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                                  </View>
-                                </TouchableOpacity> 
+                                </TouchableOpacity>
                               </View>
                             : <View></View>
                             }
