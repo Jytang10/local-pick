@@ -11,15 +11,33 @@ import _ from 'lodash';
 
 class LocationDetails extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return {
+          headerRight: 
+          <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostNote', params)}>
+            <MaterialIcons size={35} color="#fff" name="add-circle-outline"></MaterialIcons>
+          </TouchableOpacity>
+        }
+    }
+  };
+
   componentDidMount(){
     const params = this.props.navigation.state.params;
     this.props.getNotes(params.key);
   }
 
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ userData: this.props.userData });
+  }
+
   render() {
-    const map = <MaterialIcons style={{paddingRight:5}} name="map" color="#fff" size={25}></MaterialIcons>
-    const phone = <MaterialIcons style={{paddingRight:5}} name="phone" color="#fff" size={25}></MaterialIcons>
-    const link = <MaterialIcons style={{paddingRight:5}} name="link" color="#fff" size={25}></MaterialIcons>
+    const map = <MaterialIcons name="map" color="#fff" size={25}></MaterialIcons>
+    const phone = <MaterialIcons name="phone" color="#fff" size={25}></MaterialIcons>
+    const link = <MaterialIcons name="link" color="#fff" size={25}></MaterialIcons>
     const params = this.props.navigation.state.params;
     let websiteButton;
     if(params.website !== 'N/A'){
@@ -49,7 +67,7 @@ class LocationDetails extends Component {
           <View style={styles.mainTitleContainer}>
             <Text style={[styles.text, styles.name]}>{params.name}</Text>
           </View>
-          <ButtonGroup buttons={buttons} containerStyle={{height: 50, borderWidth: 0, borderRadius: 6, backgroundColor:'#3F54E3',}}/>
+          <ButtonGroup buttons={buttons} style={styles.buttonGroup} containerStyle={{height: 50, borderWidth: 0, borderRadius: 6, backgroundColor:'#3F54E3',}}/>
           <View style={styles.sectionContainer}>
             <Text style={styles.subText}>Address</Text>
             <Text style={[styles.text, styles.sectionText]}>{params.address}</Text>
@@ -57,16 +75,18 @@ class LocationDetails extends Component {
           <View style={styles.titleContainer}>
             <View style={styles.contentBox}>
               <Text style={[styles.text, styles.title]}>Notes</Text>
-              <Text style={[styles.subText]}>User Comments</Text>
             </View>
+
+
             {
               this.props.userData
               ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostNote', params)}>
                   <MaterialIcons size={35} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-                  <Text style={styles.subText}>Add Note</Text>
                 </TouchableOpacity>
               : <View></View>
             }
+
+
           </View>   
           <View style={styles.notesContainer}>
           {
@@ -138,12 +158,15 @@ const styles = StyleSheet.create({
     height: 200,
   },
   contentContainer: {
+    paddingTop: 10,
     paddingRight: 10,
     paddingLeft: 10,
   },
   mainTitleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
+  },
+  buttonGroup: {
     marginTop: 10,
   },
   name: {
@@ -151,7 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 38,
   },
   sectionContainer: {
-    paddingBottom: 10,
+    marginTop: 10,
     alignItems: 'center',
   },
   sectionText: {
