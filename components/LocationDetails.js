@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, FlatList, Image, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, FlatList, ActivityIndicator } from 'react-native';
 import Communications from 'react-native-communications';
 import { getNotes } from '../actions';
 import { connect } from 'react-redux';
@@ -7,8 +7,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { ButtonGroup } from 'react-native-elements';
 import { Linking } from 'expo';
 import _ from 'lodash';
-
-
 class LocationDetails extends Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -62,20 +60,22 @@ class LocationDetails extends Component {
     const buttons = [{ element: websiteButton }, { element: mapButton }, { element: callButton }]
     return (
       <ScrollView style={styles.container}>
-        <ImageBackground source={{uri: params.photo_url}} style={styles.heroImage}></ImageBackground>   
+        <View>
+          <ImageBackground source={{uri: params.photo_url}} style={styles.heroImage}></ImageBackground>
+        </View>
         <View style={styles.contentContainer}>
           <View style={styles.mainTitleContainer}>
             <Text style={[styles.text, styles.name]}>{params.name}</Text>
           </View>
-          <ButtonGroup buttons={buttons} style={styles.buttonGroup} containerStyle={{height: 50, borderWidth: 0, borderRadius: 6, backgroundColor:'#3F54E3',}}/>
+          <View style={styles.buttonGroup}>
+            <ButtonGroup buttons={buttons} containerStyle={{height: 50, borderWidth: 0, borderRadius: 6, backgroundColor:'#3F54E3',}}/>
+          </View>
           <View style={styles.sectionContainer}>
             <Text style={styles.subText}>Address</Text>
             <Text style={[styles.text, styles.sectionText]}>{params.address}</Text>
           </View>
           <View style={styles.titleContainer}>
-            <View style={styles.contentBox}>
-              <Text style={[styles.text, styles.title]}>Notes</Text>
-            </View>
+            <Text style={[styles.text, styles.title]}>Notes</Text>
           </View>   
           <View style={styles.notesContainer}>
           {
@@ -90,18 +90,13 @@ class LocationDetails extends Component {
                 return (
                     <View style={styles.itemContainer}>
                       <View style={styles.itemInfoContainer}>
-                        <View style={styles.profileContainer}>
-                          <View style={styles.profileImage}>
-                            <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
-                          </View>
-                          <Text style={[styles.subText, {marginLeft: 10}]}>@{item.userName}</Text>
-                        </View>
+                        <Text style={styles.subText}>@{item.userName}</Text>
                         {
                         this.props.userData && this.props.userData.userID === item.userID
                         ?  <View style={styles.iconContainer}>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
                               <View style={{marginRight:10}}>
-                                <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                                <MaterialIcons size={20} color="#5580f9" name="edit"></MaterialIcons>
                               </View>
                             </TouchableOpacity> 
                           </View>
@@ -109,7 +104,7 @@ class LocationDetails extends Component {
                         }
                       </View>
                       <View style={styles.noteContentContainer}>
-                        <Text style={[styles.text, {fontSize: 16}]}>"{item.content}"</Text>
+                        <Text style={[styles.text, {fontSize: 18}]}>"{item.content}"</Text>
                       </View>
                     </View>
                     )
@@ -142,7 +137,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   contentContainer: {
-    paddingTop: 15,
+    paddingTop: 10,
     paddingRight: 10,
     paddingLeft: 10,
   },
@@ -151,14 +146,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonGroup: {
-    marginTop: 15,
+    marginTop: 10,
   },
   name: {
     fontWeight: '500',
     fontSize: 38,
   },
   sectionContainer: {
-    marginTop: 15,
+    marginTop: 10,
     alignItems: 'center',
   },
   sectionText: {
@@ -166,8 +161,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   titleContainer: {
-    flexDirection: 'row',
-    marginTop: 15,
+    alignItems: 'center',
+    marginTop: 10,
   },
   contentBox: {
     alignItems: 'center',
@@ -180,15 +175,16 @@ const styles = StyleSheet.create({
     overflow:'hidden',
     marginVertical:10,
     marginHorizontal:10,
-    borderRadius:15,
-    borderWidth: 0.3,
+    borderRadius: 10,
     backgroundColor:'#d6d7da',
   },
   itemInfoContainer: {
-    padding:10,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingLeft: 10,
     backgroundColor:'#f1f6ff',
-    borderTopLeftRadius:15,
-    borderTopRightRadius:15,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -201,14 +197,10 @@ const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: 'row',
   },
-  profileContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
+    width: 35,
+    height: 35,
+    borderRadius: 35,
     overflow: 'hidden',
   },
   image: {
@@ -218,9 +210,9 @@ const styles = StyleSheet.create({
   },
   noteContentContainer: {
     backgroundColor:'#f1f6ff',
-    paddingLeft: 10,
-    paddingRight: 10,
     paddingBottom: 10,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
 });
 
