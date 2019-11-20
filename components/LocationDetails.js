@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, FlatList, Image, ActivityIndicator } from 'react-native';
 import Communications from 'react-native-communications';
-import { getNotes, deleteNote } from '../actions';
+import { getNotes } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ButtonGroup } from 'react-native-elements';
@@ -76,17 +76,6 @@ class LocationDetails extends Component {
             <View style={styles.contentBox}>
               <Text style={[styles.text, styles.title]}>Notes</Text>
             </View>
-
-
-            {
-              this.props.userData
-              ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostNote', params)}>
-                  <MaterialIcons size={35} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-                </TouchableOpacity>
-              : <View></View>
-            }
-
-
           </View>   
           <View style={styles.notesContainer}>
           {
@@ -113,11 +102,6 @@ class LocationDetails extends Component {
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateNote', {...item})}>
                               <View style={{marginRight:10}}>
                                 <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                              </View>
-                            </TouchableOpacity> 
-                            <TouchableOpacity onPress={() => this.props.deleteNote(item.key)}>
-                              <View>
-                                <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
                               </View>
                             </TouchableOpacity> 
                           </View>
@@ -254,4 +238,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {getNotes, deleteNote})(LocationDetails);
+export default connect(mapStateToProps, {getNotes})(LocationDetails);
