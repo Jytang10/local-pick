@@ -81,12 +81,6 @@ export function deleteLocation(key){
   }
 }
 
-export function updateLocation(name, key){
-  return(dispatch) => {
-    firebase.database().ref('/data/locations').child(key).update({name});
-  }
-}
-
 export function getNotes(locationID){
   return(dispatch) => {
     dispatch({

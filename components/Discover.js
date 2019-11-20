@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { getLists, deleteList } from '../actions';
+import { getLists } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import _ from 'lodash';
@@ -167,4 +167,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {getLists, deleteList})(Discover);
+export default connect(mapStateToProps, {getLists})(Discover);

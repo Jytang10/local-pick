@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
-import { getLocations, deleteLocation } from '../actions';
+import { getLocations } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import _ from 'lodash';
@@ -60,12 +60,7 @@ class Locations extends Component {
                         ?  <View style={styles.iconContainer}>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
                               <View style={{marginRight:10}}>
-                                <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
-                              </View>
-                            </TouchableOpacity> 
-                            <TouchableOpacity onPress={() => this.props.deleteLocation(item.key)}>
-                              <View>
-                                <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
+                                <MaterialIcons size={25} color="#5580f9" name="edit"></MaterialIcons>
                               </View>
                             </TouchableOpacity> 
                           </View>
@@ -162,4 +157,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {getLocations, deleteLocation})(Locations);
+export default connect(mapStateToProps, {getLocations})(Locations);
