@@ -44,43 +44,59 @@ class PostLocation extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.topTextContainer}>
-          <Text style={[styles.text, styles.topText]}>Search for an establishment</Text>
+         {
+          this.props.userData
+          ?
+          <View>
+            <View style={styles.topTextContainer}>
+              <Text style={[styles.text, styles.topText]}>Search for an establishment</Text>
+            </View>
+            <View style={styles.searchContainer}>
+              <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} components="country:us" queryTypes="establishment">
+                {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
+                  <React.Fragment>
+                    <View style={styles.textInputContainer}>
+                      <MaterialIcons name='search' size={30} color='#3F54E3'></MaterialIcons>
+                      <TextInput 
+                        style={styles.textInput}
+                        placeholder="Search for an establishment"
+                        onChangeText={handleTextChange}
+                        value={inputValue}
+                        >
+                      </TextInput>
+                      <TouchableOpacity style={styles.clear} onPress={clearSearchs}>
+                        <Text style={styles.clearText}>Clear</Text>
+                      </TouchableOpacity>
+                    </View>
+                    {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
+                    <ScrollView style={styles.locationResults} keyboardShouldPersistTaps='always'>
+                      {locationResults.map(ele => (
+                        <LocationItem
+                          {...ele}
+                          key={ele.id}
+                          fetchDetails={fetchDetails}
+                          searchLocation={this.searchLocation}
+                        >
+                        </LocationItem>
+                      ))}
+                    </ScrollView>
+                  </React.Fragment>
+                )}
+              </GoogleAutoComplete>
+              <ImageBackground source={require('../assets/images/truck.png')} style={styles.fillImage}></ImageBackground>
+            </View>
+          </View>
+        :
+        <View style={styles.emptyResults}>
+          <MaterialIcons size={150} color="#E089B3" name="person-pin"></MaterialIcons>
+          <Text style={[styles.errorText, {textAlign: 'center'}]}>Please login or sign up to add a location!</Text>
+          <View style={styles.signUpButtonContainer}>
+            <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('Home')}>
+              <Text style={styles.signUpText}>Login or Sign Up</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.searchContainer}>
-          <GoogleAutoComplete apiKey={GOOGLE_PLACES_API_KEY} debounce={500} minLength={4} components="country:us" queryTypes="establishment">
-            {({ handleTextChange, locationResults, fetchDetails, isSearching, inputValue, clearSearchs }) => (
-              <React.Fragment>
-                <View style={styles.textInputContainer}>
-                  <MaterialIcons name='search' size={30} color='#3F54E3'></MaterialIcons>
-                  <TextInput 
-                    style={styles.textInput}
-                    placeholder="Search for an establishment"
-                    onChangeText={handleTextChange}
-                    value={inputValue}
-                    >
-                  </TextInput>
-                  <TouchableOpacity style={styles.clear} onPress={clearSearchs}>
-                    <Text style={styles.clearText}>Clear</Text>
-                  </TouchableOpacity>
-                </View>
-                {isSearching && <ActivityIndicator size="large" color="red"></ActivityIndicator>}
-                <ScrollView style={styles.locationResults} keyboardShouldPersistTaps='always'>
-                  {locationResults.map(ele => (
-                    <LocationItem
-                      {...ele}
-                      key={ele.id}
-                      fetchDetails={fetchDetails}
-                      searchLocation={this.searchLocation}
-                    >
-                    </LocationItem>
-                  ))}
-                </ScrollView>
-              </React.Fragment>
-            )}
-          </GoogleAutoComplete>
-          <ImageBackground source={require('../assets/images/truck.png')} style={styles.fillImage}></ImageBackground>
-        </View>
+        }
       </View>
     );
   }
@@ -93,6 +109,16 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#52575D'
+  },
+  emptyResults: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  errorText: {
+    fontSize: 26,
   },
   topTextContainer: {
     alignItems: 'center',
@@ -129,6 +155,22 @@ const styles = StyleSheet.create({
     width: 250,
     alignSelf: 'center',
     marginTop: 35,
+  },
+  signUpButtonContainer: {
+    alignItems: 'center',
+    padding: 10,
+  },
+  signUpButton: {
+    width: 250,
+    padding: 13,
+    borderRadius: 20,
+    backgroundColor: '#3F54E3',
+  },
+  signUpText: {
+    textAlign:'center',
+    color:'#fff',
+    fontWeight:'bold',
+    fontSize:20  
   },
 });
 

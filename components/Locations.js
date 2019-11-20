@@ -7,9 +7,27 @@ import _ from 'lodash';
 
 class Locations extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return { 
+          headerRight: 
+          <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostLocation', params)}>
+            <MaterialIcons size={35} color="#fff" name="add-circle-outline"></MaterialIcons>
+          </TouchableOpacity>
+        }
+    }
+  };
+
   componentDidMount(){
     const params = this.props.navigation.state.params;
     this.props.getLocations(params.key);
+  }
+
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ userData: this.props.userData });
   }
 
   render() {
@@ -21,14 +39,6 @@ class Locations extends Component {
             <Text style={[styles.text, styles.title]}>{params.title}</Text>
             <Text style={styles.subText}>Category</Text>
           </View>
-          {
-            this.props.userData
-            ? <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostLocation', params)}>
-                <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-                <Text style={styles.subText}>Add Local Pick</Text>
-              </TouchableOpacity>
-            : <View></View>
-          }
         </View>
         <View>
           {

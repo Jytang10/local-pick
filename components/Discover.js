@@ -17,7 +17,7 @@ class Discover extends Component {
       return { 
           headerRight: 
           <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostList', params)}>
-            <MaterialIcons size={40} color="#fff" name="add-circle-outline"></MaterialIcons>
+            <MaterialIcons size={35} color="#fff" name="add-circle-outline"></MaterialIcons>
           </TouchableOpacity>
         }
     }
