@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   contentContainer: {
-    paddingTop: 10,
+    paddingTop: 15,
     paddingRight: 10,
     paddingLeft: 10,
   },
@@ -167,14 +167,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonGroup: {
-    marginTop: 10,
+    marginTop: 15,
   },
   name: {
     fontWeight: '500',
     fontSize: 38,
   },
   sectionContainer: {
-    marginTop: 10,
+    marginTop: 15,
     alignItems: 'center',
   },
   sectionText: {
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 15,
   },
   contentBox: {
     alignItems: 'center',
