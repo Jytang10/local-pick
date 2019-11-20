@@ -33,7 +33,6 @@ class Locations extends Component {
 
   render() {
     const params = this.props.navigation.state.params;
-    let colors = ['#525bdc', '#906dc8', '#b67bbf', '#d684b5'];
     return (
       <ScrollView style={styles.container}>
         <View style={styles.titleContainer}>
@@ -50,7 +49,7 @@ class Locations extends Component {
                 data={this.props.listOfLocations}
                 keyExtractor={(item) => item.key}
                 showsVerticalScrollIndicator={false}
-                renderItem={({item, index}) => {
+                renderItem={({item}) => {
                 return (
                   <TouchableOpacity onPress={() => this.props.navigation.navigate('LocationDetails', {...item})}>
                     <View style={styles.itemContainer}>
@@ -58,7 +57,7 @@ class Locations extends Component {
                         <LinearGradient style={styles.heroTextContainer} start={{x: 0.1, y: 0.6}} end={{x: 0.1, y: 1}} colors={['rgba(0,0,0,0.1)', 'rgba(0,0,0,1)']}>
                           <Text style={styles.heroText}>{item.name}</Text>
                         </LinearGradient>
-                        {
+                          {
                           this.props.userData && this.props.userData.userID === item.userID
                           ?  <View style={styles.iconContainer}>
                               <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateLocation', {...item})}>
@@ -135,25 +134,6 @@ const styles = StyleSheet.create({
     marginHorizontal:15,
     borderRadius:15,
     borderWidth: 0.1,
-  },
-  itemInfoContainer: {
-    padding:15,
-    borderBottomLeftRadius:15,
-    borderBottomRightRadius:15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  itemText: {
-    fontSize: 20,
-    fontWeight:'bold',
-    color: '#fff',
-  },
-  itemImage: {
-    width:'100%',
-    height:175,
-    borderTopLeftRadius:15,
-    borderTopRightRadius:15, 
-    alignSelf:'stretch',
   },
   iconContainer: {
     alignSelf:'flex-end',
