@@ -22,7 +22,7 @@ class Profile extends Component {
               <MaterialIcons size={30} color="#fff" name="edit"></MaterialIcons>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={state.params.logout}>
-              <MaterialIcons size={30} color="red" name="exit-to-app"></MaterialIcons>
+              <MaterialIcons size={30} color="grey" name="exit-to-app"></MaterialIcons>
             </TouchableOpacity>
           </View>
         }
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 12,
     overflow: 'hidden',
-    marginHorizontal: 15,
+    marginHorizontal: 10,
   },
   sectionTitleContainer: {
     alignItems: 'center',
