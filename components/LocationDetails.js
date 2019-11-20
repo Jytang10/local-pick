@@ -4,6 +4,8 @@ import Communications from 'react-native-communications';
 import { getNotes, deleteNote } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
+import { ButtonGroup } from 'react-native-elements';
+import { Linking } from 'expo';
 import _ from 'lodash';
 
 
@@ -18,6 +20,15 @@ class LocationDetails extends Component {
     const map = <MaterialIcons style={{paddingRight:5}} name="map" color="#fff" size={22}></MaterialIcons>
     const phone = <MaterialIcons style={{paddingRight:5}} name="phone" color="#fff" size={22}></MaterialIcons>
     const params = this.props.navigation.state.params;
+    let websiteButton;
+    if(params.website !== 'N/A'){
+      websiteButton = () => <TouchableOpacity onPress={() => Linking.openURL(params.website)}><Text>Website</Text></TouchableOpacity> 
+    } else {
+      websiteButton = () => <TouchableOpacity onPress={() => alert('No website provided')}><Text>Website</Text></TouchableOpacity> 
+    }
+    const mapButton = () => <TouchableOpacity onPress={() => this.props.navigation.navigate('Map', {...params})}><Text>Map</Text></TouchableOpacity>
+    const callButton = () => <TouchableOpacity onPress={() => Communications.phonecall(params.contact, true)}><Text>Call</Text></TouchableOpacity>
+    const buttons = [{ element: websiteButton }, { element: mapButton }, { element: callButton }]
     return (
       <ScrollView style={styles.container}>
         <ImageBackground source={{uri: params.photo_url}} style={styles.heroImage}></ImageBackground>   
@@ -25,6 +36,8 @@ class LocationDetails extends Component {
           <View style={styles.mainTitleContainer}>
             <Text style={[styles.text, styles.name]}>{params.name}</Text>
           </View>
+          <ButtonGroup buttons={buttons} containerStyle={{height: 50}} />
+
           <View style={styles.infoContainer}>
             <View style={styles.infoBox}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('Map', {...params})} style={styles.infoButton}>
@@ -39,14 +52,17 @@ class LocationDetails extends Component {
               </TouchableOpacity>
             </View>
           </View>
+
           <View style={styles.sectionContainer}>
             <Text style={styles.subText}>Address</Text>
             <Text style={[styles.text, styles.sectionText]}>{params.address}</Text>
           </View>
-          <View style={styles.sectionContainer}>
+          {/* <View style={styles.sectionContainer}>
             <Text style={styles.subText}>Website</Text>
             <Text style={[styles.text, styles.sectionText]}>{params.website}</Text>
-          </View>
+          </View> */}
+
+
           <View style={styles.titleContainer}>
             <View style={styles.contentBox}>
               <Text style={[styles.text, styles.title]}>Notes</Text>
