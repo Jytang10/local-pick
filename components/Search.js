@@ -90,16 +90,16 @@ const styles = StyleSheet.create({
     top:0
   },
   heroText: {
-    fontSize:22,
+    fontSize: 22,
     fontWeight:'bold',
     color:'#fff',
     alignSelf:'flex-end',
-    paddingLeft:20,
-    paddingBottom:20
+    paddingLeft: 20,
+    paddingBottom: 20
   },
   searchContainer: {
     padding: 10,
-    marginTop: 25,
+    marginTop: 5,
   },
   textInputContainer: {
     flexDirection: 'row',
@@ -111,10 +111,12 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#3F54E3',
     paddingHorizontal: 16,
+    marginRight: 5,
     marginLeft: 5,
   },
   clear: {
-    padding: 10,
+    marginLeft: 5,
+    marginRight: 5,
   },
   clearText: {
     color: 'grey',
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
     height: 250,
     width: 250,
     alignSelf: 'center',
-    marginTop: 35,
+    marginTop: 50,
   },
 });
 
