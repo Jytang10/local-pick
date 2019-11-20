@@ -12,6 +12,24 @@ class Profile extends Component {
     userData: {}
   }
 
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return { 
+          headerRight:
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={this.updateProfileNav}>
+              <MaterialIcons size={30} color="#fff" name="edit"></MaterialIcons>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={this.logout}>
+              <MaterialIcons size={30} color="red" name="exit-to-app"></MaterialIcons>
+            </TouchableOpacity>
+          </View>
+        }
+    }
+  };
+
   componentDidMount(){
     if(this.props.loginStatus){
       const loginStatus = this.props.loginStatus;
@@ -21,6 +39,11 @@ class Profile extends Component {
       const userData = this.props.userData;
       this.setState({ userData });
     }
+  }
+
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ userData: this.props.userData });
   }
 
   logout = () => {
@@ -46,7 +69,8 @@ class Profile extends Component {
       this.state.loginStatus
       ? <SafeAreaView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.iconContainer}>
+
+            {/* <View style={styles.iconContainer}>
               <TouchableOpacity onPress={this.updateProfileNav}>
                 <View style={{marginRight:10}}>
                   <MaterialIcons size={30} color="#5580f9" name="edit"></MaterialIcons>
@@ -57,7 +81,9 @@ class Profile extends Component {
                   <MaterialIcons size={30} color="red" name="exit-to-app"></MaterialIcons>
                 </View>
               </TouchableOpacity> 
-            </View>
+            </View> */}
+
+
             <View style={styles.profileImageContainer}>
               <View style={styles.profileImage}>
                 <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
