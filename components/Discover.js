@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     marginTop: 10,
-    marginBottom: 10,
     alignItems: 'center',
   },
   contentBox: {
@@ -135,17 +134,16 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     overflow:'hidden',
-    marginVertical:15,
-    marginHorizontal:15,
-    borderRadius:15,
-    borderWidth: 0.3,
+    marginVertical:10,
+    marginHorizontal:10,
+    borderRadius: 15,
     backgroundColor:'#d6d7da',
   },
   itemInfoContainer: {
-    padding:15,
+    padding: 15,
     backgroundColor:'#f1f6ff',
-    borderTopLeftRadius:15,
-    borderTopRightRadius:15,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
