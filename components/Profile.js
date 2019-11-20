@@ -19,10 +19,10 @@ class Profile extends Component {
       return { 
           headerRight:
           <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={this.updateProfileNav}>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={state.params.updateProfileNav}>
               <MaterialIcons size={30} color="#fff" name="edit"></MaterialIcons>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={this.logout}>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={state.params.logout}>
               <MaterialIcons size={30} color="red" name="exit-to-app"></MaterialIcons>
             </TouchableOpacity>
           </View>
@@ -43,7 +43,7 @@ class Profile extends Component {
 
   componentWillMount(){
     const { setParams } = this.props.navigation;
-    setParams({ userData: this.props.userData });
+    setParams({ updateProfileNav: this.updateProfileNav, logout: this.logout });
   }
 
   logout = () => {
