@@ -69,7 +69,7 @@ class Discover extends Component {
                               ? <View>
                                   <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
                                     <View style={{marginRight:10}}>
-                                      <MaterialIcons size={25} color="#5580f9" name="edit"></MaterialIcons>
+                                      <MaterialIcons size={25} color="#fff" name="edit"></MaterialIcons>
                                     </View>
                                   </TouchableOpacity>
                                 </View>
@@ -96,7 +96,7 @@ class Discover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'snow',
+    backgroundColor: '#F6F6F6',
   },
   emptyResults: {
     flex: 1,
