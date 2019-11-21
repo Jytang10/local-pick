@@ -1,7 +1,11 @@
 # Local Pick
-## Demo Video
-![](./lp-video.gif)
-<hr/>
+
+## Demo
+<p align="center">
+  <img src="./lp-demo.gif">
+</p>
+
+## Summary
 A local food directory and social service created to help users find local recommendations. Users can create an account or remain as a guest user and browse categories which hold locally recommended establishments. Users can view notes posted by other users, and post their own categories, recommendations and notes to the application.
 
 ## Getting Started
