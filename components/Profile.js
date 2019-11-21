@@ -2,15 +2,32 @@ import React, { Component } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackActions, NavigationActions } from 'react-navigation'
-
-
 class Profile extends Component {
   state = {
     loginStatus: null,
     userData: {}
   }
+
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return { 
+          headerRight:
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={state.params.updateProfileNav}>
+              <MaterialIcons size={30} color="#fff" name="edit"></MaterialIcons>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.contentBox, {marginRight: 10}]} onPress={state.params.logout}>
+              <MaterialIcons size={30} color="grey" name="exit-to-app"></MaterialIcons>
+            </TouchableOpacity>
+          </View>
+        }
+    }
+  };
 
   componentDidMount(){
     if(this.props.loginStatus){
@@ -21,6 +38,11 @@ class Profile extends Component {
       const userData = this.props.userData;
       this.setState({ userData });
     }
+  }
+
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ updateProfileNav: this.updateProfileNav, logout: this.logout });
   }
 
   logout = () => {
@@ -47,9 +69,7 @@ class Profile extends Component {
       ? <SafeAreaView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.profileImageContainer}>
-              <View style={styles.profileImage}>
-                <Image source={require('../assets/images/avatar.png')} style={styles.image} resizeMode='center'></Image>
-              </View>
+              <Avatar rounded source={require('../assets/images/avatar.png')} size="xlarge" overlayContainerStyle={{backgroundColor: '#F6F6F6'}} />
             </View>
             <View style={styles.titleContainer}>
               <Text style={[styles.text, styles.name]}>{name}</Text>
@@ -65,32 +85,40 @@ class Profile extends Component {
                 <Text style={[styles.text, styles.subText]}>Favorite Food</Text>
               </View>
             </View>
-            <View>
-              <View style={styles.sectionTitleContainer}>
-                <Text style={styles.subText}>About</Text>
-                <Text style={[styles.text, styles.aboutInfo]}>{about}</Text>
-              </View>
+            <View style={styles.sectionTitleContainer}>
+              <Text style={styles.subText}>About</Text>
+              <Text style={[styles.text, styles.aboutInfo]}>{about}</Text>
+            </View>
+            <View style={styles.sectionTitleContainer}>
+              <Text style={styles.subText}>Contact</Text>
+              <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
             </View>
             <View>
               <View style={styles.sectionTitleContainer}>
-                <Text style={styles.subText}>Contact</Text>
-                <Text style={[styles.text, styles.contactInfo]}>{email}</Text>
+                <Text style={styles.subText}>Media</Text>
               </View>
-            </View>
-            <View style={styles.signUpButtonContainer}>
-              <TouchableOpacity style={[styles.signUpButton, {backgroundColor: '#4654FF'}]} onPress={this.updateProfileNav}>
-                <Text style={styles.signUpText}>Update User Info</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.signUpButtonContainer}>
-              <TouchableOpacity style={[styles.signUpButton, {backgroundColor: '#ff0404'}]} onPress={this.logout}>
-                <Text style={styles.signUpText}>Logout</Text>
-              </TouchableOpacity>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{paddingTop: 10}}>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/kitakata.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/omomo.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/cava.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/icecream.jpg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+                <View style={styles.mediaImageContainer}>
+                  <Image source={require('../assets/images/halal.jpeg')} style={styles.image} resizeMode='cover'></Image>
+                </View>
+              </ScrollView>
             </View>
           </ScrollView>
         </SafeAreaView>
       : <View style={styles.emptyResults}>
-          <MaterialIcons size={150} color="red" name="person-pin"></MaterialIcons>
+          <MaterialIcons size={150} color="#E089B3" name="person-pin"></MaterialIcons>
           <Text style={[styles.errorText, {textAlign: 'center'}]}>No current user. Please sign up for an account!</Text>
           <View style={styles.signUpButtonContainer}>
             <TouchableOpacity style={styles.signUpButton} onPress={() => this.props.navigation.navigate('Home')}>
@@ -105,7 +133,7 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F6F6F6',
   },
   text: {
     color: '#52575D'
@@ -121,20 +149,14 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   subText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#AEB5BC',
     textTransform: 'uppercase',
     fontWeight: '500',
   },
   profileImageContainer: {
     alignSelf: 'center',
-    marginTop: 20,
-  },
-  profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    overflow: 'hidden',
+    marginTop: 15,
   },
   image: {
     flex: 1,
@@ -144,28 +166,26 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: 5,
   },
   name: {
     fontWeight: '200',
-    fontSize: 36,
+    fontSize: 38,
   },
   username: {
     color: '#AEB5BC',
-    fontSize: 16,
+    fontSize: 18,
   },
   statsContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: 16,
-    marginBottom: 10,
+    marginTop: 15,
   },
   statsBox: {
     alignItems: 'center',
     flex: 1,
   },
   stat: {
-    fontSize: 24,
+    fontSize: 26,
   },
   statsBorder: {
     borderColor: '#DFD8C8',
@@ -179,12 +199,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   sectionTitleContainer: {
-    padding: 10,
+    alignItems: 'center',
+    paddingTop: 15,
   },
   aboutInfo: {
+    fontSize: 16,
     fontWeight: '400',
   },  
   contactInfo: {
+    fontSize: 16,
     fontWeight: '500',
   },
   signUpButtonContainer: {
@@ -195,13 +218,18 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 13,
     borderRadius: 20,
-    backgroundColor: '#1491f5',
+    backgroundColor: '#3F54E3',
   },
   signUpText: {
     textAlign:'center',
     color:'#fff',
     fontWeight:'bold',
     fontSize:20  
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginRight: 10,
   }
 });
 

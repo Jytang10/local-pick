@@ -39,10 +39,11 @@ class LoginEmailPassword extends Component {
           "food": fbData.food.stringValue,
           "location": fbData.location.stringValue,
           "name": fbData.name.stringValue,
+          "userID": fbData.userID.stringValue
           }
           this.props.setUser(data)
           this.props.setLoginTrue()
-          this.props.navigation.navigate("Profile")
+          this.props.navigation.navigate("Search")
       } else {
         console.log("No such data!");
         result = "No such data!";
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     fontSize:20
   },
   buttonContainer: {
-    backgroundColor:'#3B3B98',
+    backgroundColor:'#3F54E3',
     padding:15,
     borderRadius:8
   }

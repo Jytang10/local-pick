@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { getLists, deleteList } from '../actions';
+import { getLists } from '../actions';
 import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import _ from 'lodash';
@@ -10,6 +10,19 @@ class Discover extends Component {
     city: ''
   }
 
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = navigation.state.params;
+    if(state.params != undefined){
+      return { 
+          headerRight: 
+          <TouchableOpacity style={[styles.contentBox, {marginRight: 20}]} onPress={() => navigation.navigate('PostList', params)}>
+            <MaterialIcons size={35} color="#fff" name="add-circle-outline"></MaterialIcons>
+          </TouchableOpacity>
+        }
+    }
+  };
+
   componentDidMount(){
     if(this.props.cityLocation){
       const city = this.props.cityLocation;
@@ -18,20 +31,20 @@ class Discover extends Component {
     }
   }
 
+  componentWillMount(){
+    const { setParams } = this.props.navigation;
+    setParams({ userData: this.props.userData });
+  }
+
   render() {
-    const params = this.props.navigation.state.params;
+    let colors = ['#525bdc', '#906dc8', '#b67bbf', '#d684b5'];
     return (
         this.state.city
         ?   <ScrollView style={styles.container}>
               <View style={styles.titleContainer}>
                 <View style={styles.contentBox}>
                   <Text style={[styles.text, styles.title]}>{this.props.cityLocation}</Text>
-                  <Text style={[styles.subText, {textTransform: 'uppercase'}]}>City</Text>
                 </View>
-                <TouchableOpacity style={styles.contentBox} onPress={() => this.props.navigation.navigate('PostList', params)}>
-                  <MaterialIcons size={42} color="#1B53E2" name="add-circle-outline"></MaterialIcons>
-                  <Text style={[styles.subText, {textTransform: 'uppercase'}]}>Add Category</Text>
-                </TouchableOpacity>
               </View>
               <View>
                 {
@@ -42,39 +55,38 @@ class Discover extends Component {
                       data={this.props.listOfLists}
                       keyExtractor={(item) => item.key}
                       showsVerticalScrollIndicator={false}
-                      renderItem={({item}) => {
+                      renderItem={({item, index}) => {
                       return (
-                        <TouchableOpacity style={{shadowOpacity:0.4}} onPress={() => this.props.navigation.navigate('Locations', {...item})}>
-                        <View style={styles.itemContainer}>
-                          <View style={styles.itemInfoContainer}>
-                            <View style={styles.textContainer}>
-                              <Text style={styles.itemText}>{item.title}</Text>
-                              <Text style={styles.subText}>{item.description}</Text>
-                            </View>
-                            <View style={styles.iconContainer}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
-                                <View style={{marginRight:10}}>
-                                  <MaterialIcons size={28} color="#5580f9" name="edit"></MaterialIcons>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Locations', {...item})}>
+                          <View style={styles.itemContainer}>
+                            <View style={[styles.itemInfoContainer, {backgroundColor: colors[index % colors.length]}]}>
+                              <View style={styles.textContainer}>
+                                <Text style={styles.itemText}>{item.title}</Text>
+                                <Text style={styles.subText}>{item.description}</Text>
+                              </View>
+                              {
+                              this.props.userData && this.props.userData.userID === item.userID
+                              ? <View>
+                                  <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateList', {...item})}>
+                                    <View style={{marginRight:10}}>
+                                      <MaterialIcons size={25} color="#fff" name="edit"></MaterialIcons>
+                                    </View>
+                                  </TouchableOpacity>
                                 </View>
-                              </TouchableOpacity> 
-                              <TouchableOpacity onPress={() => this.props.deleteList(item.key)}>
-                                <View>
-                                  <MaterialIcons size={28} color="#b1bcca" name="delete"></MaterialIcons>
-                                </View>
-                              </TouchableOpacity> 
+                              : <View></View>
+                              }
                             </View>
                           </View>
-                        </View>
-                      </TouchableOpacity>
-                      )
-                    }}
-                  >
+                        </TouchableOpacity>
+                        )
+                      }}
+                    >
                   </FlatList>
                 }
               </View>
             </ScrollView>
         : <View style={styles.emptyResults}>
-            <MaterialIcons size={150} color="red" name="error-outline"></MaterialIcons>
+            <MaterialIcons size={150} color="#E089B3" name="error-outline"></MaterialIcons>
             <Text style={[styles.errorText, {textAlign: 'center'}]}>No current city found. Please select a city at the Search page.</Text>
           </View>
     );
@@ -84,7 +96,7 @@ class Discover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F6F6F6',
   },
   emptyResults: {
     flex: 1,
@@ -101,13 +113,12 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: 14,
-    color: '#AEB5BC',
-    fontWeight: '500',
+    color: '#fff',
+    fontWeight: '400',
   },
   titleContainer: {
     flexDirection: 'row',
     marginTop: 10,
-    marginBottom: 10,
     alignItems: 'center',
   },
   contentBox: {
@@ -119,27 +130,22 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     overflow:'hidden',
-    marginVertical:15,
-    marginHorizontal:15,
-    borderRadius:15,
-    backgroundColor:'grey',
+    marginVertical:10,
+    marginHorizontal:10,
+    borderRadius: 15,
   },
   itemInfoContainer: {
-    padding:15,
-    backgroundColor:'#f1f6ff',
-    borderTopLeftRadius:15,
-    borderTopRightRadius:15,
+    padding: 15,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   itemText: {
     fontSize: 22,
     fontWeight:'bold',
-    color: '#5e90fb',
+    color: '#fff',
   },
-  iconContainer: {
-    flexDirection: 'row',
-  }
 });
 
 function mapStateToProps(state){
@@ -152,8 +158,9 @@ function mapStateToProps(state){
   return {
     listOfLists,
     loadingReducer: state.loadingReducer.loadingReducer,
-    cityLocation: state.searchList.city
+    cityLocation: state.searchList.city,
+    userData: state.userReducer.userData,
   }
 }
 
-export default connect(mapStateToProps, {getLists, deleteList})(Discover);
+export default connect(mapStateToProps, {getLists})(Discover);
